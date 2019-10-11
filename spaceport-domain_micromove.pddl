@@ -7,16 +7,14 @@
     (:requirements
         :strips
         :typing
+        :equality
     )
 
     (:types personell room )
 
     (:predicates
-    	(Personell ?p)
-    	(Captain ?p)
-        (Navigator ?p)
-
-
+    	(Personell ?p - personell)
+    	(has-rank ?p - personell ?rk)
         (Spacecraft-has-room ?sr - room)
         (Room-door-North ?ra - room ?rb - room)
         (Room-door-East ?ra - room ?rb - room)
@@ -25,6 +23,7 @@
         (door-locked ?ra - room ?rb - room)
         (Personell-Loc ?p - personell ?sr - room)
         (has-key ?p)
+        (key-location ?sr - room)
     )
 
     (:action change-room
@@ -45,7 +44,8 @@
       					)
       				)
       	
-      :effect (and 	(Personell-Loc ?human ?endroom)
+      :effect (and 	(not(Personell-Loc ?human ?startroom))
+      				(Personell-Loc ?human ?endroom)
 
       		  )
     )
