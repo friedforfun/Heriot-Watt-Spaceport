@@ -25,6 +25,7 @@
         (has-key ?p)
         (key-location ?sr - room)
         (door ?d - door)
+        (door-connects ?d - door ?ra - room ?rb - room)
     )
 
     (:action change-room
