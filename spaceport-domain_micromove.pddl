@@ -57,7 +57,7 @@
       					(door-locked ?door)
       				)
 
-      :effect (and (not(door-locked ?startroom ?endroom))
+      :effect (and (not(door-locked ?door))
       		  )
     )
 
