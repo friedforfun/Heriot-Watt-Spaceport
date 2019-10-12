@@ -3,7 +3,7 @@
 ; Sam Fay-Hunt SF52
 ;
 
-(define (domain domain1)
+(define (domain spaceport-domain_micromove)
     (:requirements
         :strips
         :typing
