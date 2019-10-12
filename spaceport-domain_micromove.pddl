@@ -22,7 +22,7 @@
         (Room-door-West ?ra - room ?rb - room)
         (door-locked ?d - door)
         (Personell-Loc ?p - personell ?sr - room)
-        (has-key ?p)
+        (has-key ?p - personell)
         (key-location ?sr - room)
         (door ?d - door)
         (door-connects ?d - door ?ra - room ?rb - room)
@@ -65,6 +65,4 @@
       :effect (and (not(door-locked ?door))
       		  )
     )
-
-
 )
