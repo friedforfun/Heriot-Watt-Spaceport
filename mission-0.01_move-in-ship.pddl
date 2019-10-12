@@ -2,19 +2,10 @@
   (:domain spaceport-domain_micromove)
 
 	(:objects
-		Captain
-		Navigator
-		Picard
-		La-Forge
-		Bridge
-		Engineering
-		Science-Lab
-		Launch-Bay
-		Hallway-A
-		Door-Engi
-		Door-Bridge
-		Door-Science-Lab
-		Door-Launch-Bay
+		Captain Navigator - rank
+		Picard La-Forge - personell
+		Bridge Engineering Science-Lab Launch-Bay Hallway-A - room
+		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - door
 	)
 
 	(:init
