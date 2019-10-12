@@ -30,7 +30,7 @@
       :parameters (?human - personell ?startroom - room ?endroom - room)
       :precondition (and (Personell-Loc ?human ?startroom) 					; Person moving is inside ?startroom
       					(or (and	(Room-door-North ?startroom ?endroom) 		; ?startroom has a door to ?endroom
-      								(not(door-locked ?startroom ?endroom))
+      								(not(door-locked ?startroom ?endroom))		; the door is unlocked
       						)
       						(and 	(Room-door-East ?startroom ?endroom)
       								(not(door-locked ?startroom ?endroom))
