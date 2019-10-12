@@ -10,7 +10,7 @@
         :equality
     )
 
-    (:types personell room door)
+    (:types personell rank room door)
 
     (:predicates
     	(Personell ?p - personell)
