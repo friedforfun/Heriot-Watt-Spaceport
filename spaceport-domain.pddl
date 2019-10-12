@@ -3,36 +3,66 @@
 ; Sam Fay-Hunt SF52
 ;
 
-(define (domain domain1)
-    (:requirements
-        :strips
-        :typing
-    )
+(define (domain spaceport-domain_micromove)
+  (:requirements
+    :strips
+    :typing
+    :equality
+  )
 
-    (:types personell room )
+  (:types personell rank room door)
 
-    (:predicates
-        (Space-Region ?sreg)
-        (Navigator ?n)
-        (Captain ?c)
-        (Spacecraft-room ?sr - room)
-        (Spacecraft-Damaged ?sts)
-        (Region-Contains ?rc)
+  (:predicates
+    (Personell ?p - personell)
+    (has-rank ?p - personell ?rk - rank)
+    (Spacecraft-has-room ?sr - room)
+    (Room-door-North ?ra - room ?rb - room)
+    (Room-door-East ?ra - room ?rb - room)
+    (Room-door-South ?ra - room ?rb - room)
+    (Room-door-West ?ra - room ?rb - room)
+    (door-locked ?d - door)
+    (Personell-Loc ?p - personell ?sr - room)
+    (has-key ?p - personell)
+    (key-location ?sr - room)
+    (door ?d - door)
+    (door-connects ?d - door ?ra - room ?rb - room)
+  )
 
+    (:action change-room
+      :parameters (?human - personell ?startroom - room ?endroom - room ?door - door)
+      :precondition (and (Personell-Loc ?human ?startroom)          ; Person moving is inside ?startroom
+                (or (and  (Room-door-North ?startroom ?endroom)     ; ?startroom has a door to ?endroom
+                      (door-connects ?door ?startroom ?endroom)
+                      (not(door-locked ?door))    ; the door is unlocked
+                  )
+                  (and  (Room-door-East ?startroom ?endroom)
+                      (door-connects ?door ?startroom ?endroom)
+                      (not(door-locked ?door))
+                  )
+                  (and  (Room-door-South ?startroom ?endroom)
+                      (door-connects ?door ?startroom ?endroom)
+                      (not(door-locked ?door))
+                  )
+                  (and  (Room-door-West ?startroom ?endroom)
+                      (door-connects ?door ?startroom ?endroom)
+                      (not(door-locked ?door))
+                  )
+                )
+              )
         
-        (Navigator-Loc  ?n ?sr - room)
-        (Captain-Loc ?c ?sr - room)
+      :effect (and  (not(Personell-Loc ?human ?startroom))
+              (Personell-Loc ?human ?endroom)
+
+            )
     )
 
-    (:action move
-      :parameters (?sregion ?cap ?nav ?status ?bridge )
-      :precondition (and 	(Navigator-Loc ?nav ?bridge)
-      						(Captain-Loc ?cap ?bridge)
-      						(not(Spacecraft-Damaged ?status))
-      	)
-      :effect (and (
-      		)
-      	)
-    )
+    (:action unlock-door
+      :parameters (?human - personell ?door - door)
+      :precondition (and (has-key ?human)
+                (door-locked ?door)
+              )
 
+      :effect (and (not(door-locked ?door))
+            )
+    )
 )
