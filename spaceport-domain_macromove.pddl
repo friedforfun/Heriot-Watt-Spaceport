@@ -41,60 +41,107 @@
   
     ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - region)                      ; ship is located in region
+    (Ship-at-planet ?pn - planet)
     (Ship-damaged)                                    ; ship is damaged
+    (Ship-offworld)
   )
 
     ; ------------- Moving around ship actions ----------------
     (:action change-room
       :parameters (?human - personell ?startroom - room ?endroom - room ?door - door)
-      :precondition (and (Personell-Loc ?human ?startroom)          ; Person moving is inside ?startroom
-                (or (and  (Room-door-North ?startroom ?endroom)     ; ?startroom has a door to ?endroom
-                      (door-connects ?door ?startroom ?endroom)     ; door connects the 2 rooms
-                      (not(door-locked ?door))                      ; the door is unlocked
-                  )
-                  (and  (Room-door-East ?startroom ?endroom)
-                      (door-connects ?door ?startroom ?endroom)
-                      (not(door-locked ?door))
-                  )
-                  (and  (Room-door-South ?startroom ?endroom)
-                      (door-connects ?door ?startroom ?endroom)
-                      (not(door-locked ?door))
-                  )
-                  (and  (Room-door-West ?startroom ?endroom)
-                      (door-connects ?door ?startroom ?endroom)
-                      (not(door-locked ?door))
-                  )
-                )
-              )
+      :precondition (and 
+                      (Personell-Loc ?human ?startroom)                   ; Person moving is inside ?startroom
+                      (or (and  
+                            (Room-door-North ?startroom ?endroom)         ; ?startroom has a door to ?endroom
+                            (door-connects ?door ?startroom ?endroom)     ; door connects the 2 rooms
+                            (not(door-locked ?door))                      ; the door is unlocked
+                          )
+                          (and  
+                            (Room-door-East ?startroom ?endroom)
+                            (door-connects ?door ?startroom ?endroom)
+                            (not(door-locked ?door))
+                          )
+                          (and  
+                            (Room-door-South ?startroom ?endroom)
+                            (door-connects ?door ?startroom ?endroom)
+                            (not(door-locked ?door))
+                          )
+                          (and  
+                            (Room-door-West ?startroom ?endroom)
+                            (door-connects ?door ?startroom ?endroom)
+                            (not(door-locked ?door))
+                          )
+                      )
+                    )
         
-      :effect (and  (not(Personell-Loc ?human ?startroom))        ; Personell in new location
-              (Personell-Loc ?human ?endroom)
-
-            )
+      :effect (and  
+                (not(Personell-Loc ?human ?startroom))        ; Personell in new location
+                (Personell-Loc ?human ?endroom)
+              )
     )
 
     (:action unlock-door
       :parameters (?human - personell ?door - door)
-      :precondition (and (has-key ?human)
-                (door-locked ?door)
-              )
+      :precondition (and 
+                      (has-key ?human)
+                      (door-locked ?door)
+                    )
 
       :effect (and (not(door-locked ?door))
-            )
+              )
     )
 
     ; -------------- Moving ship actions ------------------
     (:action ship-move
       :parameters (?captain - personell ?navigator - personell ?origin - region ?destination - region ?bridge - room)
-      :precondition (and  (is-captain ?captain)
-                          (is-navigator ?navigator)
-                          (is-bridge ?bridge)
-                          (Personell-Loc ?captain ?bridge)
-                          (Personell-Loc ?navigator ?bridge)
-                          (not(Ship-damaged))
+      :precondition (and  
+                      (is-captain ?captain)
+                      (is-navigator ?navigator)
+                      (is-bridge ?bridge)
+                      (Personell-Loc ?captain ?bridge)
+                      (Personell-Loc ?navigator ?bridge)
+                      (not(Ship-damaged))
                     )
-      :effect (and (not(Ship-Location ?origin))
-                   (Ship-Location ?destination)
+      :effect (and 
+                (not(Ship-Location ?origin))
+                (Ship-Location ?destination)
+                (Ship-offworld)
               )
     )
+
+  (:action visit-planet
+    :parameters (?captain - personell ?navigator - personell ?solar-system - region ?bridge - room ?planet - planet)
+    :precondition (and 
+                    (is-captain ?captain)
+                    (is-navigator ?navigator)
+                    (is-bridge ?bridge)
+                    (Personell-Loc ?captain ?bridge)
+                    (Personell-Loc ?navigator ?bridge)
+                    (Ship-offworld)
+                    (not(Ship-damaged))
+                  )
+    :effect (and 
+              (not(Ship-offworld))
+              (Ship-at-planet ?planet)
+            )
+  )
+
+  (:action leave-planet
+    :parameters (?captain - personell ?navigator - personell ?solar-system - region ?bridge - room ?planet - planet)
+    :precondition (and 
+                    (is-captain ?captain)
+                    (is-navigator ?navigator)
+                    (is-bridge ?bridge)
+                    (Personell-Loc ?captain ?bridge)
+                    (Personell-Loc ?navigator ?bridge)
+                    (not(Ship-offworld))
+                    (not(Ship-damaged))
+                  )
+    :effect (and 
+              (Ship-offworld)
+              (not(Ship-at-planet ?planet))
+            )
+  )
+
+
 )
