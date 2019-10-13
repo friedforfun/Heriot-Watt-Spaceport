@@ -1,5 +1,5 @@
 (define (problem problem-1-1)
-  (:domain spaceport-domain_micromove)
+  (:domain spaceport-domain)
 
 	(:objects
 		Picard La-Forge - personell
