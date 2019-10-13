@@ -14,9 +14,9 @@
 
   (:predicates
     ; ------------ Space predicates -------------------------
-    (Space-regions ?sp - region)                               ; space regions exist
+    (Space-region ?sp - region)                               ; space regions exist
     (region-nebula ?sp - region)                               ; space region contains nebula
-    (region-planet ?sp - region ?pn - planet)                           ; space region contains planet with name
+    (region-planet ?sp - region ?pn - planet)                  ; space region contains planet with name
     (region-astroid-belt ?sp - region)                         ; space region contains astroid belt
 
     ; ------------ Personell predicates ---------------------
@@ -37,7 +37,7 @@
     (door-connects ?d - door ?ra - room ?rb - room)   ; door joins these rooms
   
     ; ------------- Ship Location predicates ----------------
-    (Ship-Location ?sp - region)                               ; ship is located in region
+    (Ship-Location ?sp - region)                      ; ship is located in region
     (Ship-damaged)                                    ; ship is damaged
   )
 
