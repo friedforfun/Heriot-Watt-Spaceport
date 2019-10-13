@@ -100,6 +100,7 @@
                       (is-bridge ?bridge)
                       (Personell-Loc ?captain ?bridge)
                       (Personell-Loc ?navigator ?bridge)
+                      (Ship-offworld)
                       (not(Ship-damaged))
                     )
       :effect (and 
@@ -134,6 +135,7 @@
                     (is-bridge ?bridge)
                     (Personell-Loc ?captain ?bridge)
                     (Personell-Loc ?navigator ?bridge)
+                    (Ship-at-planet ?planet)
                     (not(Ship-offworld))
                     (not(Ship-damaged))
                   )
