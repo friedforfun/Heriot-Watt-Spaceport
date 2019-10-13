@@ -120,6 +120,8 @@
                     (Personell-Loc ?navigator ?bridge)
                     (Ship-offworld)
                     (not(Ship-damaged))
+                    (Ship-Location ?solar-system)
+                    (region-planet ?solar-system ?planet)
                   )
     :effect (and 
               (not(Ship-offworld))
@@ -128,7 +130,7 @@
   )
 
   (:action leave-planet
-    :parameters (?captain - personell ?navigator - personell ?solar-system - region ?bridge - room ?planet - planet)
+    :parameters (?captain - personell ?navigator - personell ?bridge - room ?planet - planet)
     :precondition (and 
                     (is-captain ?captain)
                     (is-navigator ?navigator)
