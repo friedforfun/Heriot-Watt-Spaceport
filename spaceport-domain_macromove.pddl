@@ -90,8 +90,8 @@
                         (Personell-Loc ?human ?room-to-open)
                       )
                       (or
-                        (door-connects ?room ?room-to-open)
-                        (door-connects ?room-to-open ?room)
+                        (door-connects ?door ?room ?room-to-open)
+                        (door-connects ?door ?room-to-open ?room)
                       )
 
                     )
