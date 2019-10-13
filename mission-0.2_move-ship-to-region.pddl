@@ -1,10 +1,12 @@
-(define (problem problem-1-1)
-  (:domain spaceport-domain_micromove)
+(define (problem problem-1-2)
+  (:domain spaceport-domain_macromove)
 
 	(:objects
 		Picard La-Forge - personell
 		Bridge Engineering Science-Lab Launch-Bay Hallway-A - room
 		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - door
+		Sol Proxima-Centauri Alpha-Centauri - region
+		Mercury Venus Earth Mars b - planet
 	)
 
 	(:init
