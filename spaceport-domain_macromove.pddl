@@ -21,7 +21,6 @@
 
     ; ------------ Personell predicates ---------------------
     (Personell ?p - personell)                        ; is a member of personell
-    ;-(has-rank ?p - personell ?rk - rank)              ; personell has a rank
     (has-key ?p - personell)                          ; personell has a door key
     (key-location ?sr - room)                         ; location of key on ship 
     (is-captain ?p - personell)
