@@ -21,6 +21,7 @@
 
 		; init ship interior rooms
 		(Spacecraft-has-room Bridge)
+		(is-bridge Bridge)
 		(Spacecraft-has-room Engineering)
 		(Spacecraft-has-room Science-Lab)
 		(Spacecraft-has-room Launch-Bay)

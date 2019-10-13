@@ -155,6 +155,4 @@
               (not(Ship-at-planet ?planet))
             )
   )
-
-
 )
