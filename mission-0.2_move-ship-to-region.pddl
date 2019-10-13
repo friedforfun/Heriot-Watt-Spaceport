@@ -66,8 +66,7 @@
 
 	(:goal
 		(and 
-			(Personell-Loc Picard Bridge)
-			(Personell-Loc La-Forge Bridge)
+			(Ship-at-planet b)
 		)
 	)
 
