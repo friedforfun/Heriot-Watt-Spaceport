@@ -2,7 +2,6 @@
   (:domain spaceport-domain_micromove)
 
 	(:objects
-		Captain Navigator - rank
 		Picard La-Forge - personell
 		Bridge Engineering Science-Lab Launch-Bay Hallway-A - room
 		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - door
@@ -12,8 +11,8 @@
 		; init Personell
 		(Personell Picard)
 		(Personell La-Forge)
-		(has-rank Picard Captain)
-		(has-rank La-Forge Navigator)
+		(is-captain Picard)
+		(is-navigator La-Forge)
 		(has-key Picard)
 		(Personell-Loc Picard Science-Lab)
 		(Personell-Loc La-Forge Launch-Bay)
