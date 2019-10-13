@@ -84,6 +84,16 @@
     )
 
     ; -------------- Moving ship actions ------------------
-
-    ()
+    (:action ship-move
+      :parameters (?captain - personell ?navigator - personell ?origin - region ?destination - region ?bridge - room)
+      :precondition (and  (is-captain ?captain)
+                          (is-navigator ?navigator)
+                          (is-bridge ?bridge)
+                          (Personell-Loc ?captain ?bridge)
+                          (Personell-Loc ?navigator ?bridge)
+                    )
+      :effect (and (not(Ship-Location ?origin))
+                   (Ship-Location ?destination)
+              )
+    )
 )
