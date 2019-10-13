@@ -15,7 +15,9 @@
   (:predicates
     ; ------------ Space predicates -------------------------
     (Space-regions ?sp)                               ; space regions exist
-    (region-contains ?sp ?cs)                             ; space region contains
+    (region-nebula ?sp)                               ; space region contains nebula
+    (region-planet ?sp ?pn)                           ; space region contains planet with name
+    (region-astroid-belt ?sp)                         ; space region contains astroid belt
 
     ; ------------ Personell predicates ---------------------
     (Personell ?p - personell)                        ; is a member of personell
