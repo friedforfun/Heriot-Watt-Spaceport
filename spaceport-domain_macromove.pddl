@@ -81,10 +81,19 @@
     )
 
     (:action unlock-door
-      :parameters (?human - personell ?door - door)
+      :parameters (?human - personell ?door - door ?room - room ?room-to-open - room)
       :precondition (and 
                       (has-key ?human)
                       (door-locked ?door)
+                      (or
+                        (Personell-Loc ?human ?room)
+                        (Personell-Loc ?human ?room-to-open)
+                      )
+                      (or
+                        (door-connects ?room ?room-to-open)
+                        (door-connects ?room-to-open ?room)
+                      )
+
                     )
 
       :effect (and (not(door-locked ?door))
@@ -100,13 +109,13 @@
                       (is-bridge ?bridge)
                       (Personell-Loc ?captain ?bridge)
                       (Personell-Loc ?navigator ?bridge)
+                      (Ship-Location ?origin)
                       (Ship-offworld)
                       (not(Ship-damaged))
                     )
       :effect (and 
                 (not(Ship-Location ?origin))
                 (Ship-Location ?destination)
-                (Ship-offworld)
               )
     )
 
