@@ -39,7 +39,7 @@
     (door ?d - door)                                  ; is a door
     (door-connects ?d - door ?ra - room ?rb - room)   ; door joins these rooms
   
-    ; ------------- Ship Location predicates ----------------
+    ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - region)                      ; ship is located in region
     (Ship-damaged)                                    ; ship is damaged
   )
