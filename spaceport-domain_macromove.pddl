@@ -15,7 +15,7 @@
   (:predicates
     ; ------------ Space predicates -------------------------
     (Space-regions ?sp)                               ; space regions exist
-    (region-contains ?cs)                             ; space region contains
+    (region-contains ?sp ?cs)                             ; space region contains
 
     ; ------------ Personell predicates ---------------------
     (Personell ?p - personell)                        ; is a member of personell
