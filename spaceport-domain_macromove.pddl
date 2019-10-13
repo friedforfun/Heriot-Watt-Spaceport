@@ -13,8 +13,17 @@
   (:types personell rank room door)
 
   (:predicates
+    ; ------------ Space predicates -------------------------
+    (Space-regions ?sp)                               ; space regions exist
+    (region-contains ?cs)                             ; space region contains
+
+    ; ------------ Personell predicates ---------------------
     (Personell ?p - personell)                        ; is a member of personell
     (has-rank ?p - personell ?rk - rank)              ; personell has a rank
+    (has-key ?p - personell)                          ; personell has a door key
+    (key-location ?sr - room)                         ; location of key on ship 
+
+    ; ------------ Ship interior predicates ------------------
     (Spacecraft-has-room ?sr - room)                  ; ship contains this room
     (Room-door-North ?ra - room ?rb - room)           ; room connects to other room (north)
     (Room-door-East ?ra - room ?rb - room)            ; room connects to other room (east)
@@ -22,12 +31,15 @@
     (Room-door-West ?ra - room ?rb - room)            ; room connects to other room (west)
     (door-locked ?d - door)                           ; is the door locked
     (Personell-Loc ?p - personell ?sr - room)         ; location of personell on ship
-    (has-key ?p - personell)                          ; personell has a door key
-    (key-location ?sr - room)                         ; location of key on ship
     (door ?d - door)                                  ; is a door
     (door-connects ?d - door ?ra - room ?rb - room)   ; door joins these rooms
+  
+    ; ------------- Ship Location predicates ----------------
+    (Ship-Location ?sp)                               ; ship is located in region
+    (Ship-damaged)                                    ; ship is damaged
   )
 
+    ; ------------- Moving around ship actions ----------------
     (:action change-room
       :parameters (?human - personell ?startroom - room ?endroom - room ?door - door)
       :precondition (and (Personell-Loc ?human ?startroom)          ; Person moving is inside ?startroom
@@ -65,4 +77,8 @@
       :effect (and (not(door-locked ?door))
             )
     )
+
+    ; -------------- Moving ship actions ------------------
+
+    ()
 )
