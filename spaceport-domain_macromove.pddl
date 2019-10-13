@@ -91,6 +91,7 @@
                           (is-bridge ?bridge)
                           (Personell-Loc ?captain ?bridge)
                           (Personell-Loc ?navigator ?bridge)
+                          (not(Ship-damaged))
                     )
       :effect (and (not(Ship-Location ?origin))
                    (Ship-Location ?destination)
