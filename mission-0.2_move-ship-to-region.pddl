@@ -19,7 +19,7 @@
 		(Personell-Loc Picard Science-Lab)
 		(Personell-Loc La-Forge Launch-Bay)
 
-		; init ahip interior rooms
+		; init ship interior rooms
 		(Spacecraft-has-room Bridge)
 		(Spacecraft-has-room Engineering)
 		(Spacecraft-has-room Science-Lab)
@@ -46,6 +46,21 @@
 		(door Door-Launch-Bay)
 		(door-connects Door-Launch-Bay Hallway-A Launch-Bay)
 		(door-connects Door-Launch-Bay Launch-Bay Hallway-A)
+		(door-locked Door-Launch-Bay)
+
+		; init space
+		(Space-region Sol)
+		(region-planet Sol Mercury)
+		(region-planet Sol Venus)
+		(region-planet Sol Earth)
+		(region-planet Sol Mars)
+		(Space-region Proxima-Centauri)
+		(region-planet Proxima-Centauri b)
+		(Space-region Alpha-Centauri)
+
+		; init ship location
+		(Ship-Location Sol)
+		(Ship-at-planet Earth)
 
 	)
 
