@@ -14,19 +14,22 @@
 
   (:predicates
     ; ------------ Space predicates -------------------------
-    (Space-region ?sp - region)                               ; space regions exist
-    (region-nebula ?sp - region)                               ; space region contains nebula
-    (region-planet ?sp - region ?pn - planet)                  ; space region contains planet with name
-    (region-astroid-belt ?sp - region)                         ; space region contains astroid belt
+    (Space-region ?sp - region)                       ; space regions exist
+    (region-nebula ?sp - region)                      ; space region contains nebula
+    (region-planet ?sp - region ?pn - planet)         ; space region contains planet with name
+    (region-astroid-belt ?sp - region)                ; space region contains astroid belt
 
     ; ------------ Personell predicates ---------------------
     (Personell ?p - personell)                        ; is a member of personell
-    (has-rank ?p - personell ?rk - rank)              ; personell has a rank
+    ;-(has-rank ?p - personell ?rk - rank)              ; personell has a rank
     (has-key ?p - personell)                          ; personell has a door key
     (key-location ?sr - room)                         ; location of key on ship 
+    (is-captain ?p - personell)
+    (is-navigator ?p - personell)
 
     ; ------------ Ship interior predicates ------------------
     (Spacecraft-has-room ?sr - room)                  ; ship contains this room
+    (is-bridge ?sr - room)
     (Room-door-North ?ra - room ?rb - room)           ; room connects to other room (north)
     (Room-door-East ?ra - room ?rb - room)            ; room connects to other room (east)
     (Room-door-South ?ra - room ?rb - room)           ; room connects to other room (south)
