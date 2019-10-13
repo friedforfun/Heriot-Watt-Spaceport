@@ -10,14 +10,14 @@
     :equality
   )
 
-  (:types personell rank room door)
+  (:types personell rank room door region planet)
 
   (:predicates
     ; ------------ Space predicates -------------------------
-    (Space-regions ?sp)                               ; space regions exist
-    (region-nebula ?sp)                               ; space region contains nebula
-    (region-planet ?sp ?pn)                           ; space region contains planet with name
-    (region-astroid-belt ?sp)                         ; space region contains astroid belt
+    (Space-regions ?sp - region)                               ; space regions exist
+    (region-nebula ?sp - region)                               ; space region contains nebula
+    (region-planet ?sp - region ?pn - planet)                           ; space region contains planet with name
+    (region-astroid-belt ?sp - region)                         ; space region contains astroid belt
 
     ; ------------ Personell predicates ---------------------
     (Personell ?p - personell)                        ; is a member of personell
@@ -37,7 +37,7 @@
     (door-connects ?d - door ?ra - room ?rb - room)   ; door joins these rooms
   
     ; ------------- Ship Location predicates ----------------
-    (Ship-Location ?sp)                               ; ship is located in region
+    (Ship-Location ?sp - region)                               ; ship is located in region
     (Ship-damaged)                                    ; ship is damaged
   )
 
