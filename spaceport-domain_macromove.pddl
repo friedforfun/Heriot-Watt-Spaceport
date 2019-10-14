@@ -10,7 +10,7 @@
     :equality
   )
 
-  (:types personell rank room door region planet)
+  (:types Captain Navigator - personell room door region planet)
 
   (:predicates
     ; ------------ Space predicates -------------------------
@@ -101,10 +101,8 @@
 
     ; -------------- Moving ship actions ------------------
     (:action ship-move
-      :parameters (?captain - personell ?navigator - personell ?origin - region ?destination - region ?bridge - room)
+      :parameters (?captain - captain ?navigator - navigator ?origin - region ?destination - region ?bridge - room)
       :precondition (and  
-                      (is-captain ?captain)
-                      (is-navigator ?navigator)
                       (is-bridge ?bridge)
                       (Personell-Loc ?captain ?bridge)
                       (Personell-Loc ?navigator ?bridge)
@@ -119,10 +117,8 @@
     )
 
   (:action visit-planet
-    :parameters (?captain - personell ?navigator - personell ?solar-system - region ?bridge - room ?planet - planet)
+    :parameters (?captain - captain ?navigator - navigator ?solar-system - region ?bridge - room ?planet - planet)
     :precondition (and 
-                    (is-captain ?captain)
-                    (is-navigator ?navigator)
                     (is-bridge ?bridge)
                     (Personell-Loc ?captain ?bridge)
                     (Personell-Loc ?navigator ?bridge)
@@ -138,10 +134,8 @@
   )
 
   (:action leave-planet
-    :parameters (?captain - personell ?navigator - personell ?bridge - room ?planet - planet)
+    :parameters (?captain - captain ?navigator - navigator ?bridge - room ?planet - planet)
     :precondition (and 
-                    (is-captain ?captain)
-                    (is-navigator ?navigator)
                     (is-bridge ?bridge)
                     (Personell-Loc ?captain ?bridge)
                     (Personell-Loc ?navigator ?bridge)
