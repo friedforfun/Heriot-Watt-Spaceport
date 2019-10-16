@@ -2,11 +2,9 @@
   (:domain spaceport-domain_macromove)
 
 	(:objects
-		Picard La-Forge - personell
 		Picard - Captain
 		La-Forge - Navigator
-		Bridge - room
-		Engineering Science-Lab Launch-Bay Hallway-A - room
+		Bridge - Bridge Engineering - Engineering Science-Lab - Scilab Launch-Bay - Laubay Hallway-A - Hallway
 		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - door
 		Sol Proxima-Centauri Alpha-Centauri - region
 		Mercury Venus Earth Mars b - planet

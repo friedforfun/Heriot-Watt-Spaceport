@@ -2,17 +2,13 @@
   (:domain spaceport-domain)
 
 	(:objects
-		Picard La-Forge - personell
-		Bridge Engineering Science-Lab Launch-Bay Hallway-A - room
-		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - door
+		Picard La-Forge - Personell
+		Bridge Engineering Science-Lab Launch-Bay Hallway-A - Room
+		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 	)
 
 	(:init
 		; init Personell
-		(Personell Picard)
-		(Personell La-Forge)
-		(is-captain Picard)
-		(is-navigator La-Forge)
 		(has-key Picard)
 		(Personell-Loc Picard Science-Lab)
 		(Personell-Loc La-Forge Launch-Bay)

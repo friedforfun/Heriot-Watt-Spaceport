@@ -10,47 +10,46 @@
     :equality
   )
 
-  (:types Captain Navigator - personell 
-    bridge room
-    door 
-    region planet)
+  (:types Captain Navigator - Personell 
+    Bridge Engineering Scilab Laubay Hallway - Room
+    Door 
+    Region Planet)
 
   (:predicates
     ; ------------ Space predicates -------------------------
-    (Space-region ?sp - region)                       ; space regions exist
-    (region-nebula ?sp - region)                      ; space region contains nebula
-    (region-planet ?sp - region ?pn - planet)         ; space region contains planet with name
-    (region-astroid-belt ?sp - region)                ; space region contains astroid belt
+    (Space-region ?sp - Region)                       ; space regions exist
+    (region-nebula ?sp - Region)                      ; space region contains nebula
+    (region-planet ?sp - Region ?pn - Planet)         ; space region contains planet with name
+    (region-astroid-belt ?sp - Region)                ; space region contains astroid belt
 
     ; ------------ Personell predicates ---------------------
-    (Personell ?p - personell)                        ; is a member of personell
-    (has-key ?p - personell)                          ; personell has a door key
-    (key-location ?sr - room)                         ; location of key on ship 
-    (is-captain ?p - personell)
-    (is-navigator ?p - personell)
+    (has-key ?p - Personell)                          ; personell has a door key
+    (key-location ?sr - Room)                         ; location of key on ship 
 
     ; ------------ Ship interior predicates ------------------
-    (Spacecraft-has-room ?sr - room)                  ; ship contains this room
-    (is-bridge ?sr - room)
-    (Room-door-North ?ra - room ?rb - room)           ; room connects to other room (north)
-    (Room-door-East ?ra - room ?rb - room)            ; room connects to other room (east)
-    (Room-door-South ?ra - room ?rb - room)           ; room connects to other room (south)
-    (Room-door-West ?ra - room ?rb - room)            ; room connects to other room (west)
-    (door-locked ?d - door)                           ; is the door locked
-    (Personell-Loc ?p - personell ?sr - room)         ; location of personell on ship
-    (door ?d - door)                                  ; is a door
-    (door-connects ?d - door ?ra - room ?rb - room)   ; door joins these rooms
+    (Spacecraft-has-room ?sr - Room)                  ; ship contains this room
+
+    ; collapse NESW into simple adjacency predicate
+    (Room-Adjacent ?ra - Room ?rb - Room)
+    (Room-door-North ?ra - Room ?rb - Room)           ; room connects to other room (north)
+    (Room-door-East ?ra - Room ?rb - Room)            ; room connects to other room (east)
+    (Room-door-South ?ra - Room ?rb - Room)           ; room connects to other room (south)
+    (Room-door-West ?ra - Room ?rb - Room)            ; room connects to other room (west)
+    (door-locked ?d - Door)                           ; is the door locked
+    (Personell-Loc ?p - Personell ?sr - Room)         ; location of personell on ship
+    (door ?d - Door)                                  ; is a door
+    (door-connects ?d - Door ?ra - Room ?rb - Room)   ; door joins these rooms
   
     ; ------------- Ship exterior predicates ----------------
-    (Ship-Location ?sp - region)                      ; ship is located in region
-    (Ship-at-planet ?pn - planet)
+    (Ship-Location ?sp - Region)                      ; ship is located in region
+    (Ship-at-planet ?pn - Planet)
     (Ship-damaged)                                    ; ship is damaged
     (Ship-offworld)
   )
 
     ; ------------- Moving around ship actions ----------------
     (:action change-room
-      :parameters (?human - personell ?startroom - room ?endroom - room ?door - door)
+      :parameters (?human - Personell ?startroom - Room ?endroom - Room ?door - Door)
       :precondition (and 
                       (Personell-Loc ?human ?startroom)                   ; Person moving is inside ?startroom
                       (or (and  
@@ -83,7 +82,7 @@
     )
 
     (:action unlock-door
-      :parameters (?human - personell ?door - door ?room - room ?room-to-open - room)
+      :parameters (?human - Personell ?door - Door ?room - Room ?room-to-open - Room)
       :precondition (and 
                       (has-key ?human)
                       (door-locked ?door)
@@ -104,9 +103,8 @@
 
     ; -------------- Moving ship actions ------------------
     (:action ship-move
-      :parameters (?captain - captain ?navigator - navigator ?origin - region ?destination - region ?bridge - room)
+      :parameters (?captain - Captain ?navigator - Navigator ?origin - Region ?destination - Region ?bridge - Room)
       :precondition (and  
-                      (is-bridge ?bridge)
                       (Personell-Loc ?captain ?bridge)
                       (Personell-Loc ?navigator ?bridge)
                       (Ship-Location ?origin)
@@ -120,9 +118,8 @@
     )
 
   (:action visit-planet
-    :parameters (?captain - captain ?navigator - navigator ?solar-system - region ?bridge - room ?planet - planet)
+    :parameters (?captain - Captain ?navigator - Navigator ?solar-system - Region ?bridge - Room ?planet - Planet)
     :precondition (and 
-                    (is-bridge ?bridge)
                     (Personell-Loc ?captain ?bridge)
                     (Personell-Loc ?navigator ?bridge)
                     (Ship-offworld)
@@ -137,9 +134,8 @@
   )
 
   (:action leave-planet
-    :parameters (?captain - captain ?navigator - navigator ?bridge - room ?planet - planet)
+    :parameters (?captain - Captain ?navigator - Navigator ?bridge - Room ?planet - planet)
     :precondition (and 
-                    (is-bridge ?bridge)
                     (Personell-Loc ?captain ?bridge)
                     (Personell-Loc ?navigator ?bridge)
                     (Ship-at-planet ?planet)
