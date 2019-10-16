@@ -2,46 +2,52 @@
   (:domain spaceport-domain)
 
 	(:objects
-		Picard - Captain
-		La-Forge - Navigator
-		Bridge - Bridge Engineering - Engineering Science-Lab - Scilab Launch-Bay - Laubay Hallway-A - Hallway
-		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - door
-		Sol Proxima-Centauri Alpha-Centauri - region
-		Mercury Venus Earth Mars b - planet
+		Tretter - Captain
+		Bunte Meachum - Navigator
+		Hagarty Zayicek Penley - Engineer
+		Bridge - Bridge 
+		Engineering - Engineering 
+		Science-Lab - Scilab 
+		Launch-Bay - Laubay 
+		Hallway-A  Hallway-B - Hallway
+		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
+		Sol Proxima-Centauri Alpha-Centauri - Region
+		Mercury Venus Earth Mars b - Planet
 	)
 
 	(:init
 		; init Personell
-		(has-key Picard)
-		(Personell-Loc Picard Science-Lab)
+		(has-key Tretter)
+		(Personell-Loc Tretter Science-Lab)
 		(Personell-Loc La-Forge Launch-Bay)
 
 		; init ship interior rooms
-		(Room-Adjacent  Hallway-A Bridge)
-		(Room-Adjacent  Bridge Hallway-A)
-		(door Door-Bridge)
-		(door-connects Door-Bridge Hallway-A Bridge)
-		(door-connects Door-Bridge Bridge Hallway-A)
+		(Room-Adjacent  Hallway-B Bridge)
+		(Room-Adjacent  Bridge Hallway-B)
+		(door-connects Door-Bridge Hallway-B Bridge)
+		(door-connects Door-Bridge Bridge Hallway-B)
 
 		(Room-Adjacent Hallway-A Engineering)
 		(Room-Adjacent Engineering Hallway-A)
-		(door Door-Engi)
 		(door-connects Door-Engi Hallway-A Engineering)
 		(door-connects Door-Engi Engineering Hallway-A)
 
-		(Room-Adjacent  Hallway-A Science-Lab)
-		(Room-Adjacent  Science-Lab Hallway-A)
-		(door Door-Science-Lab)
-		(door-connects Door-Science-Lab Hallway-A Science-Lab)
-		(door-connects Door-Science-Lab Science-Lab Hallway-A)
+		(Room-Adjacent  Hallway-B Science-Lab)
+		(Room-Adjacent  Science-Lab Hallway-B)
+		(door-connects Door-Science-Lab Hallway-B Science-Lab)
+		(door-connects Door-Science-Lab Science-Lab Hallway-B)
 		(door-locked Door-Science-Lab)
 
 		(Room-Adjacent Hallway-A Launch-Bay)
 		(Room-Adjacent Launch-Bay Hallway-A)
-		(door Door-Launch-Bay)
 		(door-connects Door-Launch-Bay Hallway-A Launch-Bay)
 		(door-connects Door-Launch-Bay Launch-Bay Hallway-A)
 		(door-locked Door-Launch-Bay)
+
+		(Room-Adjacent Hallway-A Hallway-B)
+		(Room-Adjacent Hallway-B Hallway-A)
+		(door-connects No-Door Hallway-A Hallway-B)
+		(door-connects No-Door Hallway-B Hallway-A)
 
 		; init space
 		(Space-region Sol)

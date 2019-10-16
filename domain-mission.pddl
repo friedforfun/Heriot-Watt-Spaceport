@@ -10,7 +10,7 @@
     :equality
   )
 
-  (:types Captain Navigator - Personell 
+  (:types Captain Navigator Engineer - Personell 
     Bridge Engineering Scilab Laubay Hallway - Room
     Door 
     Region Planet)
