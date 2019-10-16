@@ -29,12 +29,7 @@
     ; ------------ Ship interior predicates ------------------
     (Spacecraft-has-room ?sr - Room)                  ; ship contains this room
 
-    ; collapse NESW into simple adjacency predicate
     (Room-Adjacent ?ra - Room ?rb - Room)
-    (Room-door-North ?ra - Room ?rb - Room)           ; room connects to other room (north)
-    (Room-door-East ?ra - Room ?rb - Room)            ; room connects to other room (east)
-    (Room-door-South ?ra - Room ?rb - Room)           ; room connects to other room (south)
-    (Room-door-West ?ra - Room ?rb - Room)            ; room connects to other room (west)
     (door-locked ?d - Door)                           ; is the door locked
     (Personell-Loc ?p - Personell ?sr - Room)         ; location of personell on ship
     (door ?d - Door)                                  ; is a door
@@ -51,28 +46,10 @@
     (:action change-room
       :parameters (?human - Personell ?startroom - Room ?endroom - Room ?door - Door)
       :precondition (and 
-                      (Personell-Loc ?human ?startroom)                   ; Person moving is inside ?startroom
-                      (or (and  
-                            (Room-door-North ?startroom ?endroom)         ; ?startroom has a door to ?endroom
-                            (door-connects ?door ?startroom ?endroom)     ; door connects the 2 rooms
-                            (not(door-locked ?door))                      ; the door is unlocked
-                          )
-                          (and  
-                            (Room-door-East ?startroom ?endroom)
-                            (door-connects ?door ?startroom ?endroom)
-                            (not(door-locked ?door))
-                          )
-                          (and  
-                            (Room-door-South ?startroom ?endroom)
-                            (door-connects ?door ?startroom ?endroom)
-                            (not(door-locked ?door))
-                          )
-                          (and  
-                            (Room-door-West ?startroom ?endroom)
-                            (door-connects ?door ?startroom ?endroom)
-                            (not(door-locked ?door))
-                          )
-                      )
+                      (Personell-Loc ?human ?startroom)                   ; Person moving is inside ?startroom                        
+                      (Room-Adjacent ?startroom ?endroom)         ; ?startroom has a door to ?endroom
+                      (door-connects ?door ?startroom ?endroom)     ; door connects the 2 rooms
+                      (not(door-locked ?door))                      ; the door is unlocked  
                     )
         
       :effect (and  
