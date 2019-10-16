@@ -21,30 +21,27 @@
 		(Personell-Loc La-Forge Launch-Bay)
 
 		; init ship interior rooms
-		(Spacecraft-has-room Bridge)
-		(is-bridge Bridge)
-		(Spacecraft-has-room Engineering)
-		(Spacecraft-has-room Science-Lab)
-		(Spacecraft-has-room Launch-Bay)
-		(Spacecraft-has-room Hallway-A)
-		(Room-door-North Hallway-A Bridge)
-		(Room-door-South Bridge Hallway-A)
+		(Room-Adjacent  Hallway-A Bridge)
+		(Room-Adjacent  Bridge Hallway-A)
 		(door Door-Bridge)
 		(door-connects Door-Bridge Hallway-A Bridge)
 		(door-connects Door-Bridge Bridge Hallway-A)
-		(Room-door-East Hallway-A Engineering)
-		(Room-door-West Engineering Hallway-A)
+
+		(Room-Adjacent Hallway-A Engineering)
+		(Room-Adjacent Engineering Hallway-A)
 		(door Door-Engi)
 		(door-connects Door-Engi Hallway-A Engineering)
 		(door-connects Door-Engi Engineering Hallway-A)
-		(Room-door-South Hallway-A Science-Lab)
-		(Room-door-North Science-Lab Hallway-A)
+
+		(Room-Adjacent  Hallway-A Science-Lab)
+		(Room-Adjacent  Science-Lab Hallway-A)
 		(door Door-Science-Lab)
 		(door-connects Door-Science-Lab Hallway-A Science-Lab)
 		(door-connects Door-Science-Lab Science-Lab Hallway-A)
 		(door-locked Door-Science-Lab)
-		(Room-door-West Hallway-A Launch-Bay)
-		(Room-door-East Launch-Bay Hallway-A)
+
+		(Room-Adjacent Hallway-A Launch-Bay)
+		(Room-Adjacent Launch-Bay Hallway-A)
 		(door Door-Launch-Bay)
 		(door-connects Door-Launch-Bay Hallway-A Launch-Bay)
 		(door-connects Door-Launch-Bay Launch-Bay Hallway-A)
@@ -56,8 +53,10 @@
 		(region-planet Sol Venus)
 		(region-planet Sol Earth)
 		(region-planet Sol Mars)
+
 		(Space-region Proxima-Centauri)
 		(region-planet Proxima-Centauri b)
+		
 		(Space-region Alpha-Centauri)
 
 		; init ship location
