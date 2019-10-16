@@ -30,7 +30,6 @@
     (Room-Adjacent ?ra - Room ?rb - Room)
     (door-locked ?d - Door)                           ; is the door locked
     (Personell-Loc ?p - Personell ?sr - Room)         ; location of personell on ship
-    (door ?d - Door)                                  ; is a door
     (door-connects ?d - Door ?ra - Room ?rb - Room)   ; door joins these rooms
   
     ; ------------- Ship exterior predicates ----------------
@@ -77,8 +76,9 @@
     )
 
     ; -------------- Moving ship actions ------------------
+
     (:action ship-move
-      :parameters (?captain - Captain ?navigator - Navigator ?origin - Region ?destination - Region ?bridge - Room)
+      :parameters (?captain - Captain ?navigator - Navigator ?origin - Region ?destination - Region ?bridge - Bridge)
       :precondition (and  
                       (Personell-Loc ?captain ?bridge)
                       (Personell-Loc ?navigator ?bridge)
@@ -93,7 +93,7 @@
     )
 
   (:action visit-planet
-    :parameters (?captain - Captain ?navigator - Navigator ?solar-system - Region ?bridge - Room ?planet - Planet)
+    :parameters (?captain - Captain ?navigator - Navigator ?solar-system - Region ?bridge - Bridge ?planet - Planet)
     :precondition (and 
                     (Personell-Loc ?captain ?bridge)
                     (Personell-Loc ?navigator ?bridge)
@@ -109,7 +109,7 @@
   )
 
   (:action leave-planet
-    :parameters (?captain - Captain ?navigator - Navigator ?bridge - Room ?planet - planet)
+    :parameters (?captain - Captain ?navigator - Navigator ?bridge - Bridge ?planet - planet)
     :precondition (and 
                     (Personell-Loc ?captain ?bridge)
                     (Personell-Loc ?navigator ?bridge)
