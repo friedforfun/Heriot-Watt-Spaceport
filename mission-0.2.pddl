@@ -1,5 +1,5 @@
 (define (problem problem-1-2)
-  (:domain spaceport-domain_macromove)
+  (:domain spaceport-domain)
 
 	(:objects
 		Picard - Captain
