@@ -19,7 +19,7 @@
 		; init Personell
 		(has-key Tretter)
 		(Personell-Loc Tretter Science-Lab)
-		(Personell-Loc La-Forge Launch-Bay)
+		(Personell-Loc Meachum Launch-Bay)
 
 		; init ship interior rooms
 		(Room-Adjacent  Hallway-B Bridge)
