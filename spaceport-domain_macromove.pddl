@@ -27,8 +27,6 @@
     (key-location ?sr - Room)                         ; location of key on ship 
 
     ; ------------ Ship interior predicates ------------------
-    (Spacecraft-has-room ?sr - Room)                  ; ship contains this room
-
     (Room-Adjacent ?ra - Room ?rb - Room)
     (door-locked ?d - Door)                           ; is the door locked
     (Personell-Loc ?p - Personell ?sr - Room)         ; location of personell on ship
