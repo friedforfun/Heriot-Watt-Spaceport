@@ -12,10 +12,6 @@
 
 	(:init
 		; init Personell
-		(Personell Picard)
-		(Personell La-Forge)
-		(is-captain Picard)
-		(is-navigator La-Forge)
 		(has-key Picard)
 		(Personell-Loc Picard Science-Lab)
 		(Personell-Loc La-Forge Launch-Bay)
@@ -56,7 +52,7 @@
 
 		(Space-region Proxima-Centauri)
 		(region-planet Proxima-Centauri b)
-		
+
 		(Space-region Alpha-Centauri)
 
 		; init ship location
