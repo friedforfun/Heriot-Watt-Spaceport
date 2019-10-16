@@ -20,10 +20,14 @@
 		(has-key Tretter)
 		(Personell-Loc Tretter Science-Lab)
 		(Personell-Loc Meachum Launch-Bay)
+		(Personell-Loc Bunte Launch-Bay)
+		(Personell-Loc Hagarty Engineering)
+		(Personell-Loc Zayicek Engineering)
+		(Personell-Loc Penley Engineering)
 
 		; init ship interior rooms
-		(Room-Adjacent  Hallway-B Bridge)
-		(Room-Adjacent  Bridge Hallway-B)
+		(Room-Adjacent Hallway-B Bridge)
+		(Room-Adjacent Bridge Hallway-B)
 		(door-connects Door-Bridge Hallway-B Bridge)
 		(door-connects Door-Bridge Bridge Hallway-B)
 
@@ -32,8 +36,8 @@
 		(door-connects Door-Engi Hallway-A Engineering)
 		(door-connects Door-Engi Engineering Hallway-A)
 
-		(Room-Adjacent  Hallway-B Science-Lab)
-		(Room-Adjacent  Science-Lab Hallway-B)
+		(Room-Adjacent Hallway-B Science-Lab)
+		(Room-Adjacent Science-Lab Hallway-B)
 		(door-connects Door-Science-Lab Hallway-B Science-Lab)
 		(door-connects Door-Science-Lab Science-Lab Hallway-B)
 		(door-locked Door-Science-Lab)
