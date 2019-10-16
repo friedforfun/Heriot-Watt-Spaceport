@@ -5,7 +5,7 @@
 		Picard La-Forge - personell
 		Picard - Captain
 		La-Forge - Navigator
-		Bridge - bridge
+		Bridge - room
 		Engineering Science-Lab Launch-Bay Hallway-A - room
 		Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - door
 		Sol Proxima-Centauri Alpha-Centauri - region

@@ -11,7 +11,7 @@
   )
 
   (:types Captain Navigator - personell 
-    bridge - room 
+    bridge room
     door 
     region planet)
 
@@ -104,7 +104,7 @@
 
     ; -------------- Moving ship actions ------------------
     (:action ship-move
-      :parameters (?captain - captain ?navigator - navigator ?origin - region ?destination - region ?bridge - bridge)
+      :parameters (?captain - captain ?navigator - navigator ?origin - region ?destination - region ?bridge - room)
       :precondition (and  
                       (is-bridge ?bridge)
                       (Personell-Loc ?captain ?bridge)
@@ -120,7 +120,7 @@
     )
 
   (:action visit-planet
-    :parameters (?captain - captain ?navigator - navigator ?solar-system - region ?bridge - bridge ?planet - planet)
+    :parameters (?captain - captain ?navigator - navigator ?solar-system - region ?bridge - room ?planet - planet)
     :precondition (and 
                     (is-bridge ?bridge)
                     (Personell-Loc ?captain ?bridge)
@@ -137,7 +137,7 @@
   )
 
   (:action leave-planet
-    :parameters (?captain - captain ?navigator - navigator ?bridge - bridge ?planet - planet)
+    :parameters (?captain - captain ?navigator - navigator ?bridge - room ?planet - planet)
     :precondition (and 
                     (is-bridge ?bridge)
                     (Personell-Loc ?captain ?bridge)
