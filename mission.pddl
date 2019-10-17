@@ -13,6 +13,7 @@
 		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 		Sol Proxima-Centauri Alpha-Centauri - Region
 		Mercury Venus Earth Mars b - Planet
+		Mav-a Mav-b - MAV
 	)
 
 	(:init
@@ -68,6 +69,10 @@
 		; init ship location
 		(Ship-Location Sol)
 		(Ship-at-planet Earth)
+
+		;init ship vehicles
+		(MAV-docked Mav-a)
+		(MAV-docked Mav-b)
 
 	)
 
