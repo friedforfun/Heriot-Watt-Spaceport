@@ -43,6 +43,7 @@
     ; ------------- Engineering predicates -----------------
     (MAV-EVA ?en - Engineer ?ma - MAV)                ; MAV is in EVA state
     (monitor-repair ?en - Engineer)
+    (MAV-docked ?ma - MAV)
   )
 
     ; ------------- Moving around ship actions ----------------
@@ -135,6 +136,20 @@
   )
 
   ; -------------- Engineering Actions -------------------
+
+  (:action monitor-repair
+    :parameters (?engineer - Engineer ?room - Engineering)
+    :precondition 
+      (and 
+        (Personell-Loc ?engineer ?room)
+      )
+    :effect 
+      (and 
+        (monitor-repair ?engineer)
+        (personell-occupied ?engineer)
+      )
+  )
+
   (:action deploy-mav
     :parameters (?engineera - Engineer ?engineerb - Engineer ?mav - MAV ?launchbay - Laubay)
     :precondition 
@@ -148,19 +163,7 @@
         (MAV-EVA ?engineera ?mav)
         (personell-occupied ?engineera)
         (not (Depart-OK))
-      )
-  )
-
-  (:action monitor-repair
-    :parameters (?engineer - Engineer ?room - Engineering)
-    :precondition 
-      (and 
-        (Personell-Loc ?engineer ?room)
-      )
-    :effect 
-      (and 
-        (monitor-repair ?engineer)
-        (personell-occupied ?engineer)
+        (not (MAV-docked ?mav))
       )
   )
 
@@ -192,6 +195,7 @@
         (not (monitor-repair ?engib))
         (not (personell-occupied ?engia))
         (not (personell-occupied ?engib))
+        (MAV-docked ?mav)
       )
   )
 
@@ -201,6 +205,7 @@
     :precondition 
       (and 
         (not (MAV-EVA ?engineer ?mav))
+        (MAV-docked ?mav)
         (not (Depart-OK))
       )
     :effect 
