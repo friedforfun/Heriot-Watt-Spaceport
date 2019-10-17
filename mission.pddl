@@ -73,6 +73,9 @@
 		;init ship vehicles
 		(MAV-docked Mav-a)
 		(MAV-docked Mav-b)
+		(Depart-Ok)
+
+		(Ship-damaged)
 
 	)
 
