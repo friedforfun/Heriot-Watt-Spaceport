@@ -49,36 +49,38 @@
     ; ------------- Moving around ship actions ----------------
     (:action change-room
       :parameters (?person - Personell ?startroom - Room ?endroom - Room ?door - Door)
-      :precondition (and 
-                      (Personell-Loc ?person ?startroom)             ; Person moving is inside ?startroom                        
-                      (Room-Adjacent ?startroom ?endroom)           ; ?startroom has a door to ?endroom
-                      (door-connects ?door ?startroom ?endroom)     ; door connects the 2 rooms
-                      (not(door-locked ?door))                      ; the door is unlocked  
-                      (not (personell-occupied ?person))
-                    )
+      :precondition 
+        (and 
+          (Personell-Loc ?person ?startroom)             ; Person moving is inside ?startroom                        
+          (Room-Adjacent ?startroom ?endroom)           ; ?startroom has a door to ?endroom
+          (door-connects ?door ?startroom ?endroom)     ; door connects the 2 rooms
+          (not(door-locked ?door))                      ; the door is unlocked  
+          (not (personell-occupied ?person))
+        )
         
-      :effect (and  
-                (not(Personell-Loc ?person ?startroom))              ; Personell in new location
-                (Personell-Loc ?person ?endroom)
-              )
+      :effect 
+        (and  
+          (not(Personell-Loc ?person ?startroom))              ; Personell in new location
+          (Personell-Loc ?person ?endroom)
+        )
     )
 
     (:action unlock-door
       :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room)
-      :precondition (and 
-                      (has-key ?person)
-                      (not (personell-occupied ?person))
-                      (door-locked ?door)
-                      (or
-                        (Personell-Loc ?person ?room)
-                        (Personell-Loc ?person ?room-to-open)
-                      )
-                      (or
-                        (door-connects ?door ?room ?room-to-open)
-                        (door-connects ?door ?room-to-open ?room)
-                      )
-
-                    )
+      :precondition 
+        (and 
+          (has-key ?person)
+          (not (personell-occupied ?person))
+          (door-locked ?door)
+          (or
+            (Personell-Loc ?person ?room)
+            (Personell-Loc ?person ?room-to-open)
+          )
+          (or
+            (door-connects ?door ?room ?room-to-open)
+            (door-connects ?door ?room-to-open ?room)
+          )
+        )
 
       :effect (and (not(door-locked ?door))
               )
@@ -90,49 +92,55 @@
 
     (:action ship-move
       :parameters (?captain - Captain ?navigator - Navigator ?origin - Region ?destination - Region ?bridge - Bridge)
-      :precondition (and  
-                      (Personell-Loc ?captain ?bridge)
-                      (Personell-Loc ?navigator ?bridge)
-                      (Ship-Location ?origin)
-                      (Ship-offworld)
-                      (not(Ship-damaged))
-                      (Depart-OK)
-                    )
-      :effect (and 
-                (not(Ship-Location ?origin))
-                (Ship-Location ?destination)
-              )
+      :precondition 
+        (and  
+          (Personell-Loc ?captain ?bridge)
+          (Personell-Loc ?navigator ?bridge)
+          (Ship-Location ?origin)
+          (Ship-offworld)
+          (not(Ship-damaged))
+          (Depart-OK)
+        )
+      :effect 
+        (and 
+          (not(Ship-Location ?origin))
+          (Ship-Location ?destination)
+        )
     )
 
   (:action land-planet
     :parameters (?captain - Captain ?navigator - Navigator ?solar-system - Region ?bridge - Bridge ?planet - Planet)
-    :precondition (and 
-                    (Personell-Loc ?captain ?bridge)
-                    (Personell-Loc ?navigator ?bridge)
-                    (Ship-offworld)
-                    (not(Ship-damaged))
-                    (Ship-Location ?solar-system)
-                    (region-planet ?solar-system ?planet)
-                  )
-    :effect (and 
-              (not(Ship-offworld))
-              (Ship-at-planet ?planet)
-            )
+    :precondition 
+      (and 
+        (Personell-Loc ?captain ?bridge)
+        (Personell-Loc ?navigator ?bridge)
+        (Ship-offworld)
+        (not(Ship-damaged))
+        (Ship-Location ?solar-system)
+        (region-planet ?solar-system ?planet)
+      )
+    :effect 
+      (and 
+        (not(Ship-offworld))
+        (Ship-at-planet ?planet)
+      )
   )
 
   (:action leave-planet
     :parameters (?captain - Captain ?navigator - Navigator ?bridge - Bridge ?planet - planet)
-    :precondition (and 
-                    (Personell-Loc ?captain ?bridge)
-                    (Personell-Loc ?navigator ?bridge)
-                    (Ship-at-planet ?planet)
-                    (not(Ship-offworld))
-                    (not(Ship-damaged))
-                  )
-    :effect (and 
-              (Ship-offworld)
-              (not(Ship-at-planet ?planet))
-            )
+    :precondition 
+      (and 
+        (Personell-Loc ?captain ?bridge)
+        (Personell-Loc ?navigator ?bridge)
+        (Ship-at-planet ?planet)
+        (not(Ship-offworld))
+        (not(Ship-damaged))
+      )
+    :effect 
+      (and 
+        (Ship-offworld)
+        (not(Ship-at-planet ?planet))
+      )
   )
 
   ; -------------- Engineering Actions -------------------
