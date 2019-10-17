@@ -211,10 +211,10 @@
 
   ; -------------- Departure clearance -------------------
   (:action prep-departure
-    :parameters (?mav - MAV)
+    :parameters ()
     :precondition 
       (and 
-        (forall (?m - MAV) 
+        (forall ?m - MAV 
           (MAV-docked ?m) ; investigate
         )
         (not (Depart-OK))
