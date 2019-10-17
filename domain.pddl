@@ -8,6 +8,7 @@
     :strips
     :typing
     :equality
+    :conditional-effects
   )
 
   (:types Captain Navigator Engineer - Personell 
@@ -27,6 +28,7 @@
     (has-key ?p - Personell)                          ; personell has a door key
     (key-location ?sr - Room)                         ; location of key on ship 
     (personell-occupied ?p - Personell)               ; personell is engaged, cannot move room
+    
     ; ------------ Ship interior predicates ------------------
     (Room-Adjacent ?ra - Room ?rb - Room)
     (door-locked ?d - Door)                           ; is the door locked
@@ -209,11 +211,12 @@
 
   ; -------------- Departure clearance -------------------
   (:action prep-departure
-    :parameters (?mav - MAV ?engineer - Engineer)
+    :parameters (?mav - MAV)
     :precondition 
       (and 
-        (not (MAV-EVA ?engineer ?mav))
-        (MAV-docked ?mav)
+        (forall (?m - MAV) 
+          (MAV-docked ?m) ; investigate
+        )
         (not (Depart-OK))
       )
     :effect 
