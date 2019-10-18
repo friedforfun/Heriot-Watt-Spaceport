@@ -217,9 +217,7 @@
     :parameters ()
     :precondition 
       (and 
-        (forall ?m - MAV 
-          (MAV-docked ?m) ; investigate
-        )
+        (forall (?m - MAV) (MAV-docked ?m)) 
         (not (Depart-OK))
       )
     :effect 
