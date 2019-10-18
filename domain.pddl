@@ -16,7 +16,7 @@
     Bridge Engineering Scilab Laubay Hallway - Room
     MAV
     Door 
-    Nebula AstroidBelt Planet - Subregion 
+    Empty Nebula AstroidBelt Planet - Subregion 
     Region)
 
   (:predicates
