@@ -49,6 +49,7 @@
   )
 
     ; ------------- Moving around ship actions ----------------
+    ; Action so that personell can move between rooms inside the ship
     (:action change-room
       :parameters (?person - Personell ?startroom - Room ?endroom - Room ?door - Door)
       :precondition 
@@ -67,6 +68,7 @@
         )
     )
 
+    ; Action that allows keyholder to unlock doors
     (:action unlock-door
       :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room)
       :precondition 
@@ -91,8 +93,8 @@
     ; to implement pickup key
 
     ; -------------- Moving ship actions ------------------
-
-    (:action ship-move
+    ; action to move the ship from one region to another
+    (:action hyperspace-move
       :parameters (?origin - Region ?destination - Region)
       :precondition 
         (and  
@@ -108,6 +110,7 @@
         )
     )
 
+  ; action to enter orbit around a planet
   (:action orbit-planet
     :parameters (?solar-system - Region ?planet - Planet)
     :precondition 
@@ -121,10 +124,11 @@
     :effect 
       (and 
         (not(Ship-at-Escape-velocity))
-        (Ship-at-planet ?planet)
+        (Ship-at-Subregion ?planet)
       )
   )
 
+  ; Action to leave planets orbit
   (:action leave-planet-orbit
     :parameters (?planet - planet)
     :precondition 
@@ -156,6 +160,7 @@
       )
   )
 
+  ; action to deploy the mav from the launch bay
   (:action deploy-mav
     :parameters (?engineera - Engineer ?engineerb - Engineer ?mav - MAV ?launchbay - Laubay)
     :precondition 
@@ -173,6 +178,7 @@
       )
   )
 
+  ; action to repair
   (:action repair-ship
     :parameters (?engineer - Engineer ?Space-region - region ?mav - MAV)
     :precondition 
