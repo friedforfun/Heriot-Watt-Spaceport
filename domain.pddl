@@ -226,4 +226,11 @@
       )
     )
 
+  ; weapons system to destroy asteroid
+  ; weapons system disabled in nebula
+  ; shield system to prevent ionicising radiation from nebula
+  ; weapons cannot deploy when shield is in use vice versa
+  ; mav/probes/lander cannot deploy when shield is up
+  ; 
+
 )
