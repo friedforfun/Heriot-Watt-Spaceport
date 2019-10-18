@@ -16,12 +16,13 @@
     Bridge Engineering Scilab Laubay Hallway - Room
     MAV
     Door 
-    Nebula AstroidBelt Planet - Subregion Region)
+    Nebula AstroidBelt Planet - Subregion 
+    Region)
 
   (:predicates
     ; ------------ Space predicates -------------------------
     (Space-region ?sp - Region)                       ; space regions exist
-    (In-region ?sp - Region ?s2 - subregion)
+    (In-region ?sp - Region ?s2 - Subregion)  
 
     ; ------------ Personell predicates ---------------------
     (has-key ?p - Personell)                          ; personell has a door key
