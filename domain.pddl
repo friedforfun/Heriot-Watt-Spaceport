@@ -40,7 +40,7 @@
     (Ship-Location ?sp - Region)                      ; ship is located in region
     (Ship-at-planet ?pn - Planet)
     (Ship-damaged)                                    ; ship is damaged
-    (Ship-offworld)                                   ; ship is Ship-offworld
+    (Ship-at-Escape-velocity)                                   ; ship is Ship-at-Escape-velocity
     (Depart-OK)                                       ; ship cannot leave region until MAV is back on board
 
     ; ------------- Engineering predicates -----------------
@@ -100,7 +100,7 @@
           (Personell-Loc ?captain ?bridge)
           (Personell-Loc ?navigator ?bridge)
           (Ship-Location ?origin)
-          (Ship-offworld)
+          (Ship-at-Escape-velocity)
           (not(Ship-damaged))
           (Depart-OK)
         )
@@ -111,13 +111,13 @@
         )
     )
 
-  (:action land-planet
+  (:action orbit-planet
     :parameters (?captain - Captain ?navigator - Navigator ?solar-system - Region ?bridge - Bridge ?planet - Planet)
     :precondition 
       (and 
         (Personell-Loc ?captain ?bridge)
         (Personell-Loc ?navigator ?bridge)
-        (Ship-offworld)
+        (Ship-at-Escape-velocity)
         (not(Ship-damaged))
         (Ship-Location ?solar-system)
         (region-planet ?solar-system ?planet)
@@ -125,25 +125,25 @@
       )
     :effect 
       (and 
-        (not(Ship-offworld))
+        (not(Ship-at-Escape-velocity))
         (Ship-at-planet ?planet)
       )
   )
 
-  (:action leave-planet
+  (:action leave-planet-orbit
     :parameters (?captain - Captain ?navigator - Navigator ?bridge - Bridge ?planet - planet)
     :precondition 
       (and 
         (Personell-Loc ?captain ?bridge)
         (Personell-Loc ?navigator ?bridge)
         (Ship-at-planet ?planet)
-        (not(Ship-offworld))
+        (not(Ship-at-Escape-velocity))
         (not(Ship-damaged))
         (Depart-OK)
       )
     :effect 
       (and 
-        (Ship-offworld)
+        (Ship-at-Escape-velocity)
         (not(Ship-at-planet ?planet))
       )
   )
