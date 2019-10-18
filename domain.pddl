@@ -16,12 +16,13 @@
     Bridge Engineering Scilab Laubay Hallway - Room
     MAV
     Door 
-    Nebula AstroidBelt Planet - subregion Region)
+    Nebula AstroidBelt Planet - Subregion Region)
 
   (:predicates
     ; ------------ Space predicates -------------------------
     (Space-region ?sp - Region)                       ; space regions exist
     (In-region ?sp - Region ?s2 - subregion)
+
     ; ------------ Personell predicates ---------------------
     (has-key ?p - Personell)                          ; personell has a door key
     (key-location ?sr - Room)                         ; location of key on ship 
@@ -35,7 +36,7 @@
   
     ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - Region)                      ; ship is located in region
-    (Ship-at-planet ?pn - Planet)
+    (Ship-at-Subregion ?pn - Subregion)
     (Ship-damaged)                                    ; ship is damaged
     (Ship-at-Escape-velocity)                                   ; ship is Ship-at-Escape-velocity
     (Depart-OK)                                       ; ship cannot leave region until MAV is back on board
