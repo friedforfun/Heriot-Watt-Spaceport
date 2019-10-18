@@ -9,6 +9,7 @@
     :typing
     :equality
     :conditional-effects
+    :adl
   )
 
   (:types Captain Navigator Engineer - Personell 
