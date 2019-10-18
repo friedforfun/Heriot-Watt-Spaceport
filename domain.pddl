@@ -112,12 +112,11 @@
     :parameters (?captain - Captain ?navigator - Navigator ?solar-system - Region ?bridge - Bridge ?planet - Planet)
     :precondition 
       (and 
-        (Personell-Loc ?captain ?bridge)
-        (Personell-Loc ?navigator ?bridge)
+        
         (Ship-at-Escape-velocity)
         (not(Ship-damaged))
         (Ship-Location ?solar-system)
-        (region-planet ?solar-system ?planet)
+        (In-region ?solar-system ?planet)
         (Depart-OK)
       )
     :effect 
@@ -211,9 +210,11 @@
 
   ; -------------- Departure clearance -------------------
   (:action prep-departure
-    :parameters ()
+    :parameters (?captain - Captain ?navigator - Navigator ?bridge - Bridge)
     :precondition 
       (and 
+        (Personell-Loc ?captain ?bridge)
+        (Personell-Loc ?navigator ?bridge)
         (forall (?m - MAV) (MAV-docked ?m)) 
         (not (Depart-OK))
       )
