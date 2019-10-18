@@ -92,11 +92,9 @@
     ; -------------- Moving ship actions ------------------
 
     (:action ship-move
-      :parameters (?captain - Captain ?navigator - Navigator ?origin - Region ?destination - Region ?bridge - Bridge)
+      :parameters (?origin - Region ?destination - Region)
       :precondition 
         (and  
-          (Personell-Loc ?captain ?bridge)
-          (Personell-Loc ?navigator ?bridge)
           (Ship-Location ?origin)
           (Ship-at-Escape-velocity)
           (not(Ship-damaged))
@@ -110,10 +108,9 @@
     )
 
   (:action orbit-planet
-    :parameters (?captain - Captain ?navigator - Navigator ?solar-system - Region ?bridge - Bridge ?planet - Planet)
+    :parameters (?solar-system - Region ?planet - Planet)
     :precondition 
       (and 
-        
         (Ship-at-Escape-velocity)
         (not(Ship-damaged))
         (Ship-Location ?solar-system)
@@ -128,11 +125,9 @@
   )
 
   (:action leave-planet-orbit
-    :parameters (?captain - Captain ?navigator - Navigator ?bridge - Bridge ?planet - planet)
+    :parameters (?planet - planet)
     :precondition 
       (and 
-        (Personell-Loc ?captain ?bridge)
-        (Personell-Loc ?navigator ?bridge)
         (Ship-at-planet ?planet)
         (not(Ship-at-Escape-velocity))
         (not(Ship-damaged))
