@@ -199,8 +199,8 @@
     :parameters (?mav - MAV ?engia - Engineer ?engib - Engineer)
     :precondition 
       (and 
+        (MAV-EVA ?engia ?mav)
         (not (Ship-damaged))
-
       )
     :effect 
       (and 
