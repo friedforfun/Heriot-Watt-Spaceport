@@ -13,6 +13,7 @@
 		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 		Sol Proxima-Centauri Alpha-Centauri - Region
 		Mercury Venus Earth Mars b - Planet
+		Ceres - AstroidBelt
 		Mav-a Mav-b - MAV
 	)
 
@@ -56,13 +57,14 @@
 
 		; init space
 		(Space-region Sol)
-		(region-planet Sol Mercury)
-		(region-planet Sol Venus)
-		(region-planet Sol Earth)
-		(region-planet Sol Mars)
+		(In-region Sol Mercury)
+		(In-region Sol Venus)
+		(In-region Sol Earth)
+		(In-region Sol Mars)
+		(In-region Sol Ceres)
 
 		(Space-region Proxima-Centauri)
-		(region-planet Proxima-Centauri b)
+		(In-region Proxima-Centauri b)
 
 		(Space-region Alpha-Centauri)
 
