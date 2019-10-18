@@ -37,9 +37,9 @@
   
     ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - Region)                      ; ship is located in region
-    (Ship-at-Subregion ?pn - Subregion)
+    (Ship-at-Subregion ?pn - Subregion)               ; ship is located at a subregion of region
     (Ship-damaged)                                    ; ship is damaged
-    (Ship-at-Escape-velocity)                                   ; ship is Ship-at-Escape-velocity
+    (Ship-at-Escape-velocity)                         ; ship is out of the gravitational 
     (Depart-OK)                                       ; ship cannot leave region until MAV is back on board
 
     ; ------------- Engineering predicates -----------------
@@ -141,12 +141,31 @@
     :effect 
       (and 
         (Ship-at-Escape-velocity)
-        (not(Ship-at-planet ?planet))
+        (not(Ship-at-Subregion ?planet))
       )
   )
 
-  ; -------------- Engineering Actions -------------------
+  ; Action to visit asteroid belt inside region
+  (:action visit-asteroid
+    :parameters (?solar-system - Region ?asteroidbelt - AstroidBelt)
+    :precondition 
+      (and 
+        (Ship-at-Escape-velocity)
+        (not(Ship-damaged))
+        (Ship-Location ?solar-system)
+        (In-region ?solar-system ?asteroidbelt)
+        (Depart-OK)
+      )
+    :effect 
+      (and 
+        (Ship-at-Subregion ?asteroidbelt)
+        (not (Ship-at-Escape-velocity))
+        (Ship-damaged)
+      )
+    )
 
+  ; -------------- Engineering Actions -------------------
+  ; Action to instruct and engineer to begin monitoring repairs
   (:action monitor-repair
     :parameters (?engineer - Engineer ?room - Engineering)
     :precondition 
