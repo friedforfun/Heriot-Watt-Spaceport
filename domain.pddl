@@ -121,6 +121,7 @@
         (not(Ship-damaged))
         (Ship-Location ?solar-system)
         (region-planet ?solar-system ?planet)
+        (Depart-OK)
       )
     :effect 
       (and 
@@ -138,6 +139,7 @@
         (Ship-at-planet ?planet)
         (not(Ship-offworld))
         (not(Ship-damaged))
+        (Depart-OK)
       )
     :effect 
       (and 
