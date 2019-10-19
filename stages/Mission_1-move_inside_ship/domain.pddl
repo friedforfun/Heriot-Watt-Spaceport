@@ -3,7 +3,7 @@
 ; Sam Fay-Hunt SF52
 ;
 
-(define (domain spaceport-domain_micromove)
+(define (domain spaceport-domain)
     (:requirements
         :strips
         :typing
@@ -15,17 +15,17 @@
     (:predicates
     	(Personell ?p - personell)
     	(has-rank ?p - personell ?rk)
-        (Spacecraft-has-room ?sr - room)
-        (Room-door-North ?ra - room ?rb - room)
-        (Room-door-East ?ra - room ?rb - room)
-        (Room-door-South ?ra - room ?rb - room)
-        (Room-door-West ?ra - room ?rb - room)
-        (door-locked ?d - door)
-        (Personell-Loc ?p - personell ?sr - room)
-        (has-key ?p - personell)
-        (key-location ?sr - room)
-        (door ?d - door)
-        (door-connects ?d - door ?ra - room ?rb - room)
+      (Spacecraft-has-room ?sr - room)
+      (Room-door-North ?ra - room ?rb - room)
+      (Room-door-East ?ra - room ?rb - room)
+      (Room-door-South ?ra - room ?rb - room)
+      (Room-door-West ?ra - room ?rb - room)
+      (door-locked ?d - door)
+      (Personell-Loc ?p - personell ?sr - room)
+      (has-key ?p - personell)
+      (key-location ?sr - room)
+      (door ?d - door)
+      (door-connects ?d - door ?ra - room ?rb - room)
     )
 
     (:action change-room
