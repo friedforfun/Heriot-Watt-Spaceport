@@ -185,7 +185,6 @@
     :precondition 
       (and 
         (Personell-Loc ?engineera ?launchbay)
-        (monitor-repair ?engineerb)
       )
     :effect 
       (and 

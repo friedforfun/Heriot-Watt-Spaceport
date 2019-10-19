@@ -23,8 +23,8 @@
 		(Personell-Loc Tretter Science-Lab)
 		(Personell-Loc Meachum Launch-Bay)
 		(Personell-Loc Bunte Launch-Bay)
-		(Personell-Loc Hagarty Engineering)
-		(Personell-Loc Zayicek Engineering)
+		(MAV-EVA Hagarty Mav-a)
+		(MAV-EVA Zayicek Mav-b)
 		(Personell-Loc Penley Engineering)
 
 		; init ship interior rooms
@@ -73,9 +73,6 @@
 		(Ship-at-planet Earth)
 
 		;init ship vehicles
-		(MAV-docked Mav-a)
-		(MAV-docked Mav-b)
-		(Depart-Ok)
 
 		(Ship-damaged)
 
