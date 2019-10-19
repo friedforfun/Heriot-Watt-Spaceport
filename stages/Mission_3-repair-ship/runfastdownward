@@ -1,0 +1,1 @@
+sudo docker run --rm -v /home/master/Documents/fastdownward/Heriot-Watt-Spaceport:/spaceport aibasel/downward --alias lama-first /spaceport/stages/Mission_3-repair_ship/domain.pddl /spaceport/stages/Mission_3-repair_ship/mission.pddl > ~/Documents/fastdownward/Heriot-Watt-Spaceport/stages/Mission_3-repair_ship/mission03.txt
