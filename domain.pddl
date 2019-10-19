@@ -47,81 +47,97 @@
     (MAV-docked ?ma - MAV)                            ; the MAV is docked
   )
 
-    ; ------------- Moving around ship actions ----------------
-    ; personell can move between rooms inside the ship
-    (:action change-room
-      :parameters (?person - Personell ?startroom - Room ?endroom - Room ?door - Door)
-      :precondition 
-        (and 
-          (Personell-Loc ?person ?startroom)                                     
-          (Room-Adjacent ?startroom ?endroom)           
-          (door-connects ?door ?startroom ?endroom)     
-          (not(door-locked ?door))                   
-          (not (personell-occupied ?person))
-        )
-        
-      :effect 
-        (and  
-          (not(Personell-Loc ?person ?startroom))      
-          (Personell-Loc ?person ?endroom)
-        )
-    )
+  ; ------------- Moving around ship actions ----------------
+  ; personell can move between rooms inside the ship
+  (:action change-room
+    :parameters (?person - Personell ?startroom - Room ?endroom - Room ?door - Door)
+    :precondition 
+      (and 
+        (Personell-Loc ?person ?startroom)                                     
+        (Room-Adjacent ?startroom ?endroom)           
+        (door-connects ?door ?startroom ?endroom)     
+        (not(door-locked ?door))                   
+        (not (personell-occupied ?person))
+      )
+      
+    :effect 
+      (and  
+        (not(Personell-Loc ?person ?startroom))      
+        (Personell-Loc ?person ?endroom)
+      )
+  )
 
-    ; keyholder to unlock doors
-    (:action unlock-door
-      :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room)
-      :precondition 
-        (and 
-          (has-key ?person)
-          (not (personell-occupied ?person))
-          (door-locked ?door)
-          (or
-            (Personell-Loc ?person ?room)
-            (Personell-Loc ?person ?room-to-open)
-          )
-          (or
-            (door-connects ?door ?room ?room-to-open)
-            (door-connects ?door ?room-to-open ?room)
-          )
-        )
-
-      :effect (and (not(door-locked ?door))
-              )
-    )
-
-    ; collect key from room
-    (:action pickup-key
-      :parameters (?room - Room ?person - Personell)
-      :precondition 
-        (and 
-          (not (personell-occupied ?person))
+  ; keyholder to unlock doors
+  (:action unlock-door
+    :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room)
+    :precondition 
+      (and 
+        (has-key ?person)
+        (not (personell-occupied ?person))
+        (door-locked ?door)
+        (or
           (Personell-Loc ?person ?room)
-          (key-location ?room)
+          (Personell-Loc ?person ?room-to-open)
         )
-      :effect 
-        (and 
-          (not (key-location ?room))
-          (has-key ?person)
+        (or
+          (door-connects ?door ?room ?room-to-open)
+          (door-connects ?door ?room-to-open ?room)
         )
-    )
+      )
 
-    ; -------------- Moving ship actions ------------------
-    ; move the ship from one region to another
-    (:action hyperspace-move
-      :parameters (?origin - Region ?destination - Region)
-      :precondition 
-        (and  
-          (Ship-Location ?origin)
-          (Ship-clear)
-          (not(Ship-damaged))
-          (Depart-OK)
-        )
-      :effect 
-        (and 
-          (not(Ship-Location ?origin))
-          (Ship-Location ?destination)
-        )
-    )
+    :effect (and (not(door-locked ?door))
+            )
+  )
+
+  ; collect key from room
+  (:action pickup-key
+    :parameters (?room - Room ?person - Personell)
+    :precondition 
+      (and 
+        (not (personell-occupied ?person))
+        (Personell-Loc ?person ?room)
+        (key-location ?room)
+      )
+    :effect 
+      (and 
+        (not (key-location ?room))
+        (has-key ?person)
+      )
+  )
+
+  ; -------------- Moving ship actions ------------------
+  ; move the ship from one region to another
+  (:action hyperspace-move
+    :parameters (?origin - Region ?destination - Region)
+    :precondition 
+      (and  
+        (Ship-Location ?origin)
+        (Ship-clear)
+        (not(Ship-damaged))
+        (Depart-OK)
+      )
+    :effect 
+      (and 
+        (not(Ship-Location ?origin))
+        (Ship-Location ?destination)
+      )
+  )
+
+  ; visit subregion (that is not an asteriod belt)
+
+  (:action visit-subregion
+    :parameters (?solar-system - Region ?subregion - Subregion)
+    :precondition 
+      (and 
+        ()
+      )
+    :effect 
+      (and 
+        ()
+      )
+  )
+
+  ; leave subregion (ready for hyperspace jump)
 
   ; enter orbit around a planet
   (:action orbit-planet
