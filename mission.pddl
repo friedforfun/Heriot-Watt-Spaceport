@@ -56,17 +56,14 @@
 		(door-connects No-Door Hallway-B Hallway-A)
 
 		; init space
-		(Space-region Sol)
 		(In-region Sol Mercury)
 		(In-region Sol Venus)
 		(In-region Sol Earth)
 		(In-region Sol Mars)
 		(In-region Sol Ceres)
 
-		(Space-region Proxima-Centauri)
 		(In-region Proxima-Centauri b)
 
-		(Space-region Alpha-Centauri)
 
 		; init ship location
 		(Ship-Location Sol)

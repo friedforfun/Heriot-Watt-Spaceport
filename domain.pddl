@@ -21,8 +21,7 @@
 
   (:predicates
     ; ------------ Space predicates -------------------------
-    (Space-region ?sp - Region)                       ; space regions exist
-    (In-region ?sp - Region ?s2 - Subregion)  
+    (In-region ?sp - Region ?s2 - Subregion)          ; inside this region is this subregion
 
     ; ------------ Personell predicates ---------------------
     (has-key ?p - Personell)                          ; personell has a door key
