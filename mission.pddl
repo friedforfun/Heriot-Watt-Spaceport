@@ -70,7 +70,7 @@
 
 		; init ship location
 		(Ship-Location Sol)
-		(Ship-at-planet Earth)
+		(Ship-at-Subregion Earth)
 
 		;init ship vehicles
 
