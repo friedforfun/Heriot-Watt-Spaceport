@@ -226,11 +226,12 @@
   )
 
   (:action recall-mav
-    :parameters (?mav - MAV ?engia - Engineer)
+    :parameters (?mav - MAV ?engia - Engineer ?engib - Engineer)
     :precondition 
       (and 
         (not (MAV-docked ?mav))
         (MAV-EVA ?engia ?mav)
+        (not (monitor-repair ?engib))
       )
     :effect 
       (and 
