@@ -4,6 +4,161 @@ INFO     translator time limit: None
 INFO     translator memory limit: None
 INFO     translator command line string: /usr/bin/python /workspace/downward/builds/release/bin/translate/translate.py /spaceport/stages/Mission_2-move_ship/domain.pddl /spaceport/stages/Mission_2-move_ship/mission.pddl --sas-file output.sas
 Parsing...
-translate exit code: 30
+Parsing: [0.000s CPU, 0.004s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.001s wall-clock]
+Normalizing Datalog program...
+Normalizing Datalog program: [0.010s CPU, 0.004s wall-clock]
+Preparing model... [0.000s CPU, 0.002s wall-clock]
+Generated 60 rules.
+Computing model... [0.010s CPU, 0.008s wall-clock]
+266 relevant atoms
+425 auxiliary atoms
+691 final queue length
+752 total queue pushes
+Completing instantiation... [0.000s CPU, 0.004s wall-clock]
+Instantiating: [0.020s CPU, 0.019s wall-clock]
+Computing fact groups...
+Finding invariants...
+10 initial candidates
+Finding invariants: [0.000s CPU, 0.002s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+2 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.000s wall-clock]
+Computing fact groups: [0.000s CPU, 0.004s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Processing axioms: [0.000s CPU, 0.000s wall-clock]
+Translating task: [0.010s CPU, 0.004s wall-clock]
+16 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+0 operators removed
+0 axioms removed
+8 propositions removed
+Detecting unreachable propositions: [0.000s CPU, 0.002s wall-clock]
+Reordering and filtering variables...
+7 of 10 variables necessary.
+0 of 8 mutex groups necessary.
+78 of 108 operators necessary.
+0 of 0 axiom rules necessary.
+Reordering and filtering variables: [0.000s CPU, 0.001s wall-clock]
+Translator variables: 7
+Translator derived variables: 0
+Translator facts: 31
+Translator goal facts: 1
+Translator mutex groups: 0
+Translator total mutex groups size: 0
+Translator operators: 78
+Translator axioms: 0
+Translator task size: 387
+Translator peak memory: 36168 KB
+Writing output... [0.000s CPU, 0.001s wall-clock]
+Done! [0.030s CPU, 0.035s wall-clock]
+translate exit code: 0
 
-Driver aborting after translate
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: None
+INFO     search memory limit: None
+INFO     search command line string: /workspace/downward/builds/release/bin/downward --evaluator 'hlm=lmcount(lm_factory=lm_rhw(reasonable_orders=true),transform=adapt_costs(one),pref=false)' --evaluator 'hff=ff(transform=adapt_costs(one))' --search 'lazy_greedy([hff,hlm],preferred=[hff,hlm],cost_type=one,reopen_closed=false)' --internal-plan-file sas_plan < output.sas
+reading input... [t=2.138e-05s]
+done reading input! [t=0.00033736s]
+Initializing landmarks count heuristic...
+Initializing Exploration...
+Generating landmarks using the RPG/SAS+ approach
+approx. reasonable orders
+approx. obedient reasonable orders
+Removed 0 reasonable or obedient reasonable orders
+Landmarks generation time: 0.000481561s
+Discovered 16 landmarks, of which 3 are disjunctive and 0 are conjunctive 
+48 edges
+Simplifying 78 unary operators... done! [66 unary operators]
+time to simplify: 7.3412e-05s
+Initializing additive heuristic...
+Initializing FF heuristic...
+Building successor generator...done! [t=0.0020436s]
+peak memory difference for successor generator creation: 0 KB
+time for successor generation creation: 3.8049e-05s
+Variables: 7
+FactPairs: 31
+Bytes per state: 4
+Conducting lazy best first search, (real) bound = 2147483647
+5 initial landmarks, 1 goal landmarks
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 11
+New best heuristic value for ff(transform = adapt_costs(one)): 14
+[g=0, 1 evaluated, 0 expanded, t=0.00222866s, 22168 KB]
+Initial heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 11
+Initial heuristic value for ff(transform = adapt_costs(one)): 14
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 10
+New best heuristic value for ff(transform = adapt_costs(one)): 13
+[g=1, 2 evaluated, 1 expanded, t=0.00229563s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 9
+New best heuristic value for ff(transform = adapt_costs(one)): 12
+[g=2, 3 evaluated, 2 expanded, t=0.00233832s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 8
+New best heuristic value for ff(transform = adapt_costs(one)): 11
+[g=4, 6 evaluated, 5 expanded, t=0.00241954s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 7
+New best heuristic value for ff(transform = adapt_costs(one)): 10
+[g=5, 7 evaluated, 6 expanded, t=0.00246344s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 6
+New best heuristic value for ff(transform = adapt_costs(one)): 9
+[g=6, 8 evaluated, 7 expanded, t=0.00251081s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 5
+New best heuristic value for ff(transform = adapt_costs(one)): 5
+[g=7, 9 evaluated, 8 expanded, t=0.00255406s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 4
+New best heuristic value for ff(transform = adapt_costs(one)): 4
+[g=8, 10 evaluated, 9 expanded, t=0.00258954s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 3
+New best heuristic value for ff(transform = adapt_costs(one)): 3
+[g=9, 11 evaluated, 10 expanded, t=0.00262945s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 2
+New best heuristic value for ff(transform = adapt_costs(one)): 2
+[g=10, 12 evaluated, 11 expanded, t=0.00267833s, 22168 KB]
+New best heuristic value for lmcount(lm_factory = lm_rhw(reasonable_orders = true), transform = adapt_costs(one), pref = false): 1
+New best heuristic value for ff(transform = adapt_costs(one)): 1
+[g=11, 13 evaluated, 12 expanded, t=0.00272561s, 22168 KB]
+Solution found!
+Actual search time: 0.000557967s [t=0.00276429s]
+unlock-door tretter door-science-lab hallway-b science-lab (1)
+change-room tretter science-lab hallway-b door-science-lab (1)
+change-room tretter hallway-b hallway-a no-door (1)
+unlock-door tretter door-launch-bay hallway-a launch-bay (1)
+change-room tretter hallway-a hallway-b no-door (1)
+change-room tretter hallway-b bridge door-bridge (1)
+change-room meachum launch-bay hallway-a door-launch-bay (1)
+change-room meachum hallway-a hallway-b no-door (1)
+change-room meachum hallway-b bridge door-bridge (1)
+leave-planet tretter meachum bridge earth (1)
+ship-move tretter meachum sol proxima-centauri bridge (1)
+visit-planet tretter meachum proxima-centauri bridge b (1)
+Plan length: 12 step(s).
+Plan cost: 12
+Expanded 13 state(s).
+Reopened 0 state(s).
+Evaluated 14 state(s).
+Evaluations: 28
+Generated 57 state(s).
+Dead ends: 0 state(s).
+Number of registered states: 14
+Int hash set load factor: 14/16 = 0.875
+Int hash set resizes: 4
+Search time: 0.00060949s
+Total time: 0.00276786s
+Solution found.
+Peak memory: 22168 KB
+Remove intermediate file output.sas
+search exit code: 0
+
