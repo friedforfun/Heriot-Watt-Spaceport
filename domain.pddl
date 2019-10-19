@@ -38,13 +38,13 @@
     (Ship-Location ?sp - Region)                      ; ship is located in region
     (Ship-at-Subregion ?pn - Subregion)               ; ship is located at a subregion of region
     (Ship-damaged)                                    ; ship is damaged
-    (Ship-at-Escape-velocity)                         ; ship is out of the gravitational 
-    (Depart-OK)                                       ; ship cannot leave region until MAV is back on board
+    (Ship-at-Escape-velocity)                         ; ship is outside of a subregeion 
+    (Depart-OK)                                       ; ship cannot leave region until vehicles are back on board
 
     ; ------------- Engineering predicates -----------------
     (MAV-EVA ?en - Engineer ?ma - MAV)                ; MAV is in EVA state
-    (monitor-repair ?en - Engineer)
-    (MAV-docked ?ma - MAV)
+    (monitor-repair ?en - Engineer)                   ; this engineer is monitoring repair
+    (MAV-docked ?ma - MAV)                            ; the MAV is docked
   )
 
     ; ------------- Moving around ship actions ----------------
