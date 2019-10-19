@@ -89,7 +89,21 @@
               )
     )
 
-    ; to implement pickup key
+    ; action to collect key from room
+    (:action pickup-key
+      :parameters (?room - Room ?person - Personell)
+      :precondition 
+        (and 
+          (not (personell-occupied ?person))
+          (Personell-Loc ?person ?room)
+          (key-location ?room)
+        )
+      :effect 
+        (and 
+          (not (key-location ?room))
+          (has-key ?person)
+        )
+    )
 
     ; -------------- Moving ship actions ------------------
     ; action to move the ship from one region to another
