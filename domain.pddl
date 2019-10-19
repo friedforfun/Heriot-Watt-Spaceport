@@ -209,19 +209,8 @@
     :effect 
       (and 
         (not (Ship-damaged))
-      )
-  )
-
-  (:action finish-monitoring-repair
-    :parameters (?engineer - Engineer)
-    :precondition 
-      (and 
-        (monitor-repair ?engineer)
-      )
-    :effect 
-      (and 
-        (not (monitor-repair ?engineer))
-        (not (personell-occupied ?engineer))
+        (not (monitor-repair ?engineerb))
+        (not (personell-occupied ?engineerb))
       )
   )
 
