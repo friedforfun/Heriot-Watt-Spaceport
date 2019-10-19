@@ -23,6 +23,7 @@
     ; ------------ Space predicates -------------------------
     (Space-region ?sp - Region)                       ; space regions exist
     (In-region ?sp - Region ?s2 - Subregion)  
+    (isNebula ?sr - Nebula)
 
     ; ------------ Personell predicates ---------------------
     (has-key ?p - Personell)                          ; personell has a door key
@@ -204,8 +205,8 @@
         (Ship-damaged)
         (MAV-EVA ?engineer ?mav)
         (monitor-repair ?engineerb)
-        (not (forall (?x - Nebula) (= ?x ?subregion)))
-        ;(not (Ship-at-Subregion ?subregion - Nebula))
+        ;(not (forall (?x - Nebula) (= ?x ?subregion)))
+        (not (isNebula ?subregion))
       )
     :effect 
       (and 
