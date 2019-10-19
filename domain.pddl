@@ -204,7 +204,7 @@
         (Ship-damaged)
         (MAV-EVA ?engineer ?mav)
         (monitor-repair ?engineerb)
-        (not (Ship-at-Subregion ?subregion - nebula))
+        (not (Ship-at-Subregion ?subregion - Nebula))
       )
     :effect 
       (and 
