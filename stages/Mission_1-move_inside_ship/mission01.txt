@@ -1,0 +1,9 @@
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: None
+INFO     translator command line string: /usr/bin/python /workspace/downward/builds/release/bin/translate/translate.py /spaceport/stages/Mission_1-move_inside_ship/domain.pddl /spaceport/stages/Mission_1-move_inside_ship/mission.pddl --sas-file output.sas
+Parsing...
+translate exit code: 30
+
+Driver aborting after translate
