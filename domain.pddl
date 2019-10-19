@@ -163,6 +163,43 @@
       )
     )
 
+  ; Action to visit nebula
+  (:action visit-nebula
+    :parameters (?solar-system - Region ?nebula - Nebula)
+    :precondition 
+      (and 
+        (Ship-at-Escape-velocity)
+        (not(Ship-damaged))
+        (Ship-Location ?solar-system)
+        (In-region ?solar-system ?nebula)
+        (Depart-OK)
+      )
+    :effect 
+      (and 
+        (Ship-at-Subregion ?nebula)
+        (not (Ship-at-Escape-velocity))
+      )
+    )
+
+  ; Action to visit empty subregion
+  (:action visit-empty
+    :parameters (?solar-system - Region ?emptysr - empty)
+    :precondition 
+      (and 
+        (Ship-at-Escape-velocity)
+        (not(Ship-damaged))
+        (Ship-Location ?solar-system)
+        (In-region ?solar-system ?emptysr)
+        (Depart-OK)
+      )
+    :effect 
+      (and 
+        (Ship-at-Subregion ?emptysr)
+        (not (Ship-at-Escape-velocity))
+      )
+    )
+
+
   ; -------------- Engineering Actions -------------------
   ; Action to instruct and engineer to begin monitoring repairs
   (:action monitor-repair
