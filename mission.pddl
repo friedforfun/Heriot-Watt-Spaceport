@@ -80,7 +80,7 @@
 
 	(:goal
 		(and 
-			(Ship-at-planet b)
+			(Ship-at-Subregion b)
 		)
 	)
 
