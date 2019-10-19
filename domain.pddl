@@ -282,6 +282,23 @@
       )
     )
 
+  ; ------------ Missions -------------------------------
+
+  ; predicate ideas:
+  ; mission has a destination
+  ; mission requires lander to visit planet
+  ; mission requires a scan
+  ; mission requires plasma scans
+  ; mission can be complete
+
+  ; actions
+  ; complete visit mission
+  ; complete lander mission
+  ; complete scan mission
+  ; complete plasma mission
+
+  ; ---------------- Question 2 ideas -----------------------
+
   ; weapons system to destroy asteroid
   ; weapons system disabled in nebula
   ; shield system to prevent ionicising radiation from nebula
