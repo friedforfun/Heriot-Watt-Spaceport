@@ -133,7 +133,7 @@
     :parameters (?planet - planet)
     :precondition 
       (and 
-        (Ship-at-planet ?planet)
+        (Ship-at-Subregion ?planet)
         (not(Ship-at-Escape-velocity))
         (not(Ship-damaged))
         (Depart-OK)
