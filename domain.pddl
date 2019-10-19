@@ -198,14 +198,13 @@
 
   ; action to repair
   (:action repair-ship
-    :parameters (?engineer - Engineer ?engineerb - Engineer ?Space-region - region ?mav - MAV)
+    :parameters (?engineer - Engineer ?engineerb - Engineer ?subregion - Subregion ?mav - MAV)
     :precondition 
       (and 
         (Ship-damaged)
-        
-        (Ship-Location ?Space-region)
         (MAV-EVA ?engineer ?mav)
         (monitor-repair ?engineerb)
+        (not (Ship-at-Subregion ?subregion - nebula))
       )
     :effect 
       (and 
@@ -213,7 +212,7 @@
       )
   )
 
-  (:action end-repair-monitor
+  (:action finish-monitoring-repair
     :parameters (?engineer - Engineer)
     :precondition 
       (and 
