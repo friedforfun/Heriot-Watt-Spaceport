@@ -231,7 +231,6 @@
       (and 
         (not (MAV-docked ?mav))
         (MAV-EVA ?engia ?mav)
-        (not (Ship-damaged))
       )
     :effect 
       (and 
