@@ -129,40 +129,26 @@
     :parameters (?solar-system - Region ?subregion - Subregion)
     :precondition 
       (and 
-        ()
+        (Ship-clear)
+        (not(Ship-damaged))
+        (not (exists (?x - AstroidBelt) (= ?x ?subregion)))   ; there is not an asteriod belt that is the same as this subregion
+        (Ship-Location ?solar-system)
+        (In-region ?solar-system ?subregion)
+        (Depart-OK)
       )
     :effect 
       (and 
-        ()
+        (not(Ship-clear))
+        (Ship-at-Subregion ?subregion)
       )
   )
 
   ; leave subregion (ready for hyperspace jump)
-
-  ; enter orbit around a planet
-  (:action orbit-planet
-    :parameters (?solar-system - Region ?planet - Planet)
+  (:action leave-subregion
+    :parameters (?subregion - Subregion)
     :precondition 
       (and 
-        (Ship-clear)
-        (not(Ship-damaged))
-        (Ship-Location ?solar-system)
-        (In-region ?solar-system ?planet)
-        (Depart-OK)
-      )
-    :effect 
-      (and 
-        (not(Ship-clear))
-        (Ship-at-Subregion ?planet)
-      )
-  )
-
-  ; leave planets orbit
-  (:action leave-planet-orbit
-    :parameters (?planet - planet)
-    :precondition 
-      (and 
-        (Ship-at-Subregion ?planet)
+        (Ship-at-Subregion ?subregion)
         (not(Ship-clear))
         (not(Ship-damaged))
         (Depart-OK)
@@ -170,11 +156,11 @@
     :effect 
       (and 
         (Ship-clear)
-        (not(Ship-at-Subregion ?planet))
+        (not(Ship-at-Subregion ?subregion))
       )
   )
 
-  ; visit asteroid belt inside region
+  ; visit asteroid belt inside region - seperated so the ship can recieve damage
   (:action visit-asteroid
     :parameters (?solar-system - Region ?asteroidbelt - AstroidBelt)
     :precondition 
@@ -190,42 +176,6 @@
         (Ship-at-Subregion ?asteroidbelt)
         (not (Ship-clear))
         (Ship-damaged)
-      )
-    )
-
-  ; visit nebula
-  (:action visit-nebula
-    :parameters (?solar-system - Region ?nebula - Nebula)
-    :precondition 
-      (and 
-        (Ship-clear)
-        (not(Ship-damaged))
-        (Ship-Location ?solar-system)
-        (In-region ?solar-system ?nebula)
-        (Depart-OK)
-      )
-    :effect 
-      (and 
-        (Ship-at-Subregion ?nebula)
-        (not (Ship-clear))
-      )
-    )
-
-  ; visit empty subregion
-  (:action visit-empty
-    :parameters (?solar-system - Region ?emptysr - empty)
-    :precondition 
-      (and 
-        (Ship-clear)
-        (not(Ship-damaged))
-        (Ship-Location ?solar-system)
-        (In-region ?solar-system ?emptysr)
-        (Depart-OK)
-      )
-    :effect 
-      (and 
-        (Ship-at-Subregion ?emptysr)
-        (not (Ship-clear))
       )
     )
 
