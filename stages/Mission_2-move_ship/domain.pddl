@@ -123,11 +123,4 @@
             )
   )
 
-  ; -------------- Engineering Actions -------------------
-  (:action repair-ship
-    :parameters (?engineer - Engineer)
-    :precondition (and (Ship-damaged))
-    :effect (and ())
-  )
-
 )
