@@ -256,7 +256,7 @@
         )
         ;(Personell-Loc ?captain ?bridge)
         ;(Personell-Loc ?navigator ?bridge)
-        (forall (and(?m - MAV)) (MAV-docked ?m)) 
+        (forall (?m - MAV) (MAV-docked ?m)) 
         (not (Depart-OK))
       )
     :effect 
