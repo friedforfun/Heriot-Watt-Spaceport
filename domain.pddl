@@ -208,38 +208,37 @@
 
   ; repair damage
   (:action repair-ship
-    :parameters (?engineer - Engineer ?engineerb - Engineer ?subregion - Subregion ?mav - MAV)
+    :parameters (?engineer - Engineer ?mav - MAV)
     :precondition 
       (and 
         (Ship-damaged)
-        (MAV-EVA ?engineer ?mav)
-        (monitor-repair ?engineerb)
-        (Ship-at-Subregion ?subregion)
-        (not (exists (?x - Nebula) (= ?x ?subregion))) 
+        (exists (?x - Engineer) (MAV-EVA ?x ?mav))
+        (monitor-repair ?engineer)
+        (not (MAV-disabled ?mav))
       )
     :effect 
       (and 
         (not (Ship-damaged))
-        (not (monitor-repair ?engineerb))
-        (not (personell-occupied ?engineerb))
+        (not (monitor-repair ?engineer))
+        (not (personell-occupied ?engineer))
       )
   )
 
   ; Recall MAV from EVA
   (:action recall-mav
-    :parameters (?mav - MAV ?engia - Engineer ?engib - Engineer)
+    :parameters (?mav - MAV ?engineer - Engineer ?launchbay - Laubay)
     :precondition 
       (and 
         (not (MAV-docked ?mav))
-        (MAV-EVA ?engia ?mav)
-        (not (= ?engia ?engib))
-        (not (monitor-repair ?engib))
+        (MAV-EVA ?engineer ?mav)
+        (exists (?x - Engineer) (Personell-Loc ?x ?launchbay))
       )
     :effect 
       (and 
-        (not (MAV-EVA ?engia ?mav))
-        (not (personell-occupied ?engia))
+        (not (MAV-EVA ?engineer ?mav))
+        (not (personell-occupied ?engineer))
         (MAV-docked ?mav)
+        (Personell-Loc ?engineer ?launchbay)
       )
   )
 
