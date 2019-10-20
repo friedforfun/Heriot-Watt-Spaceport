@@ -247,12 +247,16 @@
 
   ; Ship ready to depart, all probes and MAV are docked
   (:action prep-departure
-    :parameters (?captain - Captain ?navigator - Navigator ?bridge - Bridge)
+    :parameters (?bridge - Bridge)
     :precondition 
       (and 
-        (Personell-Loc ?captain ?bridge)
-        (Personell-Loc ?navigator ?bridge)
-        (forall (?m - MAV) (MAV-docked ?m)) 
+        (and 
+          (exists (?x - Captain) (Personell-Loc ?x ?bridge))
+          (exists (?y - Navigator) (Personell-Loc ?y ?bridge))
+        )
+        ;(Personell-Loc ?captain ?bridge)
+        ;(Personell-Loc ?navigator ?bridge)
+        (forall (and(?m - MAV)) (MAV-docked ?m)) 
         (not (Depart-OK))
       )
     :effect 
