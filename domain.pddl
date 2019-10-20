@@ -17,7 +17,9 @@
     MAV
     Door 
     Empty Nebula AstroidBelt Planet - Subregion 
-    Region)
+    Region
+    Mission
+  )
 
   (:predicates
     ; ------------ Space predicates -------------------------
@@ -45,6 +47,18 @@
     (MAV-EVA ?en - Engineer ?ma - MAV)                ; MAV is in EVA state
     (monitor-repair ?en - Engineer)                   ; this engineer is monitoring repair
     (MAV-docked ?ma - MAV)                            ; the MAV is docked
+    (MAV-disabled ?ma - MAV)
+
+    ; ------------- Mission predicates ---------------------
+    (Mission-complete ?m - Mission)
+    (Objective-scan-subregion ?m - Mission ?sr - Subregion)
+    (Objective-visit-subregion ?m - Mission ?sr - Subregion)
+    (Objective-scan-planet ?m - Mission ?p - Planet)
+    (Objective-retrieve-plasma ?m - Mission ?n - Nebula)
+    (Objective-visit-region ?m - Mission ?r - Region)
+    (Objective-identify-touchdown ?m - Mission ?p - Planet)
+    (Objective-deploy-MAV ?m - Mission ?sr - Subregion)
+    (Objective-deploy-prove ?m - Mission ?sr - Subregion)
   )
 
   ; ------------- Moving around ship actions ----------------
@@ -123,15 +137,13 @@
       )
   )
 
-  ; visit subregion (that is not an asteriod belt)
-
+  ; visit subregion, if asteroid belt is visited ship gets damaged
   (:action visit-subregion
     :parameters (?solar-system - Region ?subregion - Subregion)
     :precondition 
       (and 
         (Ship-clear)
         (not(Ship-damaged))
-        (not (exists (?x - AstroidBelt) (= ?x ?subregion)))   ; there is not an asteriod belt that is the same as this subregion
         (Ship-Location ?solar-system)
         (In-region ?solar-system ?subregion)
         (Depart-OK)
@@ -140,6 +152,7 @@
       (and 
         (not(Ship-clear))
         (Ship-at-Subregion ?subregion)
+        (when (and (exists (?x - AstroidBelt) (= ?x ?subregion))) (Ship-damaged))
       )
   )
 
@@ -160,26 +173,6 @@
       )
   )
 
-  ; visit asteroid belt inside region - seperated so the ship can recieve damage
-  (:action visit-asteroid
-    :parameters (?solar-system - Region ?asteroidbelt - AstroidBelt)
-    :precondition 
-      (and 
-        (Ship-clear)
-        (not(Ship-damaged))
-        (Ship-Location ?solar-system)
-        (In-region ?solar-system ?asteroidbelt)
-        (Depart-OK)
-      )
-    :effect 
-      (and 
-        (Ship-at-Subregion ?asteroidbelt)
-        (not (Ship-clear))
-        (Ship-damaged)
-      )
-    )
-
-
   ; -------------- Engineering Actions -------------------
   ; Instruct an engineer to begin monitoring repairs
   (:action monitor-repair
@@ -197,7 +190,7 @@
 
   ; deploy the mav from the launch bay
   (:action deploy-mav
-    :parameters (?engineera - Engineer ?engineerb - Engineer ?mav - MAV ?launchbay - Laubay)
+    :parameters (?engineera - Engineer ?mav - MAV ?launchbay - Laubay ?subregion - Subregion)
     :precondition 
       (and 
         (Personell-Loc ?engineera ?launchbay)
@@ -209,6 +202,7 @@
         (personell-occupied ?engineera)
         (not (Depart-OK))
         (not (MAV-docked ?mav))
+        (when (and (exists (?x - Nebula) (= ?x ?subregion))) (MAV-disabled ?mav))
       )
   )
 
@@ -220,6 +214,7 @@
         (Ship-damaged)
         (MAV-EVA ?engineer ?mav)
         (monitor-repair ?engineerb)
+        (Ship-at-Subregion ?subregion)
         (not (exists (?x - Nebula) (= ?x ?subregion))) 
       )
     :effect 
@@ -237,6 +232,7 @@
       (and 
         (not (MAV-docked ?mav))
         (MAV-EVA ?engia ?mav)
+        (not (= ?engia ?engib))
         (not (monitor-repair ?engib))
       )
     :effect 
@@ -274,12 +270,24 @@
   ; mission requires plasma scans
   ; mission can be complete
 
+  ; for each mission describe precontions as goals, then set mission to true as effect
   ; actions
   ; complete visit mission
   ; complete lander mission
   ; complete scan mission
   ; complete plasma mission
 
+  (:action complete-mission
+    :parameters (?mission - Mission)
+    :precondition 
+      (and 
+        ()
+      )
+    :effect 
+      (and 
+        ()
+      )
+  )
   ; ---------------- Question 2 ideas -----------------------
 
   ; weapons system to destroy asteroid
