@@ -190,16 +190,16 @@
 
   ; deploy the mav from the launch bay
   (:action deploy-mav
-    :parameters (?engineera - Engineer ?mav - MAV ?launchbay - Laubay ?subregion - Subregion)
+    :parameters (?engineer - Engineer ?mav - MAV ?launchbay - Laubay ?subregion - Subregion)
     :precondition 
       (and 
-        (Personell-Loc ?engineera ?launchbay)
+        (Personell-Loc ?engineer ?launchbay)
       )
     :effect 
       (and 
-        (not (Personell-Loc ?engineera ?launchbay))
-        (MAV-EVA ?engineera ?mav)
-        (personell-occupied ?engineera)
+        (not (Personell-Loc ?engineer ?launchbay))
+        (MAV-EVA ?engineer ?mav)
+        (personell-occupied ?engineer)
         (not (Depart-OK))
         (not (MAV-docked ?mav))
         (when (and (exists (?x - Nebula) (= ?x ?subregion))) (MAV-disabled ?mav))
