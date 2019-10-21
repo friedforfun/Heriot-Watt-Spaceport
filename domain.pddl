@@ -52,8 +52,9 @@
 
     ;--------------- Probe predicates ----------------------
     (Probe-deployed ?pr - Probe ?sr - Subregion)
-    (Scan ?sc - Collectable ?sr - Subregion)
+    (Scan-loc ?sc - Collectable ?sr - Subregion)
     (Scan-retrieved ?sc - Collectable ?pr - Probe)
+    (Probe-destroyed ?pr - Probe)
 
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)
