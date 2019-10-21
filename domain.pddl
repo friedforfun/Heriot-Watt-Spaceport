@@ -49,6 +49,12 @@
     (MAV-docked ?ma - MAV)                            ; the MAV is docked
     (MAV-disabled ?ma - MAV)
 
+    ;--------------- Probe predicates ----------------------
+    (Probe-deployed ?pr - Probe ?sr - Subregion)
+    (Scan ?sc - Scan ?sr - Subregion)
+    (Plasma ?pl - Plasma ?sr - Subregion)
+
+
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)
     (Objective-scan-subregion ?m - Mission ?sr - Subregion)
