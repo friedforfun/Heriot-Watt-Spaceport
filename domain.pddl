@@ -52,9 +52,8 @@
 
     ;--------------- Probe predicates ----------------------
     (Probe-deployed ?pr - Probe ?sr - Subregion)
-    (Scan ?sc - Scan ?sr - Subregion)
-    (Plasma ?pl - Plasma ?sr - Subregion)
-
+    (Scan ?sc - Collectable ?sr - Subregion)
+    (Scan-retrieved ?sc - Collectable ?pr - Probe)
 
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)
