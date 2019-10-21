@@ -14,9 +14,10 @@
 
   (:types Captain Navigator Engineer - Personell 
     Bridge Engineering Scilab Laubay Hallway - Room
-    MAV
+    MAV Probe
     Door 
-    Empty Nebula AstroidBelt Planet - Subregion 
+    OnShip Empty Nebula AstroidBelt Planet - Subregion
+    Plasma Scan - collectable
     Region
     Mission
   )
