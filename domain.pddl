@@ -17,7 +17,7 @@
     MAV Probe
     Door 
     OnShip Empty Nebula AstroidBelt Planet - Subregion
-    Plasma Scan - collectable
+    Plasma Scan - Collectable
     Region
     Mission
   )
