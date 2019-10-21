@@ -279,29 +279,31 @@
     :parameters (?probe - Probe ?subregion - Subregion)
     :precondition 
       (and 
-        (forall (?x - Subregion) (not (Probe-deployed ?probe ?x)))
+        (not (exists (?x - Subregion) (Probe-deployed ?probe ?x)))
         (Ship-at-Subregion ?subregion)
       )
     :effect 
       (and 
         (Probe-deployed ?probe ?subregion)
+        (when (and (exists (?x - AstroidBelt) (= ?x ?subregion))) (Probe-destroyed ?probe))
       )
   )
 
 
   ; probe scan
   (:action probe-scan
-    :parameters (?probe - Probe ?subregion - Subregion)
+    :parameters (?probe - Probe ?subregion - Subregion ?obj - Collectable)
     :precondition 
       (and 
-        ()
+        (Probe-deployed ?probe ?subregion)
+        (Scan-loc ?obj ?subregion)
       )
     :effect 
       (and 
-        ()
+        (Scan-retrieved ?obj ?probe)
       )
   )
-  
+
   ; recall probe
 
   ; ------------ Missions -------------------------------
