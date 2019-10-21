@@ -271,6 +271,27 @@
       )
     )
 
+  ; ------------ Probes ---------------------------------
+
+  ; deploy probe
+  (:action deploy-probe
+    :parameters (?probe - Probe ?subregion - Subregion)
+    :precondition 
+      (and 
+        (forall (?x - Subregion) (not (Probe-deployed ?probe ?x)))
+        (Ship-at-Subregion ?subregion)
+      )
+    :effect 
+      (and 
+        (Probe-deployed ?probe ?subregion)
+      )
+  )
+
+
+  ; probe scan
+
+  ; recall probe
+
   ; ------------ Missions -------------------------------
 
   ; predicate ideas:
@@ -298,6 +319,9 @@
         ()
       )
   )
+
+  ; hand in mission
+  
   ; ---------------- Question 2 ideas -----------------------
 
   ; weapons system to destroy asteroid
