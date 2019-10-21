@@ -200,6 +200,7 @@
     :parameters (?engineer - Engineer ?mav - MAV ?launchbay - Laubay ?subregion - Subregion)
     :precondition 
       (and 
+        (MAV-docked ?mav)
         (Personell-Loc ?engineer ?launchbay)
       )
     :effect 
