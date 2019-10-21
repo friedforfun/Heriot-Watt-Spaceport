@@ -290,7 +290,18 @@
 
 
   ; probe scan
-
+  (:action probe-scan
+    :parameters (?probe - Probe ?subregion - Subregion)
+    :precondition 
+      (and 
+        ()
+      )
+    :effect 
+      (and 
+        ()
+      )
+  )
+  
   ; recall probe
 
   ; ------------ Missions -------------------------------
