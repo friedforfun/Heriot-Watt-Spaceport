@@ -264,10 +264,8 @@
     :parameters (?bridge - Bridge)
     :precondition 
       (and 
-        (and 
-          (exists (?x - Captain) (Personell-Loc ?x ?bridge))
-          (exists (?y - Navigator) (Personell-Loc ?y ?bridge))
-        )
+        (exists (?x - Captain) (Personell-Loc ?x ?bridge))
+        (exists (?y - Navigator) (Personell-Loc ?y ?bridge))
         (forall (?m - MAV) (MAV-docked ?m)) 
         (not (Depart-OK))
       )
