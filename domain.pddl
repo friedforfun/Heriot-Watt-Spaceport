@@ -305,7 +305,24 @@
   )
 
   ; recall probe
-
+  (:action recall-probe
+    :parameters (?probe - Probe ?subregion - Subregion)
+    :precondition 
+      (and 
+        (not (Probe-destroyed ?probe))
+        (Probe-deployed ?probe ?subregion)
+        (Ship-Location ?subregion)
+      )
+    :effect 
+      (and 
+        (not (Probe-deployed ?probe ?subregion))
+        (forall (?x - Collectable)
+          (when (and (Scan-retrieved ?x ?probe)) 
+            (Scan-delivered ?x)
+          )
+        )
+      )
+  )
   ; ------------ Missions -------------------------------
 
   ; predicate ideas:
