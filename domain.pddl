@@ -201,6 +201,7 @@
     :parameters (?engineer - Engineer ?mav - MAV ?launchbay - Laubay ?subregion - Subregion)
     :precondition 
       (and 
+        (exists (?x - Engineer) (and(not(= ?x engineer)) (Personell-Loc ?x ?launchbay)))
         (MAV-docked ?mav)
         (Personell-Loc ?engineer ?launchbay)
       )
@@ -262,8 +263,6 @@
           (exists (?x - Captain) (Personell-Loc ?x ?bridge))
           (exists (?y - Navigator) (Personell-Loc ?y ?bridge))
         )
-        ;(Personell-Loc ?captain ?bridge)
-        ;(Personell-Loc ?navigator ?bridge)
         (forall (?m - MAV) (MAV-docked ?m)) 
         (not (Depart-OK))
       )
@@ -280,6 +279,7 @@
     :parameters (?probe - Probe ?subregion - Subregion)
     :precondition 
       (and 
+        (exists (?x - Engineer ?y - Laubay) (Personell-Loc ?x ?y))
         (not (exists (?x - Subregion) (Probe-deployed ?probe ?x)))
         (Ship-at-Subregion ?subregion)
       )
@@ -296,6 +296,7 @@
     :parameters (?probe - Probe ?subregion - Subregion ?obj - Collectable)
     :precondition 
       (and 
+        (not (Probe-destroyed ?probe))
         (Probe-deployed ?probe ?subregion)
         (Scan-loc ?obj ?subregion)
       )
