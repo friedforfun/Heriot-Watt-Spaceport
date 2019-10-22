@@ -201,7 +201,7 @@
     :parameters (?engineer - Engineer ?mav - MAV ?launchbay - Laubay ?subregion - Subregion)
     :precondition 
       (and 
-        (exists (?x - Engineer) (and(not(= ?x engineer)) (Personell-Loc ?x ?launchbay)))
+        (exists (?x - Engineer) (and(not(= ?x ?engineer)) (Personell-Loc ?x ?launchbay)))
         (MAV-docked ?mav)
         (Personell-Loc ?engineer ?launchbay)
       )
