@@ -222,15 +222,20 @@
     :precondition 
       (and 
         (Ship-damaged)
-        (exists (?x - Engineer) (MAV-EVA ?x ?mav))
-        (monitor-repair ?engineer)
+        (exists (?x - Engineer) (monitor-repair ?x))
+        (MAV-EVA ?engineer ?mav)
         (not (MAV-disabled ?mav))
       )
     :effect 
       (and 
         (not (Ship-damaged))
-        (not (monitor-repair ?engineer))
-        (not (personell-occupied ?engineer))
+        (forall (?x - Engineer)
+          (when (and (monitor-repair ?x))
+            (and (not(monitor-repair ?x)) (not(personell-occupied ?x)) )
+          )
+        )
+
+          
       )
   )
 
