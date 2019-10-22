@@ -32,7 +32,6 @@
     (personell-occupied ?p - Personell)               ; personell is engaged, cannot move room
     
     ; ------------ Ship interior predicates ------------------
-    (Room-Adjacent ?ra - Room ?rb - Room)             ; room a is adjacent to room b
     (door-locked ?d - Door)                           ; the door is locked
     (Personell-Loc ?p - Personell ?sr - Room)         ; location of personell on ship
     (door-connects ?d - Door ?ra - Room ?rb - Room)   ; door joins these rooms
@@ -76,8 +75,10 @@
     :precondition 
       (and 
         (Personell-Loc ?person ?startroom)                                     
-        (Room-Adjacent ?startroom ?endroom)           
-        (door-connects ?door ?startroom ?endroom)     
+        (or 
+          (door-connects ?door ?startroom ?endroom)
+          (door-connects ?door ?endroom ?startroom)
+        ) 
         (not(door-locked ?door))                   
         (not (personell-occupied ?person))
       )
