@@ -55,6 +55,7 @@
     (Scan-loc ?sc - Collectable ?sr - Subregion)
     (Scan-retrieved ?sc - Collectable ?pr - Probe)
     (Probe-destroyed ?pr - Probe)
+    (Scan-delivered ?sc - Collectable)
 
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)
