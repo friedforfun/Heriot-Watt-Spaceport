@@ -322,17 +322,17 @@
   ; complete scan mission
   ; complete plasma mission
 
-  (:action complete-mission
-    :parameters (?mission - Mission)
-    :precondition 
-      (and 
-        ()
-      )
-    :effect 
-      (and 
-        ()
-      )
-  )
+  ;(:action complete-mission
+  ; :parameters (?mission - Mission)
+  ;  :precondition 
+  ;    (and 
+  ;      ()
+  ;    )
+  ;  :effect 
+  ;    (and 
+  ;      ()
+  ;    )
+  ;)
 
   ; hand in mission
   
