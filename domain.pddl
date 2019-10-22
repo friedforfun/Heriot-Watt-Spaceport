@@ -17,7 +17,7 @@
     MAV Probe
     Door 
     OnShip Empty Nebula AstroidBelt Planet - Subregion
-    Plasma Scan - Collectable
+    Plasma PlanetScan AsteriodScan- Collectable
     Region
     Mission
   )
@@ -55,7 +55,7 @@
     (Scan-loc ?sc - Collectable ?sr - Subregion)
     (Scan-retrieved ?sc - Collectable ?pr - Probe)
     (Probe-destroyed ?pr - Probe)
-    (Scan-delivered ?sc - Collectable)
+    (Probe-deliver ?sc - Collectable)
 
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)
@@ -323,7 +323,7 @@
         (not (Probe-deployed ?probe ?subregion))
         (forall (?x - Collectable)
           (when (and (Scan-retrieved ?x ?probe)) 
-            (Scan-delivered ?x)
+            (Probe-deliver ?x)
           )
         )
       )
