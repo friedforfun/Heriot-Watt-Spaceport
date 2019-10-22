@@ -98,10 +98,7 @@
         (has-key ?person)
         (not (personell-occupied ?person))
         (door-locked ?door)
-        (or
-          (Personell-Loc ?person ?room)
-          (Personell-Loc ?person ?room-to-open)
-        )
+        (Personell-Loc ?person ?room)
         (or
           (door-connects ?door ?room ?room-to-open)
           (door-connects ?door ?room-to-open ?room)
