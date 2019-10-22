@@ -13,7 +13,7 @@
   )
 
   (:types Captain Navigator Engineer - Personell 
-    Bridge Engineering Scilab Laubay Hallway - Room
+    Bridge Engineering Scilab LaunchBay Hallway - Room
     MAV Probe
     Door 
     OnShip Empty Nebula AstroidBelt Planet - Subregion
@@ -196,7 +196,7 @@
 
   ; deploy the mav from the launch bay
   (:action deploy-mav
-    :parameters (?engineer - Engineer ?mav - MAV ?launchbay - Laubay ?subregion - Subregion)
+    :parameters (?engineer - Engineer ?mav - MAV ?launchbay - LaunchBay ?subregion - Subregion)
     :precondition 
       (and 
         (exists (?x - Engineer) (and(not(= ?x ?engineer)) (Personell-Loc ?x ?launchbay)))
@@ -239,7 +239,7 @@
 
   ; Recall MAV from EVA
   (:action recall-mav
-    :parameters (?mav - MAV ?engineer - Engineer ?launchbay - Laubay)
+    :parameters (?mav - MAV ?engineer - Engineer ?launchbay - LaunchBay)
     :precondition 
       (and 
         (not (MAV-docked ?mav))
@@ -280,7 +280,7 @@
     :parameters (?probe - Probe ?subregion - Subregion)
     :precondition 
       (and 
-        (exists (?x - Engineer ?y - Laubay) (Personell-Loc ?x ?y))
+        (exists (?x - Engineer ?y - LaunchBay) (Personell-Loc ?x ?y))
         (not (exists (?x - Subregion) (Probe-deployed ?probe ?x)))
         (Ship-at-Subregion ?subregion)
       )
@@ -326,6 +326,8 @@
         )
       )
   )
+
+  ; ------------ Lander ---------------------------------
   ; ------------ Missions -------------------------------
 
   ; predicate ideas:

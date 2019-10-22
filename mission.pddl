@@ -8,7 +8,7 @@
 		Bridge - Bridge 
 		Engineering - Engineering 
 		Science-Lab - Scilab 
-		Launch-Bay - Laubay 
+		Launch-Bay - LaunchBay 
 		Hallway-A  Hallway-B - Hallway
 		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 		Sol Proxima-Centauri Alpha-Centauri - Region
