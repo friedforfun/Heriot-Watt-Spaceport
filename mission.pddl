@@ -15,6 +15,7 @@
 		Mercury Venus Earth Mars b - Planet
 		Ceres - AstroidBelt
 		Mav-a Mav-b - MAV
+		Probe-a - Probe
 	)
 
 	(:init
@@ -77,6 +78,7 @@
 
 	(:goal
 		(and 
+			(Probe-destroyed Probe-a)
 			(Ship-at-Subregion b)
 		)
 	)
