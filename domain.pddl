@@ -12,12 +12,12 @@
     :adl
   )
 
-  (:types Captain Navigator Engineer - Personell 
-    Bridge Engineering Scilab LaunchBay Hallway - Room
+  (:types Captain Navigator Engineer ScienceOfficer - Personell 
+    Bridge Engineering Scilab LaunchBay Hallway Computer - Room
     MAV Probe
     Door 
     OnShip Empty Nebula AstroidBelt Planet - Subregion
-    Plasma PlanetScan AsteriodScan- Collectable
+    Key Plasma PlanetScan AsteriodScan - Collectable
     Region
     Mission
   )
@@ -27,14 +27,16 @@
     (In-region ?sp - Region ?s2 - Subregion)          ; inside this region is this subregion
 
     ; ------------ Personell predicates ---------------------
-    (has-key ?p - Personell)                          ; personell has a door key
+    (holding ?p - Pe ?keyrsonell)                          ; personell has a door key
     (key-location ?sr - Room)                         ; location of key on ship 
     (personell-occupied ?p - Personell)               ; personell is engaged, cannot move room
-    
+    (holding ?p - Personell ?obj - Collectable)
+
     ; ------------ Ship interior predicates ------------------
     (door-locked ?d - Door)                           ; the door is locked
     (Personell-Loc ?p - Personell ?sr - Room)         ; location of personell on ship
     (door-connects ?d - Door ?ra - Room ?rb - Room)   ; door joins these rooms
+    (Obj-in ?obj - Collectable ?r - Room)
   
     ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - Region)                      ; ship is located in region
@@ -47,7 +49,7 @@
     (MAV-EVA ?en - Engineer ?ma - MAV)                ; MAV is in EVA state
     (monitor-repair ?en - Engineer)                   ; this engineer is monitoring repair
     (MAV-docked ?ma - MAV)                            ; the MAV is docked
-    (MAV-disabled ?ma - MAV)
+    (MAV-disabled ?ma - MAV)                          
 
     ;--------------- Probe predicates ----------------------
     (Probe-deployed ?pr - Probe ?sr - Subregion)
@@ -92,10 +94,10 @@
 
   ; keyholder to unlock doors
   (:action unlock-door
-    :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room)
+    :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room ?key -Key)
     :precondition 
       (and 
-        (has-key ?person)
+        (holding ?person ?key)
         (not (personell-occupied ?person))
         (door-locked ?door)
         (Personell-Loc ?person ?room)
@@ -110,20 +112,41 @@
   )
 
   ; collect key from room
-  (:action pickup-key
-    :parameters (?room - Room ?person - Personell)
+  (:action pickup-object
+    :parameters (?room - Room ?person - Personell ?obj - Collectable)
     :precondition 
       (and 
         (not (personell-occupied ?person))
         (Personell-Loc ?person ?room)
-        (key-location ?room)
+        (Obj-in ?obj ?room)
+        (exists (?x - Plasma) (not(= ?x ?obj)))
       )
     :effect 
       (and 
-        (not (key-location ?room))
-        (has-key ?person)
+        (holding ?person ?obj) 
+        (not (Obj-in ?obj ?room))
       )
   )
+
+  ; pickup plasma
+  (:action collect-plasma
+    :parameters (?person - ScienceOfficer ?obj - Plasma ?room - Room)
+    :precondition 
+      (and 
+        (not (personell-occupied ?person))
+        (Personell-Loc ?person ?room)
+        (Obj-in ?obj ?room)
+      )
+    :effect 
+      (and 
+        (not (Obj-in ?onj ?room))
+        (holding ?person ?obj)
+      )
+  )
+
+  ; drop plasma
+
+
 
   ; -------------- Moving ship actions ------------------
   ; move the ship from one region to another
@@ -328,6 +351,8 @@
   )
 
   ; ------------ Lander ---------------------------------
+
+
   ; ------------ Missions -------------------------------
 
   ; predicate ideas:
