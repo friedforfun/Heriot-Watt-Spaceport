@@ -144,8 +144,15 @@
       )
   )
 
-  ; drop plasma
-
+  ; drop object
+  (:action drop-object
+    :parameters (?person - Personell ?obj - Collectable ?room - Room)
+    :precondition 
+      (and 
+        (Personell-Loc ?person ?room)
+        (Obj-in ?obj ?room)
+      )
+    :effect (and ()))
 
 
   ; -------------- Moving ship actions ------------------
