@@ -25,6 +25,7 @@
   (:predicates
     ; ------------ Space predicates -------------------------
     (In-region ?sp - Region ?s2 - Subregion)          	; inside this region is this subregion
+    (Ion-rads ?sr - Planet)								; Ionising radiation is present on planet surface
 
     ; ------------ Personell predicates ---------------------
     (key-location ?sr - Room)                         	; location of key on ship 
