@@ -99,7 +99,7 @@
 
   ; keyholder to unlock doors
   (:action unlock-door
-    :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room ?key -Key)
+    :parameters (?person - Personell ?door - Door ?room - Room ?room-to-open - Room ?key - Key)
     :precondition 
       (and 
         (holding ?person ?key)
