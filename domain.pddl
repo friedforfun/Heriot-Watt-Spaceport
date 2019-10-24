@@ -152,9 +152,14 @@
     :precondition 
       (and 
         (Personell-Loc ?person ?room)
-        (Obj-in ?obj ?room)
+        (not (exists (?x - Room) (Obj-in ?obj ?x)))
+        
       )
-    :effect (and ()))
+    :effect 
+    	(and 
+    		(Obj-in ?obj ?room)
+    	)
+    )
 
 
   ; -------------- Moving ship actions ------------------
