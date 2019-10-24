@@ -14,7 +14,7 @@
 
   (:types Captain Navigator Engineer ScienceOfficer - Personell 
     Bridge Engineering Scilab LaunchBay Hallway Computer - Room
-    MAV Probe
+    MAV Probe Lander - Vehicle
     Door 
     OnShip Empty Nebula AstroidBelt Planet - Subregion
     Key Plasma PlanetScan AsteriodScan - Collectable
