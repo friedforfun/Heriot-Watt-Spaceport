@@ -17,6 +17,7 @@
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
 		key - Key
+		lander-a - Lander
 	)
 
 	(:init
@@ -52,7 +53,7 @@
 		(In-region Proxima-Centauri b)
 
 		(In-region Alpha-Centauri Eden)
-		
+
 		; init ship location
 		(Ship-Location Sol)
 		(Ship-at-Subregion Earth)
