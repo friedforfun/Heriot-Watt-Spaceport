@@ -12,7 +12,7 @@
 		Hallway-A  Hallway-B - Hallway
 		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 		Sol Proxima-Centauri Alpha-Centauri - Region
-		Mercury Venus Earth Mars b - Planet
+		Mercury Venus Earth Mars b Eden - Planet
 		Ceres - AstroidBelt
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
@@ -51,7 +51,8 @@
 
 		(In-region Proxima-Centauri b)
 
-
+		(In-region Alpha-Centauri Eden)
+		
 		; init ship location
 		(Ship-Location Sol)
 		(Ship-at-Subregion Earth)
@@ -66,6 +67,7 @@
 		(and 
 			(Vehicle-destroyed Probe-a)
 			(Ship-at-Subregion b)
+			(Antenna-deployed Eden)
 		)
 	)
 
