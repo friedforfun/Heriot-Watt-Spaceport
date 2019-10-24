@@ -347,8 +347,9 @@
       )
     :effect 
       (and 
-        (Scan-retrieved ?obj ?probe)
-        (exists (?x - PlanetScan) (when (and (= ?x ?obj)) (TouchDown-Location ?obj ?subregion)))
+        (Scan-stored ?obj ?probe)
+        
+        (when (and (exists (?x - PlanetScan) (= ?x ?obj) )) (TouchDown-Location ?obj ?subregion))
       )
   )
 
@@ -365,7 +366,7 @@
       (and 
         (not (Vehicle-deployed ?probe ?subregion))
         (forall (?x - Collectable)
-          (when (and (Scan-retrieved ?x ?probe)) 
+          (when (and (Scan-stored ?x ?probe)) 
             (Deliver-collectable ?x)
           )
         )
