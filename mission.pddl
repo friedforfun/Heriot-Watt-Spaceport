@@ -16,11 +16,12 @@
 		Ceres - AstroidBelt
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
+		key - Key
 	)
 
 	(:init
 		; init Personell
-		(has-key Tretter)
+		(holding Tretter key)
 		(Personell-Loc Tretter Science-Lab)
 		(Personell-Loc Meachum Launch-Bay)
 		(Personell-Loc Bunte Launch-Bay)
@@ -63,7 +64,7 @@
 
 	(:goal
 		(and 
-			(Probe-destroyed Probe-a)
+			(Vehicle-destroyed Probe-a)
 			(Ship-at-Subregion b)
 		)
 	)
