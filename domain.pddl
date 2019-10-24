@@ -411,7 +411,7 @@
     	)
     :effect 
     	(and 
-    		(when (and (not (Ion-rads ?subregion))) (Antenna-deployed ?subregion))
+    		(Antenna-deployed ?subregion)
         (when (and (Ion-rads ?subregion)) (2-Antenna-deployed ?subregion))
     	)
     )
