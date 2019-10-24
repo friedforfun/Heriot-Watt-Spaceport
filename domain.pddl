@@ -49,17 +49,17 @@
     (monitor-repair ?en - Engineer)                   	; this engineer is monitoring repair
 
     ;--------------- Vehicle predicates ----------------------
-    (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	; Vehicle has been deployed
-    (Scan-loc ?sc - Collectable ?sr - Subregion)		; There is scan data at this location
-    (Surface-Scan ?sc - Collectable ?sr - Subregion) 	; Scan that must be completed on the planet surface
-    (Scan-retrieved ?sc - Collectable ?pr - Probe)		; Probe has scan data
+    (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	  ; Vehicle has been deployed
+    (Scan-loc ?sc - Collectable ?sr - Subregion)		    ; There is scan data at this location
+    (Surface-Scan ?sc - Collectable ?sr - Subregion) 	  ; Scan that must be completed on the planet surface
+    (Scan-stored ?sc - Collectable ?pr - Vehicle)		    ; vehicle holds an object
     (TouchDown-Location ?obj - Collectable ?p - Planet)	; scan has found a touchdown location
-    (Vehicle-destroyed ?pr - Vehicle)					; Vehicle has been destroyed
-    (Deliver-collectable ?sc - Collectable)				; Collectible is on ship
+    (Vehicle-destroyed ?pr - Vehicle)					          ; Vehicle has been destroyed
+    (Deliver-collectable ?sc - Collectable)				      ; Collectible is on ship
     (MAV-EVA ?en - Engineer ?ma - MAV)                	; MAV is in EVA state with an engineer
     (MAV-docked ?ma - MAV)                            	; the MAV is docked
     (MAV-disabled ?ma - MAV)                          	; MAV has been disabled by a nebula
-    (Lander-surface ?la - Lander ?sr - Planet)			; Lander on surface of planet
+    (Lander-surface ?la - Lander ?sr - Planet)			    ; Lander on surface of planet
     (Antenna-deployed ?p - Planet)
     (2-Antenna-deployed ?p - Planet)
 
