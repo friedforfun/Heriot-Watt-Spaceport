@@ -58,6 +58,7 @@
     (MAV-EVA ?en - Engineer ?ma - MAV)                	; MAV is in EVA state with an engineer
     (MAV-docked ?ma - MAV)                            	; the MAV is docked
     (MAV-disabled ?ma - MAV)                          	; MAV has been disabled by a nebula
+    (Lander-surface ?la - Lander ?sr - Planet)			; Lander on surface of planet
 
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)								; Mission has been completed
@@ -357,13 +358,41 @@
         (not (Probe-deployed ?probe ?subregion))
         (forall (?x - Collectable)
           (when (and (Scan-retrieved ?x ?probe)) 
-            (Probe-deliver ?x)
+            (Deliver-collectable ?x)
           )
         )
       )
   )
 
   ; ------------ Lander ---------------------------------
+  (:action deploy-lander
+    :parameters (?lander - Lander ?subregion - Subregion)
+    :precondition 
+    	(and 
+    		(not (Vehicle-destroyed ?lander))
+    		(not (Vehicle-deployed ?lander))
+    		(exists (?x - Engineer) (Personell-Loc ?x ?launchbay))
+    	)
+    :effect 
+    	(and 
+    		(Vehicle-deployed ?lander ?subregion)
+    	)
+    )
+
+  (:action lander-touchdown
+    :parameters (?lander - Lander ?subregion - Planet)
+    :precondition 
+    	(and 
+    		(Vehicle-deployed ?lander ?subregion)
+    		(not (Lander-surface ?lander ?subregion))
+    	)
+    :effect 
+    	(and 
+    		(when (and (not (exists (?y - PlanetScan) (TouchDown-Location ?y ?subregion)))) (Vehicle-destroyed ?lander))
+    		(Lander-surface ?lander ?subregion)
+    	)
+    )
+
 
 
   ; ------------ Missions -------------------------------
