@@ -339,6 +339,7 @@
     :effect 
       (and 
         (Scan-retrieved ?obj ?probe)
+        (exists (?x - PlanetScan) (when (and (= ?x ?obj)) (TouchDown-Location ?obj ?subregion)))
       )
   )
 
