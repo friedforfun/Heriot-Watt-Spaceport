@@ -341,7 +341,7 @@
     :parameters (?probe - Probe ?subregion - Subregion ?obj - Collectable)
     :precondition 
       (and 
-        (not (Probe-destroyed ?probe))
+        (not (Vehicle-destroyed ?probe))
         (Vehicle-deployed ?probe ?subregion)
         (Scan-loc ?obj ?subregion)
       )
@@ -357,7 +357,7 @@
     :parameters (?probe - Probe ?subregion - Subregion)
     :precondition 
       (and 
-        (not (Probe-destroyed ?probe))
+        (not (Vehicle-destroyed ?probe))
         (Vehicle-deployed ?probe ?subregion)
         (Ship-Location ?subregion)
       )
