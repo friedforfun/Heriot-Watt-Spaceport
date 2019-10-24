@@ -5,6 +5,7 @@
 		Tretter - Captain
 		Bunte Meachum - Navigator
 		Hagarty Zayicek Penley - Engineer
+		Elba - ScienceOfficer
 		Bridge - Bridge 
 		Engineering - Engineering 
 		Science-Lab - Scilab 
@@ -14,10 +15,12 @@
 		Sol Proxima-Centauri Alpha-Centauri - Region
 		Mercury Venus Earth Mars b Eden - Planet
 		Ceres - AstroidBelt
+		Pleiades - Nebula
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
 		key - Key
 		lander-a - Lander
+		EdenScan - PlanetScan
 	)
 
 	(:init
@@ -26,6 +29,7 @@
 		(Personell-Loc Tretter Science-Lab)
 		(Personell-Loc Meachum Launch-Bay)
 		(Personell-Loc Bunte Launch-Bay)
+		(personell-Loc Elba Bridge)
 		(MAV-EVA Hagarty Mav-a)
 		(MAV-EVA Zayicek Mav-b)
 		(Personell-Loc Penley Engineering)
@@ -54,6 +58,9 @@
 
 		(In-region Alpha-Centauri Eden)
 
+		(In-region Alpha-Centauri Pleiades)
+		(Scan-Loc EdenScan Eden)
+		
 		; init ship location
 		(Ship-Location Sol)
 		(Ship-at-Subregion Earth)
