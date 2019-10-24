@@ -233,6 +233,7 @@
         (exists (?x - Engineer) (and(not(= ?x ?engineer)) (Personell-Loc ?x ?launchbay)))
         (MAV-docked ?mav)
         (Personell-Loc ?engineer ?launchbay)
+        (not (Vehicle-destroyed ?mav))
       )
     :effect 
       (and 
@@ -253,8 +254,9 @@
         (Ship-damaged)
         (exists (?x - Engineer) (monitor-repair ?x))
         (MAV-EVA ?engineer ?mav)
-        (not (MAV-disabled ?mav))
+        (not (or (Vehicle-destroyed ?mav) (MAV-disabled ?mav)))
       )
+
     :effect 
       (and 
         (not (Ship-damaged))
@@ -276,6 +278,7 @@
         (not (MAV-docked ?mav))
         (MAV-EVA ?engineer ?mav)
         (exists (?x - Engineer) (Personell-Loc ?x ?launchbay))
+        (not (Vehicle-destroyed ?mav))
       )
     :effect 
       (and 
@@ -314,11 +317,12 @@
         (exists (?x - Engineer ?y - LaunchBay) (Personell-Loc ?x ?y))
         (not (exists (?x - Subregion) (Probe-deployed ?probe ?x)))
         (Ship-at-Subregion ?subregion)
+        (not (Vehicle-destroyed ?probe))
       )
     :effect 
       (and 
         (Probe-deployed ?probe ?subregion)
-        (when (and (exists (?x - AstroidBelt) (= ?x ?subregion))) (Probe-destroyed ?probe))
+        (when (and (exists (?x - AstroidBelt) (= ?x ?subregion))) (Vehicle-destroyed ?probe))
       )
   )
 
