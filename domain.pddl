@@ -379,7 +379,7 @@
     :precondition 
     	(and 
     		(not (Vehicle-destroyed ?lander))
-    		(not (Vehicle-deployed ?lander))
+    		(not (Vehicle-deployed ?lander ?subregion))
     		(exists (?x - Engineer) (Personell-Loc ?x ?launchbay))
     	)
     :effect 
