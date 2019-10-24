@@ -24,43 +24,44 @@
 
   (:predicates
     ; ------------ Space predicates -------------------------
-    (In-region ?sp - Region ?s2 - Subregion)          ; inside this region is this subregion
+    (In-region ?sp - Region ?s2 - Subregion)          	; inside this region is this subregion
 
     ; ------------ Personell predicates ---------------------
-    (holding ?p - Pe ?keyrsonell)                          ; personell has a door key
-    (key-location ?sr - Room)                         ; location of key on ship 
-    (personell-occupied ?p - Personell)               ; personell is engaged, cannot move room
-    (holding ?p - Personell ?obj - Collectable)
+    (key-location ?sr - Room)                         	; location of key on ship 
+    (personell-occupied ?p - Personell)               	; personell is engaged, cannot move room
+    (holding ?p - Personell ?obj - Collectable)			; personell is holding an object
 
     ; ------------ Ship interior predicates ------------------
-    (door-locked ?d - Door)                           ; the door is locked
-    (Personell-Loc ?p - Personell ?sr - Room)         ; location of personell on ship
-    (door-connects ?d - Door ?ra - Room ?rb - Room)   ; door joins these rooms
-    (Obj-in ?obj - Collectable ?r - Room)
+    (door-locked ?d - Door)                           	; the door is locked
+    (Personell-Loc ?p - Personell ?sr - Room)         	; location of personell on ship
+    (door-connects ?d - Door ?ra - Room ?rb - Room)   	; door joins these rooms
+    (Obj-in ?obj - Collectable ?r - Room)				; object is inside a room
   
     ; ------------- Ship exterior predicates ----------------
-    (Ship-Location ?sp - Region)                      ; ship is located in region
-    (Ship-at-Subregion ?pn - Subregion)               ; ship is located at a subregion of region
-    (Ship-damaged)                                    ; ship is damaged
-    (Ship-clear)                         ; ship is outside of a subregeion 
-    (Depart-OK)                                       ; ship cannot leave region until vehicles are back on board
+    (Ship-Location ?sp - Region)                      	; ship is located in region
+    (Ship-at-Subregion ?pn - Subregion)               	; ship is located at a subregion of region
+    (Ship-damaged)                                    	; ship is damaged
+    (Ship-clear)                         				; ship is outside of a subregeion 
+    (Depart-OK)                                       	; ship cannot leave region until vehicles are back on board
 
     ; ------------- Engineering predicates -----------------
-    (MAV-EVA ?en - Engineer ?ma - MAV)                ; MAV is in EVA state
-    (monitor-repair ?en - Engineer)                   ; this engineer is monitoring repair
-    (MAV-docked ?ma - MAV)                            ; the MAV is docked
-    (MAV-disabled ?ma - MAV)                          
+    (monitor-repair ?en - Engineer)                   	; this engineer is monitoring repair
 
-    ;--------------- Probe predicates ----------------------
-    (Probe-deployed ?pr - Probe ?sr - Subregion)
-    (Scan-loc ?sc - Collectable ?sr - Subregion)
-    (Scan-retrieved ?sc - Collectable ?pr - Probe)
-    (Probe-destroyed ?pr - Probe)
-    (Probe-deliver ?sc - Collectable)
+    ;--------------- Vehicle predicates ----------------------
+    (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	; Vehicle has been deployed
+    (Scan-loc ?sc - Collectable ?sr - Subregion)		; There is scan data at this location
+    (Surface-Scan ?sc - Collectable ?sr - Subregion) 	; Scan that must be completed on the planet surface
+    (Scan-retrieved ?sc - Collectable ?pr - Probe)		; Probe has scan data
+    (TouchDown-Location ?obj - Collectable ?p - Planet)	; scan has found a touchdown location
+    (Vehicle-destroyed ?pr - Vehicle)					; Vehicle has been destroyed
+    (Deliver-collectable ?sc - Collectable)				; Collectible is on ship
+    (MAV-EVA ?en - Engineer ?ma - MAV)                	; MAV is in EVA state with an engineer
+    (MAV-docked ?ma - MAV)                            	; the MAV is docked
+    (MAV-disabled ?ma - MAV)                          	; MAV has been disabled by a nebula
 
     ; ------------- Mission predicates ---------------------
-    (Mission-complete ?m - Mission)
-    (Objective-scan-subregion ?m - Mission ?sr - Subregion)
+    (Mission-complete ?m - Mission)								; Mission has been completed
+    (Objective-scan-subregion ?m - Mission ?sr - Subregion)		; Mission has objective in location
     (Objective-visit-subregion ?m - Mission ?sr - Subregion)
     (Objective-scan-planet ?m - Mission ?p - Planet)
     (Objective-retrieve-plasma ?m - Mission ?n - Nebula)
