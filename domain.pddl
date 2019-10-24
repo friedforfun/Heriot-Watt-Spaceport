@@ -378,8 +378,9 @@
     :parameters (?lander - Lander ?subregion - Subregion)
     :precondition 
     	(and 
+        (Ship-at-Subregion ?subregion)
     		(not (Vehicle-destroyed ?lander))
-    		(not (Vehicle-deployed ?lander ?subregion))
+    		(not (exists (?y - Subregion) (Vehicle-deployed ?lander ?y)))
     		(exists (?x - Engineer) (Personell-Loc ?x ?launchbay))
     	)
     :effect 
