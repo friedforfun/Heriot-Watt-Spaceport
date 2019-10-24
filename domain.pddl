@@ -112,11 +112,13 @@
         )
       )
 
-    :effect (and (not(door-locked ?door))
-            )
+    :effect 
+      (and 
+        (not(door-locked ?door))
+      )
   )
 
-  ; collect key from room
+  ; collect pickup object when person is in room
   (:action pickup-object
     :parameters (?room - Room ?person - Personell ?obj - Collectable)
     :precondition 
@@ -274,8 +276,6 @@
             (and (not(monitor-repair ?x)) (not(personell-occupied ?x)) )
           )
         )
-
-          
       )
   )
 
@@ -300,7 +300,7 @@
 
   ; -------------- Departure clearance -------------------
 
-  ; Ship ready to depart, all probes and MAV are docked
+  ; Ship ready to depart, all MAV are docked
   (:action prep-departure
     :parameters (?bridge - Bridge)
     :precondition 
