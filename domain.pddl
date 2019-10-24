@@ -60,6 +60,8 @@
     (MAV-docked ?ma - MAV)                            	; the MAV is docked
     (MAV-disabled ?ma - MAV)                          	; MAV has been disabled by a nebula
     (Lander-surface ?la - Lander ?sr - Planet)			; Lander on surface of planet
+    (Antenna-deployed ?p - Planet)
+    (2-Antenna-deployed ?p - Planet)
 
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)								; Mission has been completed
