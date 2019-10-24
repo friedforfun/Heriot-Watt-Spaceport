@@ -324,13 +324,13 @@
     :precondition 
       (and 
         (exists (?x - Engineer ?y - LaunchBay) (Personell-Loc ?x ?y))
-        (not (exists (?x - Subregion) (Probe-deployed ?probe ?x)))
+        (not (exists (?x - Subregion) (Vehicle-deployed ?probe ?x)))
         (Ship-at-Subregion ?subregion)
         (not (Vehicle-destroyed ?probe))
       )
     :effect 
       (and 
-        (Probe-deployed ?probe ?subregion)
+        (Vehicle-deployed ?probe ?subregion)
         (when (and (exists (?x - AstroidBelt) (= ?x ?subregion))) (Vehicle-destroyed ?probe))
       )
   )
@@ -342,7 +342,7 @@
     :precondition 
       (and 
         (not (Probe-destroyed ?probe))
-        (Probe-deployed ?probe ?subregion)
+        (Vehicle-deployed ?probe ?subregion)
         (Scan-loc ?obj ?subregion)
       )
     :effect 
@@ -358,12 +358,12 @@
     :precondition 
       (and 
         (not (Probe-destroyed ?probe))
-        (Probe-deployed ?probe ?subregion)
+        (Vehicle-deployed ?probe ?subregion)
         (Ship-Location ?subregion)
       )
     :effect 
       (and 
-        (not (Probe-deployed ?probe ?subregion))
+        (not (Vehicle-deployed ?probe ?subregion))
         (forall (?x - Collectable)
           (when (and (Scan-retrieved ?x ?probe)) 
             (Deliver-collectable ?x)
