@@ -401,6 +401,19 @@
     	)
     )
 
+  (:action Deploy-antenna
+    :parameters (?lander - Lander ?subregion - Planet)
+    :precondition 
+    	(and 
+    		(Lander-surface ?lander ?subregion)
+    		(not (Vehicle-destroyed ?lander))
+    	)
+    :effect 
+    	(and 
+    		(when (and (not (Ion-rads ?subregion))) (Antenna-deployed ?subregion))
+        (when (and (Ion-rads ?subregion)) (2-Antenna-deployed ?subregion))
+    	)
+    )
 
 
   ; ------------ Missions -------------------------------
