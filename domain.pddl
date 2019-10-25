@@ -198,6 +198,7 @@
         (Ship-at-Subregion ?subr)
         (exists (?y - Engineer) (Launchbay-controls ?y ?room) )
         (Vehicle-docked ?veh ?room)
+        (not(Vehicle-deployed ?veh ?subr))
       )
     :effect 
       (and 
@@ -212,12 +213,14 @@
       )
   )
 
-  (:action recall-vehicle
+  (:action dock-vehicle
     :parameters (?veh - Vehicle ?room - LaunchBay ?subr - Subregion)
     :precondition 
       (and 
         (Ship-at-Subregion ?subr)
         (Vehicle-deployed ?veh ?subr)
+        (exists (?y - Engineer) (Launchbay-controls ?y ?room) )
+        (not (Vehicle-docked ?veh ?room))
         (not (or (Vehicle-destroyed ?veh) (Vehicle-disabled ?veh) ) )
         (not (Lander-on-surface ?veh ?subr))
       )
@@ -232,9 +235,31 @@
   )
 
   (:action operate-controls
-    :parameters (?x - object)
-    :precondition (and ())
-    :effect (and ()))
+    :parameters (?engineer - Engineer ?room - LaunchBay)
+    :precondition 
+      (and 
+        (Personnel-Loc ?engineer ?room)
+        (not (Personnel-occupied ?engineer))
+      )
+    :effect 
+      (and 
+        (Personnel-occupied ?engineer)
+        (Launchbay-controls ?engineer ?room)
+      )
+  )
+
+(:action stop-operate-controls
+  :parameters (?engineer - Engineer ?room - LaunchBay)
+  :precondition 
+    (and 
+      (Launchbay-controls ?engineer ?room)
+    )
+  :effect 
+    (and 
+      (not (Launchbay-controls ?engineer ?room))
+      (not (Personnel-occupied ?engineer))
+    )
+)
 
 ; need a board vehicle action
 
@@ -380,6 +405,10 @@
     )
 
   ; -------------------------------------------------------------
+; -------------------------------------------------------------
+; -------------------------------------------------------------
+; -------------------------------------------------------------
+
 
 
   ; -------------- Departure clearance -------------------
