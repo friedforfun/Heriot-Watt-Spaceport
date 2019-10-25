@@ -261,7 +261,6 @@
     )
 )
 
-; need a board vehicle action
 (:action board-vehicle
   :parameters (?person - Personnel ?vehicle - Vehicle ?launchbay - LaunchBay)
   :precondition 
