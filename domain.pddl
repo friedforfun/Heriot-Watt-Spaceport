@@ -367,6 +367,18 @@
 
   ; ------------ Lander ---------------------------------
 
+  (:action load-touchdown-data
+    :parameters (?lander - Lander ?touchdown - PlanetScan)
+    :precondition 
+      (and 
+        (On-ship ?touchdown Computer)
+        (exists (?x - LaunchBay) (Vehicle-docked ?lander ?x))
+      )
+    :effect 
+      (and 
+        (Scan-stored ?touchdown ?lander)
+      )
+  )
 
   (:action lander-touchdown
     :parameters (?lander - Lander ?subregion - Planet)
@@ -377,8 +389,8 @@
     	)
     :effect 
     	(and 
-    		(when (and (not (exists (?y - PlanetScan) (TouchDown-Location ?y ?subregion)))) (Vehicle-destroyed ?lander))
-    		(Lander-surface ?lander ?subregion)
+    		(when (and (not(exists (?y - PlanetScan) (and(Scan-stored ?y ?lander) (Scan-loc ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
+    		(Lander-on-surface ?lander ?subregion)
     	)
     )
 
