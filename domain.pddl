@@ -87,7 +87,6 @@
           (door-connects ?door ?startroom ?endroom)
           (door-connects ?door ?endroom ?startroom)
         ) 
-        (not(door-locked ?door))                   
         (not (Personnel-occupied ?person))
       )
       
