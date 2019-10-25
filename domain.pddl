@@ -49,12 +49,14 @@
     (monitor-repair ?en - Engineer)                   	; this engineer is monitoring repair
 
     ;--------------- Vehicle predicates ----------------------
+    (Vehicle-docked ?v - Vehicle ?room - LaunchBay)
     (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	  ; Vehicle has been deployed
     (On-board ?vh - Vehicle ?ps - Personnel)
     (Surface-Scan ?sc - Collectable ?sr - Subregion) 	  ; Scan that must be completed on the planet surface
     (Vehicle-destroyed ?pr - Vehicle)					          ; Vehicle has been destroyed
     (Vehicle-disabled ?ma - Vehicle)                          	; MAV has been disabled by a nebula
     (Lander-on-surface ?la - Lander ?sr - Planet)			    ; Lander on surface of planet
+    (Launchbay-controls ?p - Engineer ?room - LaunchBay)
 
     ; ------------- Item predicates ------------------------
     (Scan-loc ?sc - Collectable ?sr - Subregion)        ; There is scan data at this location
@@ -188,6 +190,38 @@
       )
   )
 
+  ; -------------- Launch/recall vehicles ----------------
+  (:action deploy-vehicle
+    :parameters (?veh - Vehicle ?room - LaunchBay ?subr - Subregion)
+    :precondition 
+      (and 
+        (exists (?y - Engineer) (Launchbay-controls ?y ?room) )
+        (Vehicle-docked ?veh ?room)
+      )
+    :effect 
+      (and 
+        (Vehicle-deployed ?veh ?subr)
+        
+        ;when probe in asteriodbelt destroy
+        (when (and(exists (?x - AstroidBelt ?y - Probe) (and(= ?x ?subr) (= ?y ?veh)))) (Vehicle-destroyed ?veh))
+        
+        ;when mav is in nebula disable
+        (when (and (exists (?z - Nebula ?a - MAV) (and (= ?z ?subr) (= ?a ?veh)))) (Vehicle-disabled ?veh))
+      )
+  )
+
+  (:action recall-vehicle
+    :parameters (?x - object)
+    :precondition (and ())
+    :effect (and ()))
+
+  (:action operate-controls
+    :parameters (?x - object)
+    :precondition (and ())
+    :effect (and ()))
+
+
+
   ; -------------- Engineering Actions -------------------
   ; Instruct an engineer to begin monitoring repairs
   (:action monitor-repair
@@ -228,8 +262,7 @@
 
 
 
-
-
+; REMOVE ---------------------------------------------------------
   ; deploy the mav from the launch bay
   (:action deploy-mav
     :parameters (?engineer - Engineer ?mav - MAV ?launchbay - LaunchBay ?subregion - Subregion)
@@ -272,6 +305,62 @@
       )
   )
 
+   ; deploy probe
+  (:action deploy-probe
+    :parameters (?probe - Probe ?subregion - Subregion)
+    :precondition 
+      (and 
+        (exists (?x - Engineer ?y - LaunchBay) (Personnel-Loc ?x ?y))
+        (not (exists (?x - Subregion) (Vehicle-deployed ?probe ?x)))
+        (Ship-at-Subregion ?subregion)
+        (not (Vehicle-destroyed ?probe))
+      )
+    :effect 
+      (and 
+        (Vehicle-deployed ?probe ?subregion)
+        (when (and (exists (?x - AstroidBelt) (= ?x ?subregion))) (Vehicle-destroyed ?probe))
+      )
+  )
+
+    ; recall probe
+  (:action recall-probe
+    :parameters (?probe - Probe ?subregion - Subregion ?launchbay - LaunchBay)
+    :precondition 
+      (and 
+        (not (Vehicle-destroyed ?probe))
+        (Vehicle-deployed ?probe ?subregion)
+        (Ship-Location ?subregion)
+      )
+    :effect 
+      (and 
+        (not (Vehicle-deployed ?probe ?subregion))
+        (forall (?x - Collectable)
+          (when (and (Scan-stored ?x ?probe)) 
+            (On-ship ?x ?launchbay)
+          )
+        )
+      )
+  )
+
+    (:action deploy-lander
+    :parameters (?lander - Lander ?subregion - Subregion)
+    :precondition 
+      (and 
+        (Ship-at-Subregion ?subregion)
+        (not (Vehicle-destroyed ?lander))
+        (not (exists (?y - Subregion) (Vehicle-deployed ?lander ?y)))
+        (exists (?x - Engineer) (Personnel-Loc ?x ?launchbay))
+      )
+    :effect 
+      (and 
+        (when (and(exists (?x - PlanetScan) (and (Scan-loc ?x ?subregion) ()))) (Scan-stored ?x ?lander))
+        (Vehicle-deployed ?lander ?subregion)
+      )
+    )
+
+  ; -------------------------------------------------------------
+
+
   ; -------------- Departure clearance -------------------
 
   ; Ship ready to depart, all MAV are docked
@@ -292,23 +381,7 @@
 
   ; ------------ Probes ---------------------------------
 
-  ; deploy probe
-  (:action deploy-probe
-    :parameters (?probe - Probe ?subregion - Subregion)
-    :precondition 
-      (and 
-        (exists (?x - Engineer ?y - LaunchBay) (Personnel-Loc ?x ?y))
-        (not (exists (?x - Subregion) (Vehicle-deployed ?probe ?x)))
-        (Ship-at-Subregion ?subregion)
-        (not (Vehicle-destroyed ?probe))
-      )
-    :effect 
-      (and 
-        (Vehicle-deployed ?probe ?subregion)
-        (when (and (exists (?x - AstroidBelt) (= ?x ?subregion))) (Vehicle-destroyed ?probe))
-      )
-  )
-
+ 
 
   ; probe scan
   (:action probe-scan
@@ -327,25 +400,7 @@
       )
   )
 
-  ; recall probe
-  (:action recall-probe
-    :parameters (?probe - Probe ?subregion - Subregion ?launchbay - LaunchBay)
-    :precondition 
-      (and 
-        (not (Vehicle-destroyed ?probe))
-        (Vehicle-deployed ?probe ?subregion)
-        (Ship-Location ?subregion)
-      )
-    :effect 
-      (and 
-        (not (Vehicle-deployed ?probe ?subregion))
-        (forall (?x - Collectable)
-          (when (and (Scan-stored ?x ?probe)) 
-            (On-ship ?x ?launchbay)
-          )
-        )
-      )
-  )
+
 
   (:action upload-scan
     :parameters (?scan - PlanetScan)
@@ -361,21 +416,7 @@
   )
 
   ; ------------ Lander ---------------------------------
-  (:action deploy-lander
-    :parameters (?lander - Lander ?subregion - Subregion)
-    :precondition 
-    	(and 
-        (Ship-at-Subregion ?subregion)
-    		(not (Vehicle-destroyed ?lander))
-    		(not (exists (?y - Subregion) (Vehicle-deployed ?lander ?y)))
-    		(exists (?x - Engineer) (Personnel-Loc ?x ?launchbay))
-    	)
-    :effect 
-    	(and 
-        (when (and(exists (?x - PlanetScan) (and (Scan-loc ?x ?subregion) ()))) (Scan-stored ?x ?lander))
-    		(Vehicle-deployed ?lander ?subregion)
-    	)
-    )
+
 
   (:action lander-touchdown
     :parameters (?lander - Lander ?subregion - Planet)
