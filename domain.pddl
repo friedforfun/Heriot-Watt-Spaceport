@@ -274,6 +274,22 @@
     (and 
       (not (Personnel-Loc ?person ?launchbay))
       (On-board ?vehicle ?person)
+      (Personnel-occupied ?person)
+    )
+)
+
+(:action disembark-vehicle
+  :parameters (?person - Personnel ?vehicle - Vehicle ?launchbay - LaunchBay)
+  :precondition 
+    (and 
+      (On-board ?Vehicle ?person)
+      (Vehicle-docked ?Vehicle ?launchbay)
+    )
+  :effect 
+    (and 
+      (not (Personnel-occupied ?person))
+      (Personnel-Loc ?person ?launchbay)
+      (not (On-board ?Vehicle ?person))
     )
 )
 
