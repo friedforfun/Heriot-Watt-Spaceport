@@ -334,12 +334,12 @@
 
   ; Ship ready to depart, all MAV are docked
   (:action prep-departure
-    :parameters (?bridge - Bridge)
+    :parameters (?bridge - Bridge ?launchbay - LaunchBay)
     :precondition 
       (and 
         (exists (?x - Captain) (Personnel-Loc ?x ?bridge))
         (exists (?y - Navigator) (Personnel-Loc ?y ?bridge))
-        (forall (?m - MAV) (Vehicle-docked ?m)) 
+        (forall (?m - MAV) (Vehicle-docked ?m ?launchbay)) 
         (not (Depart-OK))
       )
     :effect 
