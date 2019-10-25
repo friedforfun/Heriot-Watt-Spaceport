@@ -316,7 +316,7 @@
         (exists (?x - Engineer) (monitor-repair ?x))
         (Vehicle-deployed ?mav ?subregion)
         (On-board ?mav ?engineer)
-        (not (or (Vehicle-destroyed ?mav) (MAV-disabled ?mav)))
+        (not (or (Vehicle-destroyed ?mav) (Vehicle-disabled ?mav)))
       )
 
     :effect 
