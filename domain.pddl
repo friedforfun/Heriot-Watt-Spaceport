@@ -49,19 +49,19 @@
     (monitor-repair ?en - Engineer)                   	; this engineer is monitoring repair
 
     ;--------------- Vehicle predicates ----------------------
-    (Vehicle-docked ?v - Vehicle ?room - LaunchBay)
-    (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	  ; Vehicle has been deployed
-    (On-board ?vh - Vehicle ?ps - Personnel)
-    (Surface-Scan ?sc - Object ?sr - Subregion) 	  ; Scan that must be completed on the planet surface
-    (Vehicle-destroyed ?pr - Vehicle)					          ; Vehicle has been destroyed
-    (Vehicle-disabled ?ma - Vehicle)                          	; MAV has been disabled by a nebula
+    (Vehicle-docked ?v - Vehicle ?room - LaunchBay)       ; vehicle is docked in this launchbay
+    (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	    ; Vehicle has been deployed in this subregion
+    (On-board ?vh - Vehicle ?ps - Personnel)              ; this object is on board this vehicle
+    (Vehicle-destroyed ?pr - Vehicle)					            ; Vehicle has been destroyed
+    (Vehicle-disabled ?ma - Vehicle)                      ; vehicle has been disabled
     (Lander-on-surface ?la - Lander ?sr - Planet)			    ; Lander on surface of planet
-    (Launchbay-controls ?p - Engineer ?room - LaunchBay)
+    (Launchbay-controls ?p - Engineer ?room - LaunchBay)  ; an engineer is at the controls of this launchbay
 
     ; ------------- Item predicates ------------------------
-    (Scan-loc ?sc - Object ?sr - Subregion)        ; There is scan data at this location
-    (On-vehicle ?sc - Object ?pr - Vehicle)       ; vehicle holds an object
-    (On-ship ?sc - Object ?r - Room)             ; Collectible is on ship, in room
+    (Scan-loc ?sc - Object ?sr - Subregion)               ; There is scan data at this location
+    (On-vehicle ?sc - Object ?pr - Vehicle)               ; vehicle holds an object
+    (On-ship ?sc - Object ?r - Room)                      ; Collectible is on ship, in room
+    (Surface-Scan ?sc - Object ?sr - Subregion)           ; Scan that must be completed on the planet surface
 
 
     ; ------------- Mission predicates ---------------------
@@ -432,8 +432,8 @@
     	)
     :effect 
     	(and 
-    		(Antenna-deployed ?subregion)
-        (when (and (Ion-rads ?subregion)) (2-Antenna-deployed ?subregion))
+    		(Antenna-deployed ?antenna ?planet)
+        (not (On-vehicle ?antenna ?lander))
     	)
     )
 
