@@ -17,7 +17,7 @@
     MAV Probe Lander - Vehicle
     Door
     OnShip Empty Nebula AstroidBelt Planet - Subregion
-    Key Plasma PlanetScan AsteriodScan - Collectable
+    Plasma PlanetScan AsteriodScan - Collectable
     Region
     Mission
   )
@@ -32,9 +32,9 @@
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	; Personnel is engaged, cannot move room
     (holding ?p - Personnel ?obj - Collectable)			     ; Personnel is holding an object
+    (Personnel-Loc ?p - Personnel ?sr - Room)           ; location of Personnel on ship
 
     ; ------------ Ship interior predicates ------------------
-    (Personnel-Loc ?p - Personnel ?sr - Room)         	; location of Personnel on ship
     (door-connects ?d - Door ?ra - Room ?rb - Room)   	; door joins these rooms
     (Obj-in ?obj - Collectable ?r - Room)				        ; object is inside a room
   
@@ -262,6 +262,20 @@
 )
 
 ; need a board vehicle action
+(:action board-vehicle
+  :parameters (?person - Personnel ?vehicle - Vehicle ?launchbay - LaunchBay)
+  :precondition 
+    (and 
+      (not(Personnel-occupied ?person))
+      (Personnel-Loc ?person ?launchbay) 
+      (Vehicle-docked ?vehicle ?launchbay)
+    )
+  :effect 
+    (and 
+      (not (Personnel-Loc ?person ?launchbay))
+      (On-board ?vehicle ?person)
+    )
+)
 
 
   ; -------------- Engineering Actions -------------------
@@ -398,7 +412,7 @@
     :parameters (?lander - Lander ?subregion - Planet)
     :precondition 
     	(and 
-    		(Lander-surface ?lander ?subregion)
+    		(Lander-on-surface ?lander ?subregion)
     		(not (Vehicle-destroyed ?lander))
     	)
     :effect 
