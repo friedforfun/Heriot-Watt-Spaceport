@@ -39,10 +39,8 @@
 		(door-connects Door-Engi Hallway-A Engineering)
 
 		(door-connects Door-Science-Lab Hallway-B Science-Lab)
-		(door-locked Door-Science-Lab)
 
 		(door-connects Door-Launch-Bay Hallway-A Launch-Bay)
-		(door-locked Door-Launch-Bay)
 
 		(door-connects No-Door Hallway-A Hallway-B)
 
