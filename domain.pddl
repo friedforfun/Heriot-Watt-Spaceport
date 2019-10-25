@@ -26,27 +26,27 @@
 
   (:predicates
     ; ------------ Space predicates -------------------------
-    (In-region ?sp - Region ?s2 - Subregion)          	; inside this region is this subregion
-    (Ion-rads ?sr - Planet)								              ; Ionising radiation is present on planet surface
+    (In-region ?sp - Region ?s2 - Subregion)          	  ; inside this region is this subregion
+    (Ion-rads ?sr - Planet)								                ; Ionising radiation is present on planet surface
 
     ; ------------ Personnel predicates ---------------------
-    (Personnel-occupied ?p - Personnel)               	; Personnel is engaged, cannot move room
-    (holding ?p - Personnel ?obj - Object)			     ; Personnel is holding an object
-    (Personnel-Loc ?p - Personnel ?sr - Room)           ; location of Personnel on ship
+    (Personnel-occupied ?p - Personnel)               	  ; Personnel is engaged, cannot move room
+    (holding ?p - Personnel ?obj - Object)			          ; Personnel is holding an object
+    (Personnel-Loc ?p - Personnel ?sr - Room)             ; location of Personnel on ship
 
     ; ------------ Ship interior predicates ------------------
-    (door-connects ?d - Door ?ra - Room ?rb - Room)   	; door joins these rooms
-    (Obj-in ?obj - Object ?r - Room)				        ; object is inside a room
+    (door-connects ?d - Door ?ra - Room ?rb - Room)   	  ; door joins these rooms
+    (Obj-in ?obj - Object ?r - Room)				              ; object is inside a room
   
     ; ------------- Ship exterior predicates ----------------
-    (Ship-Location ?sp - Region)                      	; ship is located in region
-    (Ship-at-Subregion ?pn - Subregion)               	; ship is located at a subregion of region
-    (Ship-damaged)                                    	; ship is damaged
-    (Ship-clear)                         				        ; ship is outside of a subregeion 
-    (Depart-OK)                                       	; ship cannot leave region until vehicles are back on board
+    (Ship-Location ?sp - Region)                      	  ; ship is located in region
+    (Ship-at-Subregion ?pn - Subregion)               	  ; ship is located at a subregion of region
+    (Ship-damaged)                                    	  ; ship is damaged
+    (Ship-clear)                         				          ; ship is outside of a subregeion 
+    (Depart-OK)                                       	  ; ship cannot leave region until vehicles are back on board
 
     ; ------------- Engineering predicates -----------------
-    (monitor-repair ?en - Engineer)                   	; this engineer is monitoring repair
+    (monitor-repair ?en - Engineer)                   	  ; this engineer is monitoring repair
 
     ;--------------- Vehicle predicates ----------------------
     (Vehicle-docked ?v - Vehicle ?room - LaunchBay)       ; vehicle is docked in this launchbay
@@ -62,7 +62,7 @@
     (On-vehicle ?sc - Object ?pr - Vehicle)               ; vehicle holds an object
     (On-ship ?sc - Object ?r - Room)                      ; Collectible is on ship, in room
     (Surface-Scan ?sc - Object ?sr - Subregion)           ; Scan that must be completed on the planet surface
-
+    (Antenna-deployed ?an - Antenna ?p - Planet)          ; Antenna is deployed on planet surface
 
     ; ------------- Mission predicates ---------------------
     (Mission-complete ?m - Mission)								             ; Mission has been completed
@@ -190,6 +190,7 @@
   )
 
   ; -------------- Launch/recall vehicles ----------------
+  ; deploys vehicle, probes destroyed when deployed in asteriod belt & MAV disabled in nebula
   (:action deploy-vehicle
     :parameters (?veh - Vehicle ?room - LaunchBay ?subr - Subregion)
     :precondition 
@@ -204,14 +205,12 @@
         (Vehicle-deployed ?veh ?subr)
         (not(Vehicle-docked ?veh ?room))
 
-        ;when probe in asteriodbelt destroy
         (when (and(exists (?x - AstroidBelt ?y - Probe) (and(= ?x ?subr) (= ?y ?veh)))) (Vehicle-destroyed ?veh))
-        
-        ;when mav is in nebula disable
         (when (and (exists (?z - Nebula ?a - MAV) (and (= ?z ?subr) (= ?a ?veh)))) (Vehicle-disabled ?veh))
       )
   )
 
+  ; Dock vehicles in a ship launchbay
   (:action dock-vehicle
     :parameters (?veh - Vehicle ?room - LaunchBay ?subr - Subregion)
     :precondition 
@@ -225,14 +224,12 @@
       )
     :effect 
       (and 
-        (forall (?x - Engineer)
-          (when (and (On-board ?veh ?x)) (not(On-board ?veh ?x)))
-        )
         (not (Vehicle-deployed ?veh ?subr))
         (Vehicle-docked ?veh ?room)
       )
   )
 
+  ; Engineer operate launchbay controls
   (:action operate-controls
     :parameters (?engineer - Engineer ?room - LaunchBay)
     :precondition 
@@ -247,6 +244,7 @@
       )
   )
 
+; Engineer finished operating launchbay controls
 (:action stop-operate-controls
   :parameters (?engineer - Engineer ?room - LaunchBay)
   :precondition 
@@ -260,6 +258,7 @@
     )
 )
 
+; Personnel board vehicle when needed
 (:action board-vehicle
   :parameters (?person - Personnel ?vehicle - Vehicle ?launchbay - LaunchBay)
   :precondition 
@@ -276,6 +275,7 @@
     )
 )
 
+; Personnell disembark from vehicle
 (:action disembark-vehicle
   :parameters (?person - Personnel ?vehicle - Vehicle ?launchbay - LaunchBay)
   :precondition 
@@ -365,6 +365,7 @@
       )
   )
 
+  ; Probe can deliver object (scan/plasma)
   (:action probe-deliver
     :parameters (?probe - Probe ?obj - Object ?launchbay - LaunchBay)
     :precondition 
@@ -379,7 +380,7 @@
       )
   )
 
-
+  ; Planetary scans are uploaded to the computer
   (:action upload-scan
     :parameters (?scan - PlanetScan)
     :precondition 
@@ -395,6 +396,7 @@
 
   ; ------------ Lander ---------------------------------
 
+  ; Lander downloads data about touchdown from ships computer
   (:action load-touchdown-data
     :parameters (?lander - Lander ?touchdown - PlanetScan)
     :precondition 
@@ -408,6 +410,7 @@
       )
   )
 
+  ; Lander performs touchdown on planet surface
   (:action lander-touchdown
     :parameters (?lander - Lander ?subregion - Planet)
     :precondition 
@@ -422,6 +425,9 @@
     	)
     )
 
+  ;lander scan surface
+
+  ; Lander deploys an antenna
   (:action Deploy-antenna
     :parameters (?lander - Lander ?subregion - Planet ?antenna - Antenna)
     :precondition 
