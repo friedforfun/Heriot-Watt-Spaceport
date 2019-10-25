@@ -8,7 +8,7 @@
 		Elba - ScienceOfficer
 		Bridge - Bridge 
 		Engineering - Engineering 
-		Science-Lab - Scilab 
+		Science-Lab - Sciencelab 
 		Launch-Bay - LaunchBay 
 		Hallway-A  Hallway-B - Hallway
 		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
@@ -18,20 +18,19 @@
 		Pleiades - Nebula
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
-		key - Key
 		lander-a - Lander
 		EdenScan - PlanetScan
+
 	)
 
 	(:init
 		; init Personell
-		(holding Tretter key)
 		(Personell-Loc Tretter Science-Lab)
 		(Personell-Loc Meachum Launch-Bay)
 		(Personell-Loc Bunte Launch-Bay)
 		(personell-Loc Elba Bridge)
-		(MAV-EVA Hagarty Mav-a)
-		(MAV-EVA Zayicek Mav-b)
+		(On-board Mav-a Hagarty)
+		(On-board Mav-b Zayicek)
 		(Personell-Loc Penley Engineering)
 
 		; init ship interior rooms
@@ -66,7 +65,10 @@
 		(Ship-at-Subregion Earth)
 
 		;init ship vehicles
-
+		(Vehicle-deployed mav-a Earth)
+		(Vehicle-docked mav-b Launch-Bay)
+		(Vehicle-docked Probe-a Launch-Bay)
+		(Vehicle-docked lander-a Launch-Bay)
 		(Ship-damaged)
 
 	)
@@ -75,7 +77,7 @@
 		(and 
 			(Vehicle-destroyed Probe-a)
 			(Ship-at-Subregion b)
-			(Antenna-deployed Eden)
+			
 		)
 	)
 
