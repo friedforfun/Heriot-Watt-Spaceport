@@ -17,7 +17,7 @@
     MAV Probe Lander - Vehicle
     Door
     OnShip Empty Nebula AstroidBelt Planet - Subregion
-    Plasma PlanetScan AsteriodScan - Collectable
+    Plasma PlanetScan AsteriodScan Antenna - Object
     Region
     Mission
   )
@@ -31,12 +31,12 @@
 
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	; Personnel is engaged, cannot move room
-    (holding ?p - Personnel ?obj - Collectable)			     ; Personnel is holding an object
+    (holding ?p - Personnel ?obj - Object)			     ; Personnel is holding an object
     (Personnel-Loc ?p - Personnel ?sr - Room)           ; location of Personnel on ship
 
     ; ------------ Ship interior predicates ------------------
     (door-connects ?d - Door ?ra - Room ?rb - Room)   	; door joins these rooms
-    (Obj-in ?obj - Collectable ?r - Room)				        ; object is inside a room
+    (Obj-in ?obj - Object ?r - Room)				        ; object is inside a room
   
     ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - Region)                      	; ship is located in region
@@ -52,16 +52,16 @@
     (Vehicle-docked ?v - Vehicle ?room - LaunchBay)
     (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	  ; Vehicle has been deployed
     (On-board ?vh - Vehicle ?ps - Personnel)
-    (Surface-Scan ?sc - Collectable ?sr - Subregion) 	  ; Scan that must be completed on the planet surface
+    (Surface-Scan ?sc - Object ?sr - Subregion) 	  ; Scan that must be completed on the planet surface
     (Vehicle-destroyed ?pr - Vehicle)					          ; Vehicle has been destroyed
     (Vehicle-disabled ?ma - Vehicle)                          	; MAV has been disabled by a nebula
     (Lander-on-surface ?la - Lander ?sr - Planet)			    ; Lander on surface of planet
     (Launchbay-controls ?p - Engineer ?room - LaunchBay)
 
     ; ------------- Item predicates ------------------------
-    (Scan-loc ?sc - Collectable ?sr - Subregion)        ; There is scan data at this location
-    (Scan-stored ?sc - Collectable ?pr - Vehicle)       ; vehicle holds an object
-    (On-ship ?sc - Collectable ?r - Room)             ; Collectible is on ship, in room
+    (Scan-loc ?sc - Object ?sr - Subregion)        ; There is scan data at this location
+    (On-vehicle ?sc - Object ?pr - Vehicle)       ; vehicle holds an object
+    (On-ship ?sc - Object ?r - Room)             ; Collectible is on ship, in room
 
 
     ; ------------- Mission predicates ---------------------
@@ -100,7 +100,7 @@
 
   ; collect pickup object when person is in room
   (:action pickup-object
-    :parameters (?room - Room ?person - Personnel ?obj - Collectable)
+    :parameters (?room - Room ?person - Personnel ?obj - Object)
     :precondition 
       (and 
         (not (Personnel-occupied ?person))
@@ -120,7 +120,7 @@
 
   ; drop object
   (:action drop-object
-    :parameters (?person - Personnel ?obj - Collectable ?room - Room)
+    :parameters (?person - Personnel ?obj - Object ?room - Room)
     :precondition 
       (and 
         (Personnel-Loc ?person ?room)
@@ -352,7 +352,7 @@
 
   ; probe scan
   (:action probe-scan
-    :parameters (?probe - Probe ?subregion - Subregion ?obj - Collectable)
+    :parameters (?probe - Probe ?subregion - Subregion ?obj - Object)
     :precondition 
       (and 
         (not (Vehicle-destroyed ?probe))
@@ -361,20 +361,20 @@
       )
     :effect 
       (and 
-        (Scan-stored ?obj ?probe)
+        (On-vehicle ?obj ?probe)
       )
   )
 
   (:action probe-deliver
-    :parameters (?probe - Probe ?obj - Collectable ?launchbay - LaunchBay)
+    :parameters (?probe - Probe ?obj - Object ?launchbay - LaunchBay)
     :precondition 
       (and 
         (Vehicle-docked ?probe ?launchbay)
-        (Scan-stored ?obj ?probe)
+        (On-vehicle ?obj ?probe)
       )
     :effect 
       (and 
-        (not (Scan-stored ?obj ?probe))
+        (not (On-vehicle ?obj ?probe))
         (On-ship ?obj ?launchbay)
       )
   )
@@ -404,7 +404,7 @@
       )
     :effect 
       (and 
-        (Scan-stored ?touchdown ?lander)
+        (On-vehicle ?touchdown ?lander)
       )
   )
 
@@ -417,15 +417,16 @@
     	)
     :effect 
     	(and 
-    		(when (and (not(exists (?y - PlanetScan) (and(Scan-stored ?y ?lander) (Scan-loc ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
+    		(when (and (not(exists (?y - PlanetScan) (and(On-vehicle ?y ?lander) (Scan-loc ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
     		(Lander-on-surface ?lander ?subregion)
     	)
     )
 
   (:action Deploy-antenna
-    :parameters (?lander - Lander ?subregion - Planet)
+    :parameters (?lander - Lander ?subregion - Planet ?antenna - Antenna)
     :precondition 
     	(and 
+        (On-vehicle ?antenna ?lander)
     		(Lander-on-surface ?lander ?subregion)
     		(not (Vehicle-destroyed ?lander))
     	)
