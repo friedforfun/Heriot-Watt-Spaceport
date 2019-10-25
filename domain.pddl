@@ -15,34 +15,35 @@
   (:types Captain Navigator Engineer ScienceOfficer - Personell 
     Bridge Engineering Scilab LaunchBay Hallway Computer - Room
     MAV Probe Lander - Vehicle
-    Door 
+    Door
     OnShip Empty Nebula AstroidBelt Planet - Subregion
     Key Plasma PlanetScan AsteriodScan - Collectable
     Region
     Mission
   )
 
+  (:constants Computer - Computer)                      ; data can be located in the computer or physically placed in a room
+
   (:predicates
     ; ------------ Space predicates -------------------------
     (In-region ?sp - Region ?s2 - Subregion)          	; inside this region is this subregion
-    (Ion-rads ?sr - Planet)								; Ionising radiation is present on planet surface
+    (Ion-rads ?sr - Planet)								              ; Ionising radiation is present on planet surface
 
     ; ------------ Personell predicates ---------------------
-    (key-location ?sr - Room)                         	; location of key on ship 
     (personell-occupied ?p - Personell)               	; personell is engaged, cannot move room
-    (holding ?p - Personell ?obj - Collectable)			; personell is holding an object
+    (holding ?p - Personell ?obj - Collectable)			     ; personell is holding an object
 
     ; ------------ Ship interior predicates ------------------
     (door-locked ?d - Door)                           	; the door is locked
     (Personell-Loc ?p - Personell ?sr - Room)         	; location of personell on ship
     (door-connects ?d - Door ?ra - Room ?rb - Room)   	; door joins these rooms
-    (Obj-in ?obj - Collectable ?r - Room)				; object is inside a room
+    (Obj-in ?obj - Collectable ?r - Room)				        ; object is inside a room
   
     ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - Region)                      	; ship is located in region
     (Ship-at-Subregion ?pn - Subregion)               	; ship is located at a subregion of region
     (Ship-damaged)                                    	; ship is damaged
-    (Ship-clear)                         				; ship is outside of a subregeion 
+    (Ship-clear)                         				        ; ship is outside of a subregeion 
     (Depart-OK)                                       	; ship cannot leave region until vehicles are back on board
 
     ; ------------- Engineering predicates -----------------
@@ -50,22 +51,29 @@
 
     ;--------------- Vehicle predicates ----------------------
     (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	  ; Vehicle has been deployed
-    (Scan-loc ?sc - Collectable ?sr - Subregion)		    ; There is scan data at this location
     (Surface-Scan ?sc - Collectable ?sr - Subregion) 	  ; Scan that must be completed on the planet surface
-    (Scan-stored ?sc - Collectable ?pr - Vehicle)		    ; vehicle holds an object
-    (TouchDown-Location ?obj - Collectable ?p - Planet)	; scan has found a touchdown location
+    
     (Vehicle-destroyed ?pr - Vehicle)					          ; Vehicle has been destroyed
-    (Deliver-collectable ?sc - Collectable)				      ; Collectible is on ship
     (MAV-EVA ?en - Engineer ?ma - MAV)                	; MAV is in EVA state with an engineer
     (MAV-docked ?ma - MAV)                            	; the MAV is docked
     (MAV-disabled ?ma - MAV)                          	; MAV has been disabled by a nebula
     (Lander-surface ?la - Lander ?sr - Planet)			    ; Lander on surface of planet
+
+    ; ------------- Item predicates ------------------------
+    (Scan-loc ?sc - Collectable ?sr - Subregion)        ; There is scan data at this location
+    (Scan-stored ?sc - Collectable ?pr - Vehicle)       ; vehicle holds an object
+    (On-ship ?sc - Collectable ?r - Room)             ; Collectible is on ship
+
+
+    ; maybe dont need
+    (TouchDown-Location ?obj - Collectable ?p - Planet) ; scan has found a touchdown location
+
     (Antenna-deployed ?p - Planet)
     (2-Antenna-deployed ?p - Planet)
 
     ; ------------- Mission predicates ---------------------
-    (Mission-complete ?m - Mission)								; Mission has been completed
-    (Objective-scan-subregion ?m - Mission ?sr - Subregion)		; Mission has objective in location
+    (Mission-complete ?m - Mission)								             ; Mission has been completed
+    (Objective-scan-subregion ?m - Mission ?sr - Subregion)		 ; Mission has objective in location
     (Objective-visit-subregion ?m - Mission ?sr - Subregion)
     (Objective-scan-planet ?m - Mission ?p - Planet)
     (Objective-retrieve-plasma ?m - Mission ?n - Nebula)
@@ -355,7 +363,7 @@
 
   ; recall probe
   (:action recall-probe
-    :parameters (?probe - Probe ?subregion - Subregion)
+    :parameters (?probe - Probe ?subregion - Subregion ?launchbay - LaunchBay)
     :precondition 
       (and 
         (not (Vehicle-destroyed ?probe))
@@ -398,6 +406,7 @@
     	)
     :effect 
     	(and 
+        (when (and(exists (?x - PlanetScan) (and (Scan-loc ?x ?subregion) ()))) (Scan-stored ?x ?lander))
     		(Vehicle-deployed ?lander ?subregion)
     	)
     )
