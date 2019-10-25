@@ -367,9 +367,22 @@
         (not (Vehicle-deployed ?probe ?subregion))
         (forall (?x - Collectable)
           (when (and (Scan-stored ?x ?probe)) 
-            (Deliver-collectable ?x)
+            (On-ship ?x ?launchbay)
           )
         )
+      )
+  )
+
+  (:action upload-scan
+    :parameters (?scan - PlanetScan)
+    :precondition 
+      (and 
+        (exists (?x - room)  (On-ship ?scan ?x))
+        (not(On-ship ?scan Computer))
+      )
+    :effect 
+      (and 
+        (On-ship ?scan Computer)
       )
   )
 
