@@ -413,7 +413,7 @@
     :precondition 
     	(and 
     		(Vehicle-deployed ?lander ?subregion)
-    		(not (Lander-surface ?lander ?subregion))
+    		(not (Lander-on-surface ?lander ?subregion))
     	)
     :effect 
     	(and 
