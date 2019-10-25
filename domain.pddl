@@ -322,8 +322,6 @@
 
   ; ------------ Probes ---------------------------------
 
- 
-
   ; probe scan
   (:action probe-scan
     :parameters (?probe - Probe ?subregion - Subregion ?obj - Collectable)
@@ -336,11 +334,22 @@
     :effect 
       (and 
         (Scan-stored ?obj ?probe)
-        
-        (when (and (exists (?x - PlanetScan) (= ?x ?obj) )) (TouchDown-Location ?obj ?subregion))
       )
   )
 
+  (:action probe-deliver
+    :parameters (?probe - Probe ?obj - Collectable ?launchbay - LaunchBay)
+    :precondition 
+      (and 
+        (Vehicle-docked ?probe ?launchbay)
+        (Scan-stored ?obj ?probe)
+      )
+    :effect 
+      (and 
+        (not (Scan-stored ?obj ?probe))
+        (On-ship ?obj ?launchbay)
+      )
+  )
 
 
   (:action upload-scan
