@@ -339,7 +339,7 @@
       (and 
         (exists (?x - Captain) (Personnel-Loc ?x ?bridge))
         (exists (?y - Navigator) (Personnel-Loc ?y ?bridge))
-        (forall (?m - MAV) (MAV-docked ?m)) 
+        (forall (?m - MAV) (Vehicle-docked ?m)) 
         (not (Depart-OK))
       )
     :effect 
