@@ -195,13 +195,15 @@
     :parameters (?veh - Vehicle ?room - LaunchBay ?subr - Subregion)
     :precondition 
       (and 
+        (Ship-at-Subregion ?subr)
         (exists (?y - Engineer) (Launchbay-controls ?y ?room) )
         (Vehicle-docked ?veh ?room)
       )
     :effect 
       (and 
         (Vehicle-deployed ?veh ?subr)
-        
+        (not(Vehicle-docked ?veh ?room))
+
         ;when probe in asteriodbelt destroy
         (when (and(exists (?x - AstroidBelt ?y - Probe) (and(= ?x ?subr) (= ?y ?veh)))) (Vehicle-destroyed ?veh))
         
@@ -211,15 +213,30 @@
   )
 
   (:action recall-vehicle
-    :parameters (?x - object)
-    :precondition (and ())
-    :effect (and ()))
+    :parameters (?veh - Vehicle ?room - LaunchBay ?subr - Subregion)
+    :precondition 
+      (and 
+        (Ship-at-Subregion ?subr)
+        (Vehicle-deployed ?veh ?subr)
+        (not (or (Vehicle-destroyed ?veh) (Vehicle-disabled ?veh) ) )
+        (not (Lander-on-surface ?veh ?subr))
+      )
+    :effect 
+      (and 
+        (forall (?x - Engineer)
+          (when (and (On-board ?veh ?x)) (not(On-board ?veh ?x)))
+        )
+        (not (Vehicle-deployed ?veh ?subr))
+        (Vehicle-docked ?veh ?room)
+      )
+  )
 
   (:action operate-controls
     :parameters (?x - object)
     :precondition (and ())
     :effect (and ()))
 
+; need a board vehicle action
 
 
   ; -------------- Engineering Actions -------------------
@@ -263,6 +280,10 @@
 
 
 ; REMOVE ---------------------------------------------------------
+; REMOVE ---------------------------------------------------------
+; REMOVE ---------------------------------------------------------
+; REMOVE ---------------------------------------------------------
+  
   ; deploy the mav from the launch bay
   (:action deploy-mav
     :parameters (?engineer - Engineer ?mav - MAV ?launchbay - LaunchBay ?subregion - Subregion)
@@ -485,5 +506,10 @@
   ; weapons cannot deploy when shield is in use vice versa
   ; mav/probes/lander cannot deploy when shield is up
   ; 
+
+  ; ---------------------------------------------------------
+
+  ; equipment stored in spaceport
+  ; ship can fly back and restock probes, landers ect
 
 )
