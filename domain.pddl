@@ -22,7 +22,7 @@
     Mission
   )
 
-  (:constants Computer - Computer)                      ; data can be located in the computer or physically placed in a room
+  (:constants Computer - Computer)                      
 
   (:predicates
     ; ------------ Space predicates -------------------------
