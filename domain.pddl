@@ -51,10 +51,12 @@
     ;--------------- Vehicle predicates ----------------------
     (Vehicle-docked ?v - Vehicle ?room - LaunchBay)       ; vehicle is docked in this launchbay
     (Vehicle-deployed ?pr - Vehicle ?sr - Subregion)	    ; Vehicle has been deployed in this subregion
-    (On-board ?vh - Vehicle ?ps - Personnel)              ; this object is on board this vehicle
+    (On-board ?ps - Personnel ?vh - Vehicle)              ; this person is on board this vehicle
     (Vehicle-destroyed ?pr - Vehicle)					            ; Vehicle has been destroyed
     (Vehicle-disabled ?ma - Vehicle)                      ; vehicle has been disabled
-    (Lander-on-surface ?la - Lander ?sr - Planet)			    ; Lander on surface of planet
+
+    ; type of lander on surface changed for testing online planner: ?la - Lander -> Vehicle ?sr - Planet -> Subregion
+    (Lander-on-surface ?la - Subregion ?sr - Planet)			    ; Lander on surface of planet
     (Launchbay-controls ?p - Engineer ?room - LaunchBay)  ; an engineer is at the controls of this launchbay
 
     ; ------------- Item predicates ------------------------
@@ -270,7 +272,7 @@
   :effect 
     (and 
       (not (Personnel-Loc ?person ?launchbay))
-      (On-board ?vehicle ?person)
+      (On-board ?person ?vehicle)
       (Personnel-occupied ?person)
     )
 )
@@ -280,14 +282,14 @@
   :parameters (?person - Personnel ?vehicle - Vehicle ?launchbay - LaunchBay)
   :precondition 
     (and 
-      (On-board ?Vehicle ?person)
+      (On-board ?person ?vehicle)
       (Vehicle-docked ?Vehicle ?launchbay)
     )
   :effect 
     (and 
       (not (Personnel-occupied ?person))
       (Personnel-Loc ?person ?launchbay)
-      (not (On-board ?Vehicle ?person))
+      (not (On-board ?person ?vehicle))
     )
 )
 
@@ -308,14 +310,14 @@
   )
 
   ; repair damage
-  (:action repair-ship
+  (:action repair-ship ; change ?mav - MAV -> Vehicle for editor testing
     :parameters (?engineer - Engineer ?mav - MAV ?subregion - Subregion)
     :precondition 
       (and 
         (Ship-damaged)
         (exists (?x - Engineer) (monitor-repair ?x))
         (Vehicle-deployed ?mav ?subregion)
-        (On-board ?mav ?engineer)
+        (On-board ?engineer ?mav)
         (not (or (Vehicle-destroyed ?mav) (Vehicle-disabled ?mav)))
       )
 
@@ -438,7 +440,7 @@
     	)
     :effect 
     	(and 
-    		(Antenna-deployed ?antenna ?planet)
+    		(Antenna-deployed ?antenna ?subregion)
         (not (On-vehicle ?antenna ?lander))
     	)
     )

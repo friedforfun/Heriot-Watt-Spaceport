@@ -19,7 +19,9 @@
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
 		lander-a - Lander
-		EdenScan - PlanetScan
+		EdenScan bScan - PlanetScan
+		Ant-a Ant-b - Antenna
+
 
 	)
 
@@ -29,9 +31,9 @@
 		(Personnel-Loc Meachum Launch-Bay)
 		(Personnel-Loc Bunte Launch-Bay)
 		(Personnel-Loc Elba Bridge)
-		(On-board Mav-a Hagarty)
+		(On-board Hagarty Mav-a)
 		(Personnel-occupied Hagarty)
-		(On-board Mav-b Zayicek)
+		(On-board Zayicek Mav-b)
 		(Personnel-occupied Zayicek)
 		(Personnel-Loc Penley Engineering)
 
@@ -54,10 +56,12 @@
 		(In-region Sol Ceres)
 
 		(In-region Proxima-Centauri b)
+		(Scan-Loc bScan b)
 
 		(In-region Alpha-Centauri Eden)
 
 		(In-region Alpha-Centauri Pleiades)
+		(In-region Alpha-Centauri Eden)
 		(Scan-Loc EdenScan Eden)
 		
 		; init ship location
@@ -66,10 +70,12 @@
 
 		;init ship vehicles
 		;(Vehicle-deployed mav-a Earth)
-		(Vehicle-docked mav-b Launch-Bay)
+		(Vehicle-docked mav-a Launch-Bay)
 		(Vehicle-docked mav-b Launch-Bay)
 		(Vehicle-docked Probe-a Launch-Bay)
 		(Vehicle-docked lander-a Launch-Bay)
+		(On-vehicle Ant-a lander-a)
+		(On-vehicle Ant-b lander-a)
 		(Ship-damaged)
 
 	)
