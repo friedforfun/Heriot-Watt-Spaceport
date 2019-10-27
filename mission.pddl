@@ -30,7 +30,9 @@
 		(Personell-Loc Bunte Launch-Bay)
 		(personell-Loc Elba Bridge)
 		(On-board Mav-a Hagarty)
+		(Personnel-occupied Hagarty)
 		(On-board Mav-b Zayicek)
+		(Personnel-occupied Zayicek)
 		(Personell-Loc Penley Engineering)
 
 		; init ship interior rooms
@@ -63,7 +65,8 @@
 		(Ship-at-Subregion Earth)
 
 		;init ship vehicles
-		(Vehicle-deployed mav-a Earth)
+		;(Vehicle-deployed mav-a Earth)
+		(Vehicle-docked mav-b Launch-Bay)
 		(Vehicle-docked mav-b Launch-Bay)
 		(Vehicle-docked Probe-a Launch-Bay)
 		(Vehicle-docked lander-a Launch-Bay)
@@ -73,7 +76,7 @@
 
 	(:goal
 		(and 
-			(Vehicle-destroyed Probe-a)
+			
 			(Ship-at-Subregion b)
 			
 		)
