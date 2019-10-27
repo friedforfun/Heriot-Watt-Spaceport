@@ -82,7 +82,8 @@
 
 	(:goal
 		(and 
-			
+			(Vehicle-destroyed Probe-a)
+			(Vehicle-disabled Mav-b)
 			(Ship-at-Subregion b)
 			
 		)
