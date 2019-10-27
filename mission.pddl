@@ -24,16 +24,16 @@
 	)
 
 	(:init
-		; init Personell
-		(Personell-Loc Tretter Science-Lab)
-		(Personell-Loc Meachum Launch-Bay)
-		(Personell-Loc Bunte Launch-Bay)
-		(personell-Loc Elba Bridge)
+		; init Personnel
+		(Personnel-Loc Tretter Science-Lab)
+		(Personnel-Loc Meachum Launch-Bay)
+		(Personnel-Loc Bunte Launch-Bay)
+		(Personnel-Loc Elba Bridge)
 		(On-board Mav-a Hagarty)
 		(Personnel-occupied Hagarty)
 		(On-board Mav-b Zayicek)
 		(Personnel-occupied Zayicek)
-		(Personell-Loc Penley Engineering)
+		(Personnel-Loc Penley Engineering)
 
 		; init ship interior rooms
 		(door-connects Door-Bridge Hallway-B Bridge)
