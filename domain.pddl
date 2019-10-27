@@ -65,15 +65,15 @@
     (Antenna-deployed ?an - Antenna ?p - Planet)          ; Antenna is deployed on planet surface
 
     ; ------------- Mission predicates ---------------------
-    (Mission-complete ?m - Mission)								             ; Mission has been completed
-    (Objective-scan-subregion ?m - Mission ?sr - Subregion)		 ; Mission has objective in location
-    (Objective-visit-subregion ?m - Mission ?sr - Subregion)
-    (Objective-scan-planet ?m - Mission ?p - Planet)
-    (Objective-retrieve-plasma ?m - Mission ?n - Nebula)
-    (Objective-visit-region ?m - Mission ?r - Region)
-    (Objective-identify-touchdown ?m - Mission ?p - Planet)
-    (Objective-deploy-MAV ?m - Mission ?sr - Subregion)
-    (Objective-deploy-prove ?m - Mission ?sr - Subregion)
+    ;(Mission-complete ?m - Mission)								             ; Mission has been completed
+    ;(Objective-scan-subregion ?m - Mission ?sr - Subregion)		 ; Mission has objective in location
+    ;(Objective-visit-subregion ?m - Mission ?sr - Subregion)
+    ;(Objective-scan-planet ?m - Mission ?p - Planet)
+    ;(Objective-retrieve-plasma ?m - Mission ?n - Nebula)
+    ;(Objective-visit-region ?m - Mission ?r - Region)
+    ;(Objective-identify-touchdown ?m - Mission ?p - Planet)
+    ;(Objective-deploy-MAV ?m - Mission ?sr - Subregion)
+    ;(Objective-deploy-probe ?m - Mission ?sr - Subregion)
   )
 
   ; ------------- Moving around ship actions ----------------
@@ -443,6 +443,12 @@
     	)
     )
 
+  ;lander transmit scan to ship
+  ;(:action transmit-from-surface
+  ;  :parameters (?lander - Lander ?obj - PlanetScan)
+  ;  :precondition 
+  ;  (and ())
+  ;  :effect (and ()))
 
   ; ------------ Missions -------------------------------
 
