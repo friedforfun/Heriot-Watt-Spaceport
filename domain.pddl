@@ -462,11 +462,41 @@
     )
 
   ;lander transmit scan to ship
-  ;(:action transmit-from-surface
-  ;  :parameters (?lander - Lander ?obj - PlanetScan)
-  ;  :precondition 
-  ;  (and ())
-  ;  :effect (and ()))
+  (:action transmit-from-surface
+    :parameters (?lander - Lander ?subregion - Planet ?obj - PlanetScan)
+    :precondition 
+      (and 
+        (not (Ion-rads ?subregion))
+        (exists (?x - Antenna) (Antenna-deployed ?x ?subregion))
+        (not (Vehicle-destroyed ?lander))
+        (Lander-on-surface ?lander ?subregion)
+        (Ship-at-Subregion ?subregion)
+      )
+    :effect 
+      (and 
+        (On-ship ?obj Computer)
+      )
+  )
+
+  ; transmit from irradiated surface
+  (:action transmit-irradiated-surface
+    :parameters (?lander - Lander ?subregion - Planet ?obj - PlanetScan)
+    :precondition 
+      (and 
+        (exists (?x - Antenna ?y - Antenna)
+          (and
+            (not (= ?x ?y)) (Antenna-deployed ?x ?subregion) (Antenna-deployed ?y ?subregion)
+          )
+        )
+        (Lander-on-surface ?lander ?subregion)
+        (not (Vehicle-destroyed ?lander))
+        (Ship-at-Subregion ?subregion)
+      )
+    :effect 
+      (and 
+        (On-ship ?obj Computer)
+      )
+  )
 
   ; ------------ Missions -------------------------------
 
