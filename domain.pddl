@@ -56,7 +56,7 @@
     (Vehicle-disabled ?ma - Vehicle)                      ; vehicle has been disabled
 
     ; type of lander on surface changed for testing online planner: ?la - Lander -> Vehicle ?sr - Planet -> Subregion
-    (Lander-on-surface ?la - Subregion ?sr - Planet)			    ; Lander on surface of planet
+    (Lander-on-surface ?la - Lander ?sr - Planet)			    ; Lander on surface of planet
     (Launchbay-controls ?p - Engineer ?room - LaunchBay)  ; an engineer is at the controls of this launchbay
 
     ; ------------- Item predicates ------------------------
