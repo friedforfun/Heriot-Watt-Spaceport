@@ -62,7 +62,7 @@
 
 		(In-region Alpha-Centauri Pleiades)
 		(In-region Alpha-Centauri Eden)
-		(Scan-Loc EdenScan Eden)
+		(Probe-scan EdenScan Eden)
 		
 		; init ship location
 		(Ship-Location Sol)
@@ -84,6 +84,7 @@
 		(and 
 			(Vehicle-destroyed Probe-a)
 			(Vehicle-disabled Mav-b)
+			(Lander-on-surface lander-a Eden)
 			(Ship-at-Subregion b)
 			
 		)
