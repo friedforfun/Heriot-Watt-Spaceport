@@ -424,12 +424,26 @@
     	)
     :effect 
     	(and 
-    		(when (and (not(exists (?y - PlanetScan) (and(On-vehicle ?y ?lander) (Scan-loc ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
+    		(when (and (not(exists (?y - PlanetScan) (and(On-vehicle ?y ?lander) (Probe-scan ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
     		(Lander-on-surface ?lander ?subregion)
     	)
     )
 
   ;lander scan surface
+  (:action scan-surface
+    :parameters (?lander - Lander ?planet - Planet ?scan - PlanetScan)
+    :precondition 
+      (and 
+        (Lander-on-surface ?lander ?planet)
+        (not (Vehicle-destroyed ?lander))
+        (Lander-Scan ?scan ?planet)
+      )
+    :effect 
+      (and 
+        (On-vehicle ?scan ?lander)
+      )
+  )
+
 
   ; Lander deploys an antenna
   (:action Deploy-antenna
