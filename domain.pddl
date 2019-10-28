@@ -60,10 +60,10 @@
     (Launchbay-controls ?p - Engineer ?room - LaunchBay)  ; an engineer is at the controls of this launchbay
 
     ; ------------- Item predicates ------------------------
-    (Scan-loc ?sc - Object ?sr - Subregion)               ; There is scan data at this location
+    (Probe-scan ?sc - Object ?sr - Subregion)               ; There is scan data at this location
     (On-vehicle ?sc - Object ?pr - Vehicle)               ; vehicle holds an object
     (On-ship ?sc - Object ?r - Room)                      ; Collectible is on ship, in room
-    (Surface-Scan ?sc - Object ?sr - Subregion)           ; Scan that must be completed on the planet surface
+    (Lander-Scan ?sc - Object ?sr - planet)           ; Scan that must be completed on the planet surface
     (Antenna-deployed ?an - Antenna ?p - Planet)          ; Antenna is deployed on planet surface
 
     ; ------------- Mission predicates ---------------------
@@ -361,7 +361,7 @@
       (and 
         (not (Vehicle-destroyed ?probe))
         (Vehicle-deployed ?probe ?subregion)
-        (Scan-loc ?obj ?subregion)
+        (Probe-scan ?obj ?subregion)
       )
     :effect 
       (and 
