@@ -56,7 +56,7 @@
 		(In-region Sol Ceres)
 
 		(In-region Proxima-Centauri b)
-		(Scan-Loc bScan b)
+		(Probe-scan bScan b)
 
 		(In-region Alpha-Centauri Eden)
 
@@ -82,11 +82,11 @@
 
 	(:goal
 		(and 
-			(Vehicle-destroyed Probe-a)
-			(Vehicle-disabled Mav-b)
+			;(Vehicle-destroyed Probe-a)
+			;(Vehicle-disabled Mav-b)
 			(lander-on-surface lander-a Eden)
 			(not (Vehicle-destroyed lander-a))
-			(Ship-at-Subregion b)
+			;(Ship-at-Subregion b)
 			
 		)
 	)
