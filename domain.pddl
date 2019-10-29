@@ -317,6 +317,7 @@
         (Ship-damaged)
         (exists (?x - Engineer) (monitor-repair ?x))
         (Vehicle-deployed ?mav ?subregion)
+        (Ship-at-Subregion ?subregion)
         (On-board ?engineer ?mav)
         (not (or (Vehicle-destroyed ?mav) (Vehicle-disabled ?mav)))
       )
