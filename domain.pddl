@@ -206,7 +206,7 @@
       (and 
         (Vehicle-deployed ?veh ?subr)
         (not(Vehicle-docked ?veh ?room))
-        ;(not (Depart-OK))
+        (not (Depart-OK))
         (when (and(exists (?x - AstroidBelt ?y - Probe) (and(= ?x ?subr) (= ?y ?veh)))) (Vehicle-destroyed ?veh))
         (when (and (exists (?z - Nebula ?a - MAV) (and (= ?z ?subr) (= ?a ?veh)))) (Vehicle-disabled ?veh))
       )
@@ -342,7 +342,8 @@
         (exists (?x - Captain) (Personnel-Loc ?x ?bridge))
         (exists (?y - Navigator) (Personnel-Loc ?y ?bridge))
         ;(not (exists (?m - MAV ?l - LaunchBay) (not(Vehicle-docked ?m ?l))))
-        (forall (?m - MAV) (Vehicle-docked ?m ?launchbay)) 
+        ;(forall (?m - MAV) (Vehicle-docked ?m ?launchbay)) 
+        (exists (?y - Engineer) (Launchbay-controls ?y ?launchbay) )
         (not (exists (?z - Engineer ?l - LaunchBay) (Launchbay-controls ?z ?l)))
         (not (Depart-OK))
       )
