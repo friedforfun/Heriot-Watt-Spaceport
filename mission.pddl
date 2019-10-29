@@ -84,9 +84,10 @@
 		(and 
 			;(Vehicle-destroyed Probe-a)
 			;(Vehicle-disabled Mav-b)
+			;(lander-on-surface lander-a Eden)
+			;(not (Vehicle-destroyed lander-a))
+			(On-vehicle EdenScan lander-a)
 			(lander-on-surface lander-a Eden)
-			(not (Vehicle-destroyed lander-a))
-			;(Ship-at-Subregion b)
 			
 		)
 	)

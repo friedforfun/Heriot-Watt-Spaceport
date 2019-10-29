@@ -206,7 +206,7 @@
       (and 
         (Vehicle-deployed ?veh ?subr)
         (not(Vehicle-docked ?veh ?room))
-        ;(not (Depart-OK))
+        (not (Depart-OK))
         (when (and(exists (?x - AstroidBelt ?y - Probe) (and(= ?x ?subr) (= ?y ?veh)))) (Vehicle-destroyed ?veh))
         (when (and (exists (?z - Nebula ?a - MAV) (and (= ?z ?subr) (= ?a ?veh)))) (Vehicle-disabled ?veh))
       )
