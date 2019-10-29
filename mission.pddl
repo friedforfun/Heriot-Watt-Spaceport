@@ -19,7 +19,7 @@
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
 		lander-a - Lander
-		EdenScan bScan - PlanetScan
+		EdenScan EdenSurfaceScan bScan - PlanetScan
 		Ant-a Ant-b - Antenna
 
 
@@ -63,6 +63,7 @@
 		(In-region Alpha-Centauri Pleiades)
 		(In-region Alpha-Centauri Eden)
 		(Probe-scan EdenScan Eden)
+		(Lander-Scan EdenSurfaceScan Eden)
 		
 		; init ship location
 		(Ship-Location Sol)
@@ -88,6 +89,7 @@
 			;(not (Vehicle-destroyed lander-a))
 			(On-vehicle EdenScan lander-a)
 			(lander-on-surface lander-a Eden)
+			(On-ship EdenSurfaceScan Computer)
 			
 		)
 	)
