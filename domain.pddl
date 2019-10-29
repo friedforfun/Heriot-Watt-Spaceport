@@ -341,8 +341,8 @@
       (and 
         (exists (?x - Captain) (Personnel-Loc ?x ?bridge))
         (exists (?y - Navigator) (Personnel-Loc ?y ?bridge))
-        (not (exists (?m - MAV ?l - LaunchBay) (not(Vehicle-docked ?m ?l))))
-        ;(forall (?m - MAV) (Vehicle-docked ?m ?launchbay)) 
+        ;(not (exists (?m - MAV ?l - LaunchBay) (not(Vehicle-docked ?m ?l))))
+        (forall (?m - MAV) (Vehicle-docked ?m ?launchbay)) 
         (not (exists (?z - Engineer ?l - LaunchBay) (Launchbay-controls ?z ?l)))
         (not (Depart-OK))
       )
