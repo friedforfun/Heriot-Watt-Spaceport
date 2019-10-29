@@ -84,8 +84,8 @@
 		(and 
 			(Vehicle-destroyed Probe-a)
 			(Vehicle-disabled Mav-b)
-			(Lander-on-surface Lander-a Eden)
-			(Antenna-deployed Ant-a Eden)
+			(lander-on-surface lander-a Eden)
+			(not (Vehicle-destroyed lander-a))
 			(Ship-at-Subregion b)
 			
 		)
