@@ -485,6 +485,7 @@
     :parameters (?lander - Lander ?subregion - Planet ?obj - PlanetScan)
     :precondition 
       (and 
+        (Ion-rads ?subregion)
         (exists (?x - Antenna ?y - Antenna)
           (and
             (not (= ?x ?y)) (Antenna-deployed ?x ?subregion) (Antenna-deployed ?y ?subregion)
@@ -493,6 +494,7 @@
         (Lander-on-surface ?lander ?subregion)
         (not (Vehicle-destroyed ?lander))
         (Ship-at-Subregion ?subregion)
+        (Lander-Scan ?obj ?subregion)
       )
     :effect 
       (and 
