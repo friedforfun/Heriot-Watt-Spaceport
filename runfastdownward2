@@ -1,0 +1,1 @@
+sudo docker run --rm -v /home/master/Documents/fastdownward/Heriot-Watt-Spaceport:/spaceport aibasel/downward --alias lama-first /spaceport/domain.pddl /spaceport/mission.pddl > ~/Documents/fastdownward/Heriot-Watt-Spaceport/Output/dev_output2.txt
