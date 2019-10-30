@@ -17,7 +17,7 @@
     MAV Probe Lander - Vehicle
     Door
     OnShip Empty Nebula AstroidBelt Planet - Subregion
-    Plasma PlanetScan AsteriodScan Antenna - Object
+    Plasma PlanetScan AsteriodScan Antenna PlasmaData - Object
     Region
     Mission
   )
@@ -60,11 +60,12 @@
     (Launchbay-controls ?p - Engineer ?room - LaunchBay)  ; an engineer is at the controls of this launchbay
 
     ; ------------- Item predicates ------------------------
-    (Probe-scan ?sc - Object ?sr - Subregion)               ; There is scan data at this location
+    (Probe-scan ?sc - Object ?sr - Subregion)             ; There is scan data at this location
     (On-vehicle ?sc - Object ?pr - Vehicle)               ; vehicle holds an object
     (On-ship ?sc - Object ?r - Room)                      ; Collectible is on ship, in room
-    (Lander-Scan ?sc - Object ?sr - planet)           ; Scan that must be completed on the planet surface
+    (Lander-Scan ?sc - Object ?sr - planet)               ; Scan that must be completed on the planet surface
     (Antenna-deployed ?an - Antenna ?p - Planet)          ; Antenna is deployed on planet surface
+    (Plasma-data ?data - PlasmaData ?obj - Plasma)        ; Plasmadata is data from plasma
 
     ; ------------- Mission predicates ---------------------
     ;(Mission-complete ?m - Mission)								             ; Mission has been completed
@@ -499,6 +500,21 @@
     :effect 
       (and 
         (On-ship ?obj Computer)
+      )
+  )
+
+  ; ------------ Science lab  -------------------------
+  (:action analyse-plasma
+    :parameters (?person - ScienceOfficer ?plasmadata - PlasmaData ?plasma - Plasma ?room - Sciencelab)
+    :precondition 
+      (and 
+        (On-ship ?plasma ?room)
+        (Personnel-Loc ?person ?room)
+        (Plasma-data ?plasmadata ?plasma)
+      )
+    :effect 
+      (and 
+        (On-ship ?plasmadata Computer)
       )
   )
 
