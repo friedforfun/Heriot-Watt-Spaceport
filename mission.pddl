@@ -16,8 +16,8 @@
 		Mercury Venus Earth Mars b Eden - Planet
 		Ceres - AstroidBelt
 		Pleiades - Nebula
-		Pleiades-plasma - Plasma
-		pp-data - PlasmaData
+		plasma - Plasma
+		pdata - PlasmaData
 		Mav-a - MAV
 		Probe-a - Probe
 		lander-a - Lander
@@ -62,8 +62,9 @@
 		(In-region Alpha-Centauri Eden)
 
 		(In-region Alpha-Centauri Pleiades)
-		(Probe-scan Pleiades-plasma Pleiades)
-		(Plasma-data pp-data Pleiades-plasma)
+		(Probe-scan plasma Pleiades)
+		(Plasma-data pdata plasma)
+
 		(In-region Alpha-Centauri Eden)
 		(Probe-scan EdenScan Eden)
 		(Lander-Scan EdenSurfaceScan Eden)
@@ -91,7 +92,7 @@
 			;(not (Vehicle-destroyed lander-a))
 			;(On-vehicle EdenScan lander-a)
 			;(lander-on-surface lander-a Eden)
-			(On-ship pp-data Computer)
+			(On-vehicle plasma Probe-a)
 			;(On-ship bScan Computer)
 			;(Ship-at-Subregion Earth)
 		)
