@@ -402,10 +402,10 @@
 
   ; Planetary scans are uploaded to the computer
   (:action upload-scan
-    :parameters (?scan - PlanetScan)
+    :parameters (?scan - Scan)
     :precondition 
       (and 
-        (exists (?x - room)  (On-ship ?scan ?x))
+        (exists (?x - Room)  (On-ship ?scan ?x))
         (not(On-ship ?scan Computer))
       )
     :effect 
@@ -418,7 +418,7 @@
 
   ; Lander downloads data about touchdown from ships computer
   (:action load-touchdown-data
-    :parameters (?lander - Lander ?touchdown - PlanetScan)
+    :parameters (?lander - Lander ?touchdown - ProbeScan)
     :precondition 
       (and 
         (On-ship ?touchdown Computer)
@@ -440,19 +440,19 @@
     	)
     :effect 
     	(and 
-    		(when (and (not(exists (?y - PlanetScan) (and(On-vehicle ?y ?lander) (Probe-scan ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
+    		(when (and (not(exists (?y - ProbeScan) (and(On-vehicle ?y ?lander) (Obj-subregion ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
     		(Lander-on-surface ?lander ?subregion)
     	)
     )
 
   ;lander scan surface
   (:action scan-surface
-    :parameters (?lander - Lander ?planet - Planet ?scan - PlanetScan)
+    :parameters (?lander - Lander ?planet - Planet ?scan - LanderScan)
     :precondition 
       (and 
         (Lander-on-surface ?lander ?planet)
         (not (Vehicle-destroyed ?lander))
-        (Lander-Scan ?scan ?planet)
+        (Obj-subregion ?scan ?planet)
       )
     :effect 
       (and 
@@ -479,7 +479,7 @@
 
   ;lander transmit scan to ship
   (:action transmit-from-surface
-    :parameters (?lander - Lander ?subregion - Planet ?obj - PlanetScan)
+    :parameters (?lander - Lander ?subregion - Planet ?obj - LanderScan)
     :precondition 
       (and 
         (not (Ion-rads ?subregion))
@@ -487,7 +487,7 @@
         (not (Vehicle-destroyed ?lander))
         (Lander-on-surface ?lander ?subregion)
         (Ship-at-Subregion ?subregion)
-        (Lander-Scan ?obj ?subregion)
+        (On-vehicle ?obj ?lander)      
       )
     :effect 
       (and 
@@ -497,7 +497,7 @@
 
   ; transmit from irradiated surface
   (:action transmit-irradiated-surface
-    :parameters (?lander - Lander ?subregion - Planet ?obj - PlanetScan)
+    :parameters (?lander - Lander ?subregion - Planet ?obj - LanderScan)
     :precondition 
       (and 
         (Ion-rads ?subregion)
@@ -509,7 +509,7 @@
         (Lander-on-surface ?lander ?subregion)
         (not (Vehicle-destroyed ?lander))
         (Ship-at-Subregion ?subregion)
-        (Lander-Scan ?obj ?subregion)
+        (On-vehicle ?obj ?lander)
       )
     :effect 
       (and 
