@@ -377,7 +377,7 @@
       (and 
         (not(Vehicle-destroyed ?probe))
         (Vehicle-deployed ?probe ?subregion)
-        (Obj-subregion)
+        (Obj-subregion ?plasma ?subregion)
       )
     :effect 
       (and 

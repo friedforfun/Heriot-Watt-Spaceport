@@ -63,8 +63,6 @@
 		(In-region Alpha-Centauri Eden)
 
 		(In-region Alpha-Centauri Pleiades)
-		(Obj-subregion plasma Pleiades)
-		(Plasma-data pdata plasma)
 
 		(In-region Alpha-Centauri Eden)
 		(Obj-subregion EdenScan Eden)
