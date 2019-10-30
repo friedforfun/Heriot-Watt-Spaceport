@@ -17,7 +17,8 @@
     MAV Probe Lander - Vehicle
     Door
     OnShip Empty Nebula AstroidBelt Planet - Subregion
-    Plasma PlanetScan AsteriodScan Antenna PlasmaData - Object
+    Plasma Antenna Scan - Object
+    ProbeScan LanderScan PlasmaScan - Scan ; can upload scans
     Region
     Mission
   )
