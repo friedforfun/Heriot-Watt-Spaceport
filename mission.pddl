@@ -63,6 +63,8 @@
 		(In-region Alpha-Centauri Eden)
 
 		(In-region Alpha-Centauri Pleiades)
+		(Obj-subregion plasma-ple Pleiades)
+		(Obj-subregion plasmascan-ple Pleiades)
 
 		(In-region Alpha-Centauri Eden)
 		(Obj-subregion EdenScan Eden)
@@ -89,7 +91,7 @@
 			(Vehicle-destroyed Probe-a)
 			(Vehicle-disabled Mav-b)
 			(lander-on-surface lander-a Eden)
-			;(On-ship plasma Launch-Bay)
+			(On-ship plasma-ple Launch-Bay)
 			(On-ship EdenSurfaceScan Computer)
 			(On-ship EdenScan Computer)
 			(Ship-at-Subregion Earth)
