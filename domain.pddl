@@ -20,7 +20,7 @@
     Plasma Antenna Scan - Object
     ProbeScan LanderScan PlasmaScan - Scan ; can upload scans
     Region
-    Mission
+    Objective - Mission
   )
 
   (:constants Computer - Computer)                      
