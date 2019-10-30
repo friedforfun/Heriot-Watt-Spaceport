@@ -16,8 +16,6 @@
 		Mercury Venus Earth Mars b Eden - Planet
 		Ceres - AstroidBelt
 		Pleiades - Nebula
-		plasma - Plasma
-		pdata - PlasmaData
 		Mav-a - MAV
 		Probe-a - Probe
 		lander-a - Lander
@@ -80,9 +78,6 @@
 		(On-vehicle Ant-a lander-a)
 		(On-vehicle Ant-b lander-a)
 		(Ship-damaged)
-
-		(On-ship plasma Launch-Bay)
-
 
 	)
 
