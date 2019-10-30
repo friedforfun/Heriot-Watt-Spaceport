@@ -16,7 +16,7 @@
 		Mercury Venus Earth Mars b Eden - Planet
 		Ceres - AstroidBelt
 		Pleiades - Nebula
-		Mav-a - MAV
+		Mav-a Mav-b - MAV
 		Probe-a - Probe
 		lander-a - Lander
 		EdenScan bScan - ProbeScan
@@ -73,6 +73,7 @@
 		;init ship vehicles
 		;(Vehicle-deployed mav-a Earth)
 		(Vehicle-docked mav-a Launch-Bay)
+		(Vehicle-docked mav-b Launch-Bay)
 		(Vehicle-docked Probe-a Launch-Bay)
 		(Vehicle-docked lander-a Launch-Bay)
 		(On-vehicle Ant-a lander-a)
@@ -83,15 +84,13 @@
 
 	(:goal
 		(and 
-			;(Vehicle-destroyed Probe-a)
-			;(Vehicle-disabled Mav-b)
-			;(lander-on-surface lander-a Eden)
-			;(not (Vehicle-destroyed lander-a))
-			;(On-vehicle EdenScan lander-a)
-			;(lander-on-surface lander-a Eden)
+			(Vehicle-destroyed Probe-a)
+			(Vehicle-disabled Mav-b)
+			(lander-on-surface lander-a Eden)
 			;(On-ship plasma Launch-Bay)
+			(On-ship EdenSurfaceScan Computer)
 			(On-ship EdenScan Computer)
-			;(Ship-at-Subregion Earth)
+			(Ship-at-Subregion Earth)
 		)
 	)
 
