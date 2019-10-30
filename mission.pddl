@@ -22,6 +22,8 @@
 		EdenScan bScan - ProbeScan
 		EdenSurfaceScan - LanderScan
 		Ant-a Ant-b - Antenna
+		plasma-ple - Plasma
+		plasmascan-ple - PlasmaScan
 
 
 	)

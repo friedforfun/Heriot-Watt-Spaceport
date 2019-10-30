@@ -61,11 +61,11 @@
     (Launchbay-controls ?p - Engineer ?room - LaunchBay)  ; an engineer is at the controls of this launchbay
 
     ; ------------- Item predicates ------------------------
-    (Obj-subregion ?sc - Object ?sr - Subregion)             ; There is an object for the probe to collect at this location
+    (Obj-subregion ?sc - Object ?sr - Subregion)          ; There is an object for the probe to collect at this location
     (On-vehicle ?sc - Object ?pr - Vehicle)               ; vehicle holds an object
     (On-ship ?sc - Object ?r - Room)                      ; Collectible is on ship, in room
     (Antenna-deployed ?an - Antenna ?p - Planet)          ; Antenna is deployed on planet surface
-    (Plasma-data ?data - PlasmaData ?obj - Plasma)        ; Plasmadata is data from plasma
+    (Plasma-data ?data - PlasmaScan ?obj - Plasma)        ; PlasmaScan is data from plasma
 
     ; ------------- Mission predicates ---------------------
     ;(Mission-complete ?m - Mission)								             ; Mission has been completed
@@ -519,16 +519,16 @@
 
   ; ------------ Science lab  -------------------------
   (:action analyse-plasma
-    :parameters (?person - ScienceOfficer ?plasmadata - PlasmaData ?plasma - Plasma ?room - Sciencelab)
+    :parameters (?person - ScienceOfficer ?plasmascan - PlasmaScan ?plasma - Plasma ?room - Sciencelab)
     :precondition 
       (and 
         (On-ship ?plasma ?room)
         (Personnel-Loc ?person ?room)
-        (Plasma-data ?plasmadata ?plasma)
+        (Plasma-data ?plasmascan ?plasma)
       )
     :effect 
       (and 
-        (On-ship ?plasmadata Computer)
+        (On-ship ?plasmascan Computer)
       )
   )
 
