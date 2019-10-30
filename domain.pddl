@@ -311,7 +311,7 @@
   )
 
   ; repair damage
-  (:action repair-ship ; change ?mav - MAV -> Vehicle for editor testing
+  (:action repair-ship ; change ?mav - MAV -> Vehicle for online editor testing
     :parameters (?engineer - Engineer ?mav - MAV ?subregion - Subregion)
     :precondition 
       (and 
@@ -358,16 +358,30 @@
 
   ; probe scan
   (:action probe-scan
-    :parameters (?probe - Probe ?subregion - Subregion ?obj - Object)
+    :parameters (?probe - Probe ?subregion - Subregion ?obj - ProbeScan)
     :precondition 
       (and 
         (not (Vehicle-destroyed ?probe))
         (Vehicle-deployed ?probe ?subregion)
-        (Probe-scan ?obj ?subregion)
+        (Obj-subregion ?obj ?subregion)
       )
     :effect 
       (and 
         (On-vehicle ?obj ?probe)
+      )
+  )
+
+  (:action probe-collect-plasma
+    :parameters (?probe - Probe ?subregion - Subregion ?plasma - Plasma)
+    :precondition 
+      (and 
+        (not(Vehicle-destroyed ?probe))
+        (Vehicle-deployed ?probe ?subregion)
+        (Obj-subregion)
+      )
+    :effect 
+      (and 
+        (On-vehicle ?plasma ?probe)
       )
   )
 
