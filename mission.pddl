@@ -16,7 +16,7 @@
 		Mercury Venus Earth Mars b Eden - Planet
 		Ceres - AstroidBelt
 		Pleiades - Nebula
-		Mav-a Mav-b - MAV
+		Mav-a - MAV
 		Probe-a - Probe
 		lander-a - Lander
 		EdenScan EdenSurfaceScan bScan - PlanetScan
@@ -27,14 +27,13 @@
 
 	(:init
 		; init Personnel
-		(Personnel-Loc Tretter Science-Lab)
-		(Personnel-Loc Meachum Launch-Bay)
-		(Personnel-Loc Bunte Launch-Bay)
-		(Personnel-Loc Elba Bridge)
+		(Personnel-Loc Tretter Bridge)
+		(Personnel-Loc Meachum Bridge)
+		(Personnel-Loc Bunte Bridge)
+		(Personnel-Loc Elba Science-Lab)
 		(On-board Hagarty Mav-a)
 		(Personnel-occupied Hagarty)
-		(On-board Zayicek Mav-b)
-		(Personnel-occupied Zayicek)
+		(Personnel-Loc Zayicek Launch-Bay)
 		(Personnel-Loc Penley Engineering)
 
 		; init ship interior rooms
@@ -72,7 +71,6 @@
 		;init ship vehicles
 		;(Vehicle-deployed mav-a Earth)
 		(Vehicle-docked mav-a Launch-Bay)
-		(Vehicle-docked mav-b Launch-Bay)
 		(Vehicle-docked Probe-a Launch-Bay)
 		(Vehicle-docked lander-a Launch-Bay)
 		(On-vehicle Ant-a lander-a)
@@ -90,7 +88,7 @@
 			;(On-vehicle EdenScan lander-a)
 			;(lander-on-surface lander-a Eden)
 			(On-ship EdenSurfaceScan Computer)
-			(On-ship bScan Computer)
+			;(On-ship bScan Computer)
 			;(Ship-at-Subregion Earth)
 		)
 	)
