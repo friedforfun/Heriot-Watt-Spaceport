@@ -68,15 +68,18 @@
     (Plasma-data ?data - PlasmaScan ?obj - Plasma)        ; PlasmaScan is data from plasma
 
     ; ------------- Mission predicates ---------------------
-    ;(Mission-complete ?m - Mission)								             ; Mission has been completed
-    ;(Objective-scan-subregion ?m - Mission ?sr - Subregion)		 ; Mission has objective in location
-    ;(Objective-visit-subregion ?m - Mission ?sr - Subregion)
-    ;(Objective-scan-planet ?m - Mission ?p - Planet)
-    ;(Objective-retrieve-plasma ?m - Mission ?n - Nebula)
-    ;(Objective-visit-region ?m - Mission ?r - Region)
-    ;(Objective-identify-touchdown ?m - Mission ?p - Planet)
-    ;(Objective-deploy-MAV ?m - Mission ?sr - Subregion)
-    ;(Objective-deploy-probe ?m - Mission ?sr - Subregion)
+    (Mission-objective ?ob - Objective ?mi - Mission)
+    (Object-complete ?ob - Objective)
+    (Mission-complete ?m - Mission)								             ; Mission has been completed
+    
+    (Objective-scan-subregion ?m - Objective ?sr - Subregion)		 ; Mission has objective in location
+    (Objective-visit-subregion ?m - Objective ?sr - Subregion)
+    (Objective-scan-planet ?m - Objective ?p - Planet)
+    (Objective-retrieve-plasma ?m - Objective ?n - Nebula)
+    (Objective-visit-region ?m - Objective ?r - Region)
+    (Objective-identify-touchdown ?m - Objective ?p - Planet)
+    (Objective-deploy-MAV ?m - Objective ?sr - Subregion)
+    (Objective-deploy-probe ?m - Objective ?sr - Subregion)
   )
 
   ; ------------- Moving around ship actions ----------------
