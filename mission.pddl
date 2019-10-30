@@ -21,7 +21,8 @@
 		Mav-a - MAV
 		Probe-a - Probe
 		lander-a - Lander
-		EdenScan EdenSurfaceScan bScan - PlanetScan
+		EdenScan bScan - ProbeScan
+		EdenSurfaceScan - LanderScan
 		Ant-a Ant-b - Antenna
 
 
@@ -57,17 +58,17 @@
 		(In-region Sol Ceres)
 
 		(In-region Proxima-Centauri b)
-		(Probe-scan bScan b)
+		(Obj-subregion bScan b)
 
 		(In-region Alpha-Centauri Eden)
 
 		(In-region Alpha-Centauri Pleiades)
-		(Probe-scan plasma Pleiades)
+		(Obj-subregion plasma Pleiades)
 		(Plasma-data pdata plasma)
 
 		(In-region Alpha-Centauri Eden)
-		(Probe-scan EdenScan Eden)
-		(Lander-Scan EdenSurfaceScan Eden)
+		(Obj-subregion EdenScan Eden)
+		(Obj-subregion EdenSurfaceScan Eden)
 		
 		; init ship location
 		(Ship-Location Sol)
@@ -82,6 +83,9 @@
 		(On-vehicle Ant-b lander-a)
 		(Ship-damaged)
 
+		(On-ship plasma Launch-Bay)
+
+
 	)
 
 	(:goal
@@ -92,8 +96,8 @@
 			;(not (Vehicle-destroyed lander-a))
 			;(On-vehicle EdenScan lander-a)
 			;(lander-on-surface lander-a Eden)
-			(On-vehicle plasma Probe-a)
-			;(On-ship bScan Computer)
+			;(On-ship plasma Launch-Bay)
+			(On-ship EdenScan Computer)
 			;(Ship-at-Subregion Earth)
 		)
 	)
