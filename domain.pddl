@@ -20,7 +20,7 @@
     Plasma Antenna Scan - Object
     ProbeScan LanderScan PlasmaScan - Scan ; can upload scans
     Region
-    Objective - Mission
+    ;Objective - Mission
   )
 
   (:constants Computer - Computer)                      
@@ -37,8 +37,7 @@
 
     ; ------------ Ship interior predicates ------------------
     (door-connects ?d - Door ?ra - Room ?rb - Room)   	  ; door joins these rooms
-    (Obj-in ?obj - Object ?r - Room)				              ; object is inside a room
-  
+
     ; ------------- Ship exterior predicates ----------------
     (Ship-Location ?sp - Region)                      	  ; ship is located in region
     (Ship-at-Subregion ?pn - Subregion)               	  ; ship is located at a subregion of region
@@ -108,7 +107,7 @@
       (and 
         (not (Personnel-occupied ?person))
         (Personnel-Loc ?person ?room)
-        (Obj-in ?obj ?room)
+        (On-ship ?obj ?room)
         (or 
           (exists (?x - Plasma ?y - ScienceOfficer) (and(= ?x ?obj) (= ?y ?person)))
           (exists (?x - Plasma)(not(= ?x ?obj)))
@@ -117,7 +116,7 @@
     :effect 
       (and 
         (holding ?person ?obj) 
-        (not (Obj-in ?obj ?room))
+        (not (On-ship ?obj ?room))
       )
   )
 
@@ -127,13 +126,13 @@
     :precondition 
       (and 
         (Personnel-Loc ?person ?room)
-        (not (exists (?x - Room) (Obj-in ?obj ?x)))
-        
+        (not (exists (?x - Room) (On-ship ?obj ?x)))
+        (holding ?person ?obj)
       )
     :effect 
     	(and 
         (not (holding ?person ?obj))
-    		(Obj-in ?obj ?room)
+    		(On-ship ?obj ?room)
     	)
     )
 
