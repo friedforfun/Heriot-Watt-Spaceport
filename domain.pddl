@@ -512,7 +512,8 @@
         (Lander-on-surface ?lander ?subregion)
         (not (Vehicle-destroyed ?lander))
         (Ship-at-Subregion ?subregion)
-        (On-vehicle ?obj ?lander)
+        (Obj-subregion ?obj ?subregion)
+        ;(On-vehicle ?obj ?lander)
       )
     :effect 
       (and 
