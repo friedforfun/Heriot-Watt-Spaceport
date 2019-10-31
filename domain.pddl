@@ -540,20 +540,6 @@
 
   ; ------------ Missions -------------------------------
 
-  ; predicate ideas:
-  ; mission has a destination
-  ; mission requires lander to visit planet
-  ; mission requires a scan
-  ; mission requires plasma scans
-  ; mission can be complete
-
-  ; for each mission describe precontions as goals, then set mission to true as effect
-  ; actions
-  ; complete visit mission
-  ; complete lander mission
-  ; complete scan mission
-  ; complete plasma mission
-
   (:action complete-objective-scan
     :parameters (?objective - Objective ?scan - Scan)
     :precondition 
@@ -631,7 +617,7 @@
   ; ----------------- Additional feature ----------------------------------;
   ; Ship can dock at a starport and aquire new vehicles and crew members   ;
   ; Starport with home flag will be used to hand in completed Missions     ;
-  ; Crew load into ship via new room: Airlock                              ;
+  ; Crew and objects load into ship via new room: Airlock                  ;
   ; vehicles load into ship via launchbay                                  ;
   ;------------------------------------------------------------------------;
 
