@@ -570,7 +570,7 @@
       (and 
         (Objective-visit-subregion ?objective ?subregion)
         (not (Objective-complete ?objective))
-        (Ship-Location ?subregion)
+        (Ship-at-Subregion ?subregion)
       )
     :effect 
       (and 
@@ -579,12 +579,11 @@
   )
 
   (:action complete-objective-retrieve-plasmadata
-    :parameters (?objective - Objective ?plasma - Plasma ?plasmascan - PlasmaScan)
+    :parameters (?objective - Objective ?plasmascan - PlasmaScan)
     :precondition 
       (and 
         (Objective-retrieve-plasmadata ?objective ?plasma)
         (not (Objective-complete ?objective))
-        (Plasma-data ?plasmascan ?plasma) 
         (On-ship ?plasmascan Computer)
       )
     :effect 
