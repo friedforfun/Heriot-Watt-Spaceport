@@ -579,12 +579,13 @@
   )
 
   (:action complete-objective-retrieve-plasmadata
-    :parameters (?objective - Objective ?plasma - Plasma)
+    :parameters (?objective - Objective ?plasma - Plasma ?plasmascan - PlasmaScan)
     :precondition 
       (and 
         (Objective-retrieve-plasmadata ?objective ?plasma)
         (not (Objective-complete ?objective))
-        (exists (?x - PlasmaScan) (and (Plasma-data ?x ?plasma) (On-ship ?x Computer)))
+        (Plasma-data ?plasmascan ?plasma) 
+        (On-ship ?plasmascan Computer)
       )
     :effect 
       (and 
