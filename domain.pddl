@@ -13,7 +13,7 @@
   )
 
   (:types Captain Navigator Engineer ScienceOfficer - Personnel 
-    Bridge Engineering Sciencelab LaunchBay Hallway Computer - Room
+    Bridge Engineering Sciencelab LaunchBay Hallway Airlock Computer - Room
     MAV Probe Lander - Vehicle
     Door
     OnShip Empty Nebula AstroidBelt Planet - Subregion
