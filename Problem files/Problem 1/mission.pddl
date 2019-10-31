@@ -102,9 +102,9 @@
 
 		;init objectives to satisfy the mission
 		(Objective-scan objective-1 EdenSurfaceScan)
-		(Objective-scan objective-2 bScan)
-		(Objective-deploy-vehicle objective-3 probe-a ceres)
-		(Objective-deploy-vehicle objective-4 mav-a Pleiades)
+		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
+		(Objective-visit-subregion objective-3 b)
+		(Objective-deploy-vehicle objective-4 lander-x Pleiades)
 	)
 
 	(:goal
