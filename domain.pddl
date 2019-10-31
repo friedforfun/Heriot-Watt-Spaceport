@@ -74,7 +74,7 @@
     (Objective-scan ?m - Objective ?scan - Scan)		 ; Mission has objective in location
     (Objective-visit-subregion ?m - Objective ?sr - Subregion)
     (Objective-retrieve-plasmadata ?m - Objective ?p - Plasma)
-    (Objective-deploy-vehcle ?m - Objective ?v - Vehicle ?sr - Subregion)
+    (Objective-deploy-vehicle ?m - Objective ?v - Vehicle ?sr - Subregion)
   )
 
   ; ------------- Moving around ship actions ----------------
@@ -555,7 +555,7 @@
     :precondition 
       (and 
         (Objective-scan ?objective ?scan)
-        (not (Object-complete ?objective))
+        (not (Objective-complete ?objective))
         (On-ship ?scan Computer)
       )
     :effect 
@@ -569,7 +569,7 @@
     :precondition 
       (and 
         (Objective-visit-subregion ?objective ?subregion)
-        (not (Object-complete ?objective))
+        (not (Objective-complete ?objective))
         (Ship-Location ?subregion)
       )
     :effect 
@@ -583,7 +583,7 @@
     :precondition 
       (and 
         (Objective-retrieve-plasmadata ?objective ?plasma)
-        (not (Object-complete ?objective))
+        (not (Objective-complete ?objective))
         (exists (?x - PlasmaScan) (and (Plasma-data ?x ?plasma) (On-ship ?x Computer)))
       )
     :effect 
@@ -596,7 +596,7 @@
     :parameters (?objective - Objective ?subregion - Subregion ?vehicle - Vehicle)
     :precondition 
       (and 
-        (Objective-deploy-MAV ?objective ?subregion)
+        (Objective-deploy-vehicle ?objective ?vehicle ?subregion)
         (not (Objective-complete ?objective))
         (Vehicle-deployed ?vehicle ?subregion)
       )
