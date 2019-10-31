@@ -32,7 +32,8 @@
     (Rads ?sr - Planet)								                ; radiation is present on planet surface
     (Starport-location ?sp - Starport ?sb - Subregion)    ; Location of the spaceport
     (Ship-docked ?sp - Starport)
-    
+    (Starport-vehicles ?ve - vehicle ?sp - Starport)
+    (Starport-crew ?p - Personnel ?sp - Starport)
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	  ; Personnel is engaged, cannot move room
     (holding ?p - Personnel ?obj - Object)			          ; Personnel is holding an object
