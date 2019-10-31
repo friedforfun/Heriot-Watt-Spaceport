@@ -26,6 +26,7 @@
 		plasma-ple - Plasma
 		plasmascan-ple - PlasmaScan
 
+		Mission-1 - Mission
 		objective-1 objective-2 objective-3 objective-4 objective-5 - Objective
 
 		Bernal-1 Island-2 - Starport
@@ -97,7 +98,7 @@
 		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
 		(Objective-visit-subregion objective-3 b)
 		(Objective-deploy-vehicle objective-4 lander-x Pleiades)
-		(Objective-scan objective-5 bSurfaceScan)
+		;(Objective-scan objective-5 bSurfaceScan)
 	)
 
 	(:goal
@@ -106,8 +107,8 @@
 			;(Vehicle-disabled Mav-b)
 			;(On-ship plasma-ple Science-Lab)
 			;(Antenna-deployed Ant-a Eden)
-			(On-vehicle EdenSurfaceScan lander-a)
-			(On-vehicle bSurfaceScan lander-x)
+			;(On-vehicle EdenSurfaceScan lander-a)
+			;(On-vehicle bSurfaceScan lander-x)
 			;(On-ship EdenScan Computer)
 			;(On-vehicle EdenScan lander-a)
 			;(lander-on-surface lander-a Eden)
@@ -123,7 +124,7 @@
 			;(Objective-complete objective-4)
 			;(Objective-complete objective-5)
 
-			(Ship-docked Bernal-1)
+			(Mission-complete Mission-1)
 		)
 	)
 
