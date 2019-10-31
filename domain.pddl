@@ -34,6 +34,7 @@
     (Ship-docked ?sp - Starport)
     (Starport-vehicles ?ve - vehicle ?sp - Starport)
     (Starport-crew ?p - Personnel ?sp - Starport)
+    (Starport-item ?obj - Object ?sp - Starport)
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	  ; Personnel is engaged, cannot move room
     (holding ?p - Personnel ?obj - Object)			          ; Personnel is holding an object
