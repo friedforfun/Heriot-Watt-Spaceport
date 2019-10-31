@@ -27,8 +27,8 @@
 		plasmascan-ple - PlasmaScan
 
 		Mission-1 - Mission
-		objective-1 - Objective
-		;objective-2 objective-3 objective-4 objective-5 - Objective
+		objective-1 objective-2 objective-3 - Objective
+		;objective-4 objective-5 - Objective
 
 		Bernal-1 Island-2 - Starport
 	)
@@ -97,8 +97,8 @@
 
 		;init objective
 		(Objective-scan objective-1 EdenSurfaceScan)
-		;(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
-		;(Objective-visit-subregion objective-3 b)
+		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
+		(Objective-visit-subregion objective-3 b)
 		;(Objective-deploy-vehicle objective-4 lander-x Pleiades)
 		;(Objective-scan objective-5 bSurfaceScan)
 	)
@@ -126,7 +126,8 @@
 			;(Objective-complete objective-4)
 			;(Objective-complete objective-5)
 
-			(Mission-control EdenSurfaceScan)
+			;(Mission-control EdenSurfaceScan)
+			(Mission-complete Mission-1)
 		)
 	)
 

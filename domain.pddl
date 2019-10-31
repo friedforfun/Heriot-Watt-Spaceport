@@ -633,14 +633,14 @@
     :precondition 
       (and 
         (forall (?x - Objective) (Objective-complete ?x))
-        (forall (On-ship ?y Computer) (Mission-control ?y))
+        (not (exists (?y - Scan ) (and (On-ship ?y Computer) (not (Mission-control ?y)))))
         (Ship-docked ?starport)
         (Home-starport ?starport)
       )
     :effect 
       (and 
+        ;(when (and (not(exists (?x - Scan)  (not(and (On-ship ?x Computer) (Mission-control ?x)))))) (Mission-complete ?mission))
         (Mission-complete ?mission)
-
       )
   )
 
