@@ -2,10 +2,13 @@
   (:domain spaceport-domain)
 
 	(:objects
+		; Personnel
 		Tretter - Captain
 		Bunte Meachum - Navigator
 		Hagarty Zayicek Penley - Engineer
 		Elba - ScienceOfficer
+
+		; Rooms + Doors
 		Bridge - Bridge 
 		Engineering - Engineering 
 		Science-Lab - Sciencelab 
@@ -13,28 +16,35 @@
 		Airlock - Airlock
 		Hallway-A  Hallway-B - Hallway
 		No-Door Door-Airlock Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
+		
+		; Regions of space
 		Sol Proxima-Centauri Alpha-Centauri - Region
 		Earth b Eden - Planet
 		Ceres - AstroidBelt
 		Pleiades - Nebula
+		
+		; Vehicles
 		Mav-a Mav-x - MAV
 		Probe-a - Probe
 		lander-a lander-x - Lander
+		
+		; physical objects and scan data
 		EdenScan bScan - ProbeScan
 		EdenSurfaceScan bSurfaceScan - LanderScan
 		Ant-a Ant-b Ant-x Ant-y - Antenna
 		plasma-ple - Plasma
 		plasmascan-ple - PlasmaScan
 
+		; mission and objectives
 		Mission-1 - Mission
-		objective-1 objective-2 objective-3 - Objective
-		;objective-4 objective-5 - Objective
+		objective-1 objective-2 objective-3 objective-4 - Objective
 
+		; starports
 		Bernal-1 Island-2 - Starport
 	)
 
 	(:init
-		; init Personnel
+		; init Personnel locations and busy status
 		(Personnel-Loc Tretter Bridge)
 		(Personnel-Loc Meachum Bridge)
 		(Personnel-Loc Bunte Bridge)
@@ -43,26 +53,21 @@
 		(Personnel-occupied Hagarty)
 		(Personnel-Loc Zayicek Launch-Bay)
 
-		; init ship interior rooms
+		; init ship interior rooms represent connections between rooms
 		(door-connects Door-Bridge Hallway-B Bridge)
-
 		(door-connects Door-Engi Hallway-A Engineering)
 		(door-connects Door-Airlock Hallway-A Airlock)
 		(door-connects Door-Science-Lab Hallway-B Science-Lab)
-
 		(door-connects Door-Launch-Bay Hallway-A Launch-Bay)
-
 		(door-connects No-Door Hallway-A Hallway-B)
 
-		; init space
-
+		; init space, spaceports, and spaceport contents
 		(In-region Sol Earth)
 		(Home-starport Bernal-1)
 		(Starport-location Bernal-1 Earth)
 		(Starport-crew Penley Bernal-1)
 		(Starport-vehicles mav-x Bernal-1)
 		
-
 		(In-region Sol Ceres)
 
 		(In-region Proxima-Centauri b)
@@ -88,45 +93,22 @@
 		(Ship-Location Sol)
 		(Ship-docked Bernal-1)
 
-		;init ship vehicles
+		;init ship vehicles and the objects they carry
 		(Vehicle-docked mav-a Launch-Bay)
 		(Vehicle-docked Probe-a Launch-Bay)
 		(Vehicle-docked lander-a Launch-Bay)
 		(On-vehicle Ant-a lander-a)
 		(On-vehicle Ant-b lander-a)
 
-		;init objective
+		;init objectives to satisfy the mission
 		(Objective-scan objective-1 EdenSurfaceScan)
 		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
 		(Objective-visit-subregion objective-3 b)
-		;(Objective-deploy-vehicle objective-4 lander-x Pleiades)
-		;(Objective-scan objective-5 bSurfaceScan)
+		(Objective-deploy-vehicle objective-4 lander-x Pleiades)
 	)
 
 	(:goal
 		(and 
-			;(Vehicle-destroyed Probe-a)
-			;(Vehicle-disabled Mav-b)
-			;(On-ship plasma-ple Science-Lab)
-			;(Antenna-deployed Ant-a Eden)
-			;(On-vehicle EdenSurfaceScan lander-a)
-			;(On-vehicle bSurfaceScan lander-x)
-			;(On-ship EdenScan Computer)
-			;(On-vehicle EdenScan lander-a)
-			;(lander-on-surface lander-a Eden)
-			;(On-ship Ant-x Airlock)
-			;(On-ship Ant-y Airlock)
-
-			;(On-ship EdenSurfaceScan Computer)
-			;(On-ship plasmascan-ple Computer)
-			;(Vehicle-destroyed lander-a)
-			;(Objective-complete objective-1)
-			;(Objective-complete objective-2)
-			;(Objective-complete objective-3)
-			;(Objective-complete objective-4)
-			;(Objective-complete objective-5)
-
-			;(Mission-control EdenSurfaceScan)
 			(Mission-complete Mission-1)
 		)
 	)
