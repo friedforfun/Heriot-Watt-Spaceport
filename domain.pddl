@@ -73,7 +73,7 @@
     
     (Objective-scan ?m - Objective ?scan - Scan)		 ; Mission has objective in location
     (Objective-visit-subregion ?m - Objective ?sr - Subregion)
-    (Objective-retrieve-plasmadata ?m - Objective ?p - Plasma)
+    (Objective-retrieve-plasmadata ?m - Objective ?p - PlasmaScan)
     (Objective-deploy-vehicle ?m - Objective ?v - Vehicle ?sr - Subregion)
   )
 
