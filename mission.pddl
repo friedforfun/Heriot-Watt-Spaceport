@@ -23,7 +23,7 @@
 		EdenSurfaceScan - LanderScan
 		Ant-a Ant-b - Antenna
 		plasma-ple - Plasma
-		;plasmascan-ple - PlasmaScan
+		plasmascan-ple - PlasmaScan
 
 
 	)
@@ -64,7 +64,7 @@
 
 		(In-region Alpha-Centauri Pleiades)
 		(Obj-subregion plasma-ple Pleiades)
-		;(Plasma-data plasmascan-ple plasma-ple)
+		(Plasma-data plasmascan-ple plasma-ple)
 
 		(In-region Alpha-Centauri Eden)
 		(Obj-subregion EdenScan Eden)
@@ -89,13 +89,13 @@
 			;(Vehicle-destroyed Probe-a)
 			;(Vehicle-disabled Mav-b)
 			;(lander-on-surface lander-a Eden)
-			(On-ship plasma-ple Science-Lab)
+			;(On-ship plasma-ple Science-Lab)
 			;(Antenna-deployed Ant-a Eden)
 			;(On-vehicle EdenSurfaceScan lander-a)
 			;(On-ship EdenScan Computer)
 			;(On-ship EdenSurfaceScan Computer)
 			
-			;(On-vehicle plasma-ple probe-a)
+			(On-ship plasmascan-ple Computer)
 			(Ship-at-Subregion Earth)
 		)
 	)
