@@ -11,7 +11,7 @@
 		Science-Lab - Sciencelab 
 		Launch-Bay - LaunchBay 
 		Hallway-A  Hallway-B - Hallway
-		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
+		No-Door Door-Airlock Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 		Sol Proxima-Centauri Alpha-Centauri - Region
 		Earth b Eden - Planet
 		Ceres - AstroidBelt
@@ -44,7 +44,7 @@
 		(door-connects Door-Bridge Hallway-B Bridge)
 
 		(door-connects Door-Engi Hallway-A Engineering)
-
+		(door-connects Door-Airlock Hallway-A Airlock)
 		(door-connects Door-Science-Lab Hallway-B Science-Lab)
 
 		(door-connects Door-Launch-Bay Hallway-A Launch-Bay)
@@ -95,7 +95,7 @@
 		(Objective-scan objective-1 EdenSurfaceScan)
 		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
 		(Objective-visit-subregion objective-3 b)
-		(Objective-deploy-vehicle objective-4 mav-x Pleiades)
+		(Objective-deploy-vehicle objective-4 lander-x Pleiades)
 		(Objective-scan objective-5 bSurfaceScan)
 	)
 
@@ -109,15 +109,17 @@
 			;(On-ship EdenScan Computer)
 			;(On-vehicle EdenScan lander-a)
 			;(lander-on-surface lander-a Eden)
+			(On-ship Ant-x Airlock)
+			(On-ship Ant-y Airlock)
 
 			;(On-ship EdenSurfaceScan Computer)
 			;(On-ship plasmascan-ple Computer)
 			;(Vehicle-destroyed lander-a)
-			(Objective-complete objective-1)
-			(Objective-complete objective-2)
-			(Objective-complete objective-3)
-			(Objective-complete objective-4)
-			(Objective-complete objective-5)
+			;(Objective-complete objective-1)
+			;(Objective-complete objective-2)
+			;(Objective-complete objective-3)
+			;(Objective-complete objective-4)
+			;(Objective-complete objective-5)
 
 			(Ship-docked Bernal-1)
 		)
