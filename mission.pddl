@@ -10,6 +10,7 @@
 		Engineering - Engineering 
 		Science-Lab - Sciencelab 
 		Launch-Bay - LaunchBay 
+		Airlock - Airlock
 		Hallway-A  Hallway-B - Hallway
 		No-Door Door-Airlock Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 		Sol Proxima-Centauri Alpha-Centauri - Region
