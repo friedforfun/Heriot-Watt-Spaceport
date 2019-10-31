@@ -707,7 +707,7 @@
       (and 
         (Ship-docked ?starport)
         (Starport-item ?obj ?starport)
-        (not (exists (?x - Room) (On-ship ?obj ?x)))
+        (forall (?x - Room) (not(On-ship ?obj ?x)))
       )
     :effect 
       (and 
