@@ -29,8 +29,8 @@
   (:predicates
     ; ------------ Space predicates -------------------------
     (In-region ?sp - Region ?s2 - Subregion)          	  ; inside this region is this subregion
-    (Ion-rads ?sr - Planet)								                ; Ionising radiation is present on planet surface
-    (Starport-location ?sp - Starport ?sb - Subregion)  ; Location of the spaceport
+    (Rads ?sr - Planet)								                ; radiation is present on planet surface
+    (Starport-location ?sp - Starport ?sb - Subregion)    ; Location of the spaceport
     (Ship-docked ?sp - Starport)
     
     ; ------------ Personnel predicates ---------------------
@@ -485,7 +485,7 @@
     :parameters (?lander - Lander ?subregion - Planet ?obj - LanderScan)
     :precondition 
       (and 
-        (not (Ion-rads ?subregion))
+        (not (Rads ?subregion))
         (exists (?x - Antenna) (Antenna-deployed ?x ?subregion))
         (not (Vehicle-destroyed ?lander))
         (Lander-on-surface ?lander ?subregion)
@@ -504,7 +504,7 @@
     :parameters (?lander - Lander ?subregion - Planet ?obj - LanderScan)
     :precondition 
       (and 
-        (Ion-rads ?subregion)
+        (Rads ?subregion)
         (exists (?x - Antenna ?y - Antenna)
           (and
             (not (= ?x ?y)) (Antenna-deployed ?x ?subregion) (Antenna-deployed ?y ?subregion)
