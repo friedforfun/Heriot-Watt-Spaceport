@@ -437,6 +437,7 @@
     :parameters (?lander - Lander ?subregion - Planet)
     :precondition 
     	(and 
+        (exists (?x - ProbeScan) (On-vehicle ?x ?lander))
     		(Vehicle-deployed ?lander ?subregion)
     		(not (Lander-on-surface ?lander ?subregion))
     	)
