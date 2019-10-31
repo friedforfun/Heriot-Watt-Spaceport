@@ -25,6 +25,8 @@
 		plasma-ple - Plasma
 		plasmascan-ple - PlasmaScan
 
+		objective-1 objective-2 - Objective
+
 
 	)
 
@@ -82,6 +84,10 @@
 		(On-vehicle Ant-a lander-a)
 		(On-vehicle Ant-b lander-a)
 
+		;init objective
+		(Objective-scan objective-1 EdenSurfaceScan)
+		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
+			
 	)
 
 	(:goal
@@ -95,9 +101,12 @@
 			;(On-vehicle EdenScan lander-a)
 			;(lander-on-surface lander-a Eden)
 
-			(On-ship EdenSurfaceScan Computer)
-			(On-ship plasmascan-ple Computer)
+			;(On-ship EdenSurfaceScan Computer)
+			;(On-ship plasmascan-ple Computer)
 			;(Vehicle-destroyed lander-a)
+			(Objective-complete objective-1)
+			(Objective-complete objective-2)
+
 			(Ship-at-Subregion Earth)
 		)
 	)
