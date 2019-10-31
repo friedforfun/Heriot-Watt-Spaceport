@@ -21,6 +21,7 @@
     ProbeScan LanderScan PlasmaScan - Scan ; can upload scans
     Region
     Objective - Mission
+    Starport
   )
 
   (:constants Computer - Computer)                      
@@ -29,7 +30,9 @@
     ; ------------ Space predicates -------------------------
     (In-region ?sp - Region ?s2 - Subregion)          	  ; inside this region is this subregion
     (Ion-rads ?sr - Planet)								                ; Ionising radiation is present on planet surface
-
+    (Starport-location ?sp - Starport ?sb - Subregion)  ; Location of the spaceport
+    (Ship-docked ?sp - Starport)
+    
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	  ; Personnel is engaged, cannot move room
     (holding ?p - Personnel ?obj - Object)			          ; Personnel is holding an object
@@ -622,7 +625,38 @@
   ;)
 
   ; hand in mission
+
+  (:action dock-starport
+    :parameters (?starport - Starport ?subregion - Subregion)
+    :precondition 
+      (and 
+        (Ship-at-Subregion ?subregion)
+        (Starport-location ?starport ?subregion)
+        (not (Ship-docked ?starport))
+      )
+    :effect 
+      (and 
+        (not (Ship-at-Subregion ?subregion))
+        (Ship-docked ?starport)
+      )
+  )
+
+  (:action leave-starport
+    :parameters (?starport - Starport ?subregion - Subregion)
+    :precondition 
+      (and 
+        (not (Ship-at-Subregion ?subregion))
+        (Starport-location ?starport ?subregion)
+        (Ship-docked ?starport)
+      )
+    :effect 
+      (and 
+        (Ship-at-Subregion ?subregion)
+        (not (Ship-docked ?starport))
+      )
+  )
   
+
   ; ---------------- Question 2 ideas -----------------------
 
   ; weapons system to destroy asteroid
