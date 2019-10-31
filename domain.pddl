@@ -437,7 +437,7 @@
     :parameters (?lander - Lander ?subregion - Planet)
     :precondition 
     	(and 
-        (exists (?x - ProbeScan) (On-vehicle ?x ?lander))
+        (exists (?x - ProbeScan) (On-vehicle ?x ?lander)) ; it is possible to load touchdown data for the wrong planet thus destroying the lander
     		(Vehicle-deployed ?lander ?subregion)
     		(not (Lander-on-surface ?lander ?subregion))
     	)
@@ -492,7 +492,7 @@
         (Lander-on-surface ?lander ?subregion)
         (Ship-at-Subregion ?subregion)
         (Obj-subregion ?obj ?subregion)
-        ;(On-vehicle ?obj ?lander)      
+        (On-vehicle ?obj ?lander)      
       )
     :effect 
       (and 
@@ -515,7 +515,7 @@
         (not (Vehicle-destroyed ?lander))
         (Ship-at-Subregion ?subregion)
         (Obj-subregion ?obj ?subregion)
-        ;(On-vehicle ?obj ?lander)
+        (On-vehicle ?obj ?lander)
       )
     :effect 
       (and 
