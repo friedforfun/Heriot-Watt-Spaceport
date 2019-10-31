@@ -20,7 +20,8 @@
     Plasma Antenna Scan - Object
     ProbeScan LanderScan PlasmaScan - Scan ; can upload scans
     Region
-    Objective - Mission
+    Objective
+    Mission
     Starport
   )
 
@@ -36,6 +37,8 @@
     (Starport-crew ?p - Personnel ?sp - Starport)
     (Starport-item ?obj - Object ?sp - Starport)
     (Home-starport ?st - Starport)
+    (Mission-control ?S - Scan)
+
 
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	  ; Personnel is engaged, cannot move room
@@ -76,7 +79,6 @@
     ; ------------- Mission predicates ---------------------
     (Objective-complete ?ob - Objective)
     (Mission-complete ?m - Mission)								             ; Mission has been completed
-    
     (Objective-scan ?m - Objective ?scan - Scan)		 ; Mission has objective in location
     (Objective-visit-subregion ?m - Objective ?sr - Subregion)
     (Objective-retrieve-plasmadata ?m - Objective ?p - PlasmaScan)
@@ -612,17 +614,33 @@
       )
   )
 
+  (:action upload-to-mission-control
+    :parameters (?scan - Scan ?starport - Starport)
+    :precondition 
+      (and 
+        (Ship-docked ?starport)
+        (Home-starport ?starport)
+        (On-ship ?scan Computer)
+      )
+    :effect 
+      (and 
+        (Mission-control ?scan)
+      )
+  )
+
   (:action complete-mission
     :parameters (?mission - Mission ?starport - Starport)
     :precondition 
       (and 
         (forall (?x - Objective) (Objective-complete ?x))
+        (forall (On-ship ?y Computer) (Mission-control ?y))
         (Ship-docked ?starport)
         (Home-starport ?starport)
       )
     :effect 
       (and 
         (Mission-complete ?mission)
+
       )
   )
 
