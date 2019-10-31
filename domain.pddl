@@ -662,7 +662,7 @@
       (and 
         (Ship-docked ?starport)
         (Starport-vehicles ?vehicle ?starport)
-        (not (exists (?x - Vehicle) (and (= ?x ?vehicle) (Vehicle-docked ?x ?launchbay))))
+        (not (Vehicle-docked ?vehicle ?launchbay))
       )
     :effect 
       (and 
