@@ -25,7 +25,7 @@
 		plasma-ple - Plasma
 		plasmascan-ple - PlasmaScan
 
-		objective-1 objective-2 - Objective
+		objective-1 objective-2 objective-3 objective-4 - Objective
 
 
 	)
@@ -87,7 +87,8 @@
 		;init objective
 		(Objective-scan objective-1 EdenSurfaceScan)
 		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
-			
+		(Objective-visit-subregion objective-3 b)
+		(Objective-deploy-vehicle objective-4 mav-b Pleiades)
 	)
 
 	(:goal
@@ -106,6 +107,9 @@
 			;(Vehicle-destroyed lander-a)
 			(Objective-complete objective-1)
 			(Objective-complete objective-2)
+			(Objective-complete objective-3)
+			(Objective-complete objective-4)
+
 
 			(Ship-at-Subregion Earth)
 		)
