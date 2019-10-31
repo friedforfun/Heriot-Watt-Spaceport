@@ -39,7 +39,7 @@
 		(On-board Hagarty Mav-a)
 		(Personnel-occupied Hagarty)
 		(Personnel-Loc Zayicek Launch-Bay)
-		(Personnel-Loc Penley Engineering)
+		(Starport-crew Penley)
 
 		; init ship interior rooms
 		(door-connects Door-Bridge Hallway-B Bridge)
