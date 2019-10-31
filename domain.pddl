@@ -686,4 +686,19 @@
       )
   )
 
+  ; objects must be removed from the ship before they can be loaded onto the ship again
+  (:action load-object
+    :parameters (?obj - object ?starport - Starport ?room - Airlock)
+    :precondition 
+      (and 
+        (Ship-docked ?starport)
+        (Starport-item ?obj ?starport)
+        (not (exists (?x - Room) (On-ship ?obj ?x)))
+      )
+    :effect 
+      (and 
+        (On-ship ?obj ?room)
+      )
+  )
+
 )
