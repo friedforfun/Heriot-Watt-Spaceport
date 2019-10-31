@@ -342,16 +342,14 @@
 
   ; -------------- Departure clearance -------------------
 
-  ; Ship ready to depart, all MAV are docked
+  ; Ship ready to depart, MAV behaviour not ideal
   (:action prep-departure
     :parameters (?bridge - Bridge ?launchbay - LaunchBay)
     :precondition 
       (and 
         (exists (?x - Captain) (Personnel-Loc ?x ?bridge))
         (exists (?y - Navigator) (Personnel-Loc ?y ?bridge))
-        ;(not (exists (?m - MAV ?l - LaunchBay) (not(Vehicle-docked ?m ?l))))
         ;(forall (?m - MAV) (Vehicle-docked ?m ?launchbay)) 
-        ;(not (exists (?z - Engineer ?l - LaunchBay) (Launchbay-controls ?z ?l)))
         (not (Depart-OK))
       )
     :effect 
@@ -558,6 +556,7 @@
 
   ; ------------ Missions -------------------------------
 
+  ; set objective complete when scan is on ship computer
   (:action complete-objective-scan
     :parameters (?objective - Objective ?scan - Scan)
     :precondition 
@@ -572,6 +571,7 @@
       )
   )
 
+  ; set objective complete when ship visits appropreate subregion
   (:action complete-objective-visit-subregion
     :parameters (?objective - Objective ?subregion - Subregion)
     :precondition 
@@ -586,6 +586,7 @@
       )
   )
 
+  ; set complete when plasma data is on computer
   (:action complete-objective-retrieve-plasmadata
     :parameters (?objective - Objective ?plasmascan - PlasmaScan)
     :precondition 
@@ -600,6 +601,7 @@
       )
   )
 
+  ; set complete when defined vehicle is deployed in location
   (:action complete-objective-deploy-vehicle
     :parameters (?objective - Objective ?subregion - Subregion ?vehicle - Vehicle)
     :precondition 
@@ -614,6 +616,7 @@
       )
   )
 
+  ; upload scans on ship to mission control when at home spaceport
   (:action upload-to-mission-control
     :parameters (?scan - Scan ?starport - Starport)
     :precondition 
@@ -628,6 +631,7 @@
       )
   )
 
+  ; set mission complete when all objectives are achieved, no scan is on ship that has not been sent to mission control
   (:action complete-mission
     :parameters (?mission - Mission ?starport - Starport)
     :precondition 
@@ -639,7 +643,6 @@
       )
     :effect 
       (and 
-        ;(when (and (not(exists (?x - Scan)  (not(and (On-ship ?x Computer) (Mission-control ?x)))))) (Mission-complete ?mission))
         (Mission-complete ?mission)
       )
   )
