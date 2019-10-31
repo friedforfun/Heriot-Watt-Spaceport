@@ -657,6 +657,19 @@
       )
   )
   
+  (:action load-vehicle
+    :parameters (?vehicle - Vehicle ?starport - Starport ?launchbay - LaunchBay)
+    :precondition 
+      (and 
+        (Ship-docked ?starport)
+        (Starport-vehicles ?vehicle ?starport)
+        (not (exists (?x - Vehicle) (and (= ?x ?vehicle) (Vehicle-docked ?x ?launchbay))))
+      )
+    :effect 
+      (and 
+        (Vehicle-docked ?vehicle ?launchbay)
+      )
+  )
 
   ; ---------------- Question 2 ideas -----------------------
 
