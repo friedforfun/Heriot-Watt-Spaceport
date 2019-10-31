@@ -35,6 +35,7 @@
     (Starport-vehicles ?ve - vehicle ?sp - Starport)
     (Starport-crew ?p - Personnel ?sp - Starport)
     (Starport-item ?obj - Object ?sp - Starport)
+    (Home-starport ?st - Starport)
 
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	  ; Personnel is engaged, cannot move room
@@ -73,7 +74,6 @@
     (Plasma-data ?data - PlasmaScan ?obj - Plasma)        ; PlasmaScan is data from plasma
 
     ; ------------- Mission predicates ---------------------
-    (Mission-objective ?ob - Objective ?mi - Mission)
     (Objective-complete ?ob - Objective)
     (Mission-complete ?m - Mission)								             ; Mission has been completed
     
@@ -612,23 +612,19 @@
       )
   )
 
-
-
-
-  ;(:action complete-mission
-  ; :parameters (?mission - Mission)
-  ;  :precondition 
-  ;    (and 
-  ;      ()
-  ;    )
-  ;  :effect 
-  ;    (and 
-  ;      ()
-  ;    )
-  ;)
-
-  ; hand in mission
-
+  (:action complete-mission
+    :parameters (?mission - Mission ?starport - Starport)
+    :precondition 
+      (and 
+        (forall (?x - Objective) (Objective-complete ?x))
+        (Ship-docked ?starport)
+        (Home-starport ?starport)
+      )
+    :effect 
+      (and 
+        (Mission-complete ?mission)
+      )
+  )
 
   ; ----------------- Additional feature ----------------------------------;
   ; Ship can dock at a starport and aquire new vehicles and crew members   ;
