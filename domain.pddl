@@ -444,6 +444,7 @@
     	(and 
     		(when (and (not(exists (?y - ProbeScan) (and(On-vehicle ?y ?lander) (Obj-subregion ?y ?subregion)))) ) (Vehicle-destroyed ?lander))
     		(Lander-on-surface ?lander ?subregion)
+        (not (Vehicle-deployed ?lander ?subregion))
     	)
     )
 
