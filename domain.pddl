@@ -684,5 +684,19 @@
 
   ; equipment stored in spaceport
   ; ship can fly back and restock probes, landers ect
+  (:action load-crew
+    :parameters (?person - Personnel ?starport - Starport ?room - Airlock)
+    :precondition 
+      (and 
+        (Ship-docked ?starport)
+        (Starport-crew ?person ?starport)
+        (not (exists (?x - Room) (Personnel-Loc ?person ?x)))
+      )
+    :effect 
+      (and 
+        (not (Starport-crew ?person ?starport))
+        (Personnel-Loc ?person ?room)
+      )
+  )
 
 )
