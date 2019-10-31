@@ -582,7 +582,7 @@
     :parameters (?objective - Objective ?plasmascan - PlasmaScan)
     :precondition 
       (and 
-        (Objective-retrieve-plasmadata ?objective ?plasma)
+        (Objective-retrieve-plasmadata ?objective ?plasmascan)
         (not (Objective-complete ?objective))
         (On-ship ?plasmascan Computer)
       )
