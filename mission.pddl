@@ -32,13 +32,19 @@
 
 	(:init
 		; init Personnel
+		(join-crew Tretter)
 		(Personnel-Loc Tretter Bridge)
+		(join-crew Meachum)
 		(Personnel-Loc Meachum Bridge)
+		(join-crew Bunte)
 		(Personnel-Loc Bunte Bridge)
+		(join-crew Elba)
 		(Personnel-Loc Elba Science-Lab)
+		(join-crew haggarty)
 		(On-board Hagarty Mav-a)
 		(Personnel-occupied Hagarty)
 		(Personnel-Loc Zayicek Launch-Bay)
+		(join-crew Zayicek)
 
 		; init ship interior rooms
 		(door-connects Door-Bridge Hallway-B Bridge)

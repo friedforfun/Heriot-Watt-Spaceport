@@ -35,6 +35,7 @@
     (Starport-vehicles ?ve - vehicle ?sp - Starport)
     (Starport-crew ?p - Personnel ?sp - Starport)
     (Starport-item ?obj - Object ?sp - Starport)
+    (join-crew ?p - Personnel)
     ; ------------ Personnel predicates ---------------------
     (Personnel-occupied ?p - Personnel)               	  ; Personnel is engaged, cannot move room
     (holding ?p - Personnel ?obj - Object)			          ; Personnel is holding an object
@@ -691,12 +692,13 @@
       (and 
         (Ship-docked ?starport)
         (Starport-crew ?person ?starport)
-        (not (exists (?x - Room) (Personnel-Loc ?person ?x)))
+        (not (join-crew ?person))
       )
     :effect 
       (and 
         (not (Starport-crew ?person ?starport))
         (Personnel-Loc ?person ?room)
+        (join-crew ?person)
       )
   )
 
