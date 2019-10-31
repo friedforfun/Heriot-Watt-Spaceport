@@ -419,6 +419,20 @@
 
   ; ------------ Lander ---------------------------------
 
+  (:action Store-antenna
+    :parameters (?antenna - Antenna ?lander - Lander ?room - LaunchBay)
+    :precondition 
+      (and 
+        (On-ship ?antenna ?room)
+        (Vehicle-docked ?lander ?room)
+        (exists (?x - Personnel) (Personnel-Loc ?x ?room))
+      )
+    :effect 
+      (and 
+        (On-vehicle ?antenna ?lander)
+      )
+  )
+
   ; Lander downloads data about touchdown from ships computer
   (:action load-touchdown-data
     :parameters (?lander - Lander ?touchdown - ProbeScan)
