@@ -102,10 +102,10 @@
 		(On-vehicle Ant-b lander-a)
 
 		;init objectives to satisfy the mission
-		(Objective-visit-subregion objective-1 b)
-		(Objective-visit-subregion objective-2 Ceres)
-		(Objective-visit-subregion objective-3 Eden)
-		(Objective-visit-subregion objective-4 Pleiades)
+		(Objective-deploy-vehicle objective-1 lander-x b)
+		(Objective-scan objective-2 bScan)
+		(Objective-scan objective-3 bSurfaceScan)
+		(Objective-deploy-vehicle objective-4 lander-a Eden)
 	)
 
 	(:goal
