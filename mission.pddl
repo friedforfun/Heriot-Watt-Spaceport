@@ -13,21 +13,21 @@
 		Hallway-A  Hallway-B - Hallway
 		No-Door Door-Engi Door-Bridge Door-Science-Lab Door-Launch-Bay - Door
 		Sol Proxima-Centauri Alpha-Centauri - Region
-		Mercury Venus Earth Mars b Eden - Planet
+		Earth b Eden - Planet
 		Ceres - AstroidBelt
 		Pleiades - Nebula
 		Mav-a Mav-b - MAV
 		Probe-a - Probe
 		lander-a - Lander
 		EdenScan bScan - ProbeScan
-		EdenSurfaceScan - LanderScan
+		EdenSurfaceScan bSurfaceScan - LanderScan
 		Ant-a Ant-b - Antenna
 		plasma-ple - Plasma
 		plasmascan-ple - PlasmaScan
 
-		objective-1 objective-2 objective-3 objective-4 - Objective
+		objective-1 objective-2 objective-3 objective-4 objective-5 - Objective
 
-
+		Bernal-1 - Starport
 	)
 
 	(:init
@@ -53,14 +53,17 @@
 		(door-connects No-Door Hallway-A Hallway-B)
 
 		; init space
-		(In-region Sol Mercury)
-		(In-region Sol Venus)
+
 		(In-region Sol Earth)
-		(In-region Sol Mars)
+		(Starport-location Bernal-1 Earth)
+
 		(In-region Sol Ceres)
 
 		(In-region Proxima-Centauri b)
 		(Obj-subregion bScan b)
+		(Obj-subregion bSurfaceScan b)
+		(Rads b)
+
 
 		(In-region Alpha-Centauri Eden)
 
@@ -74,7 +77,7 @@
 		
 		; init ship location
 		(Ship-Location Sol)
-		(Ship-at-Subregion Earth)
+		(Ship-docked Bernal-1)
 
 		;init ship vehicles
 		(Vehicle-docked mav-a Launch-Bay)
@@ -89,6 +92,7 @@
 		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
 		(Objective-visit-subregion objective-3 b)
 		(Objective-deploy-vehicle objective-4 mav-b Pleiades)
+		(Objective-scan objective-5 bSurfaceScan)
 	)
 
 	(:goal
@@ -109,9 +113,9 @@
 			(Objective-complete objective-2)
 			(Objective-complete objective-3)
 			(Objective-complete objective-4)
+			(Objective-complete objective-5)
 
-
-			(Ship-at-Subregion Earth)
+			(Ship-docked Bernal-1)
 		)
 	)
 
