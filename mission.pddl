@@ -25,7 +25,7 @@
 		
 		; Vehicles
 		Mav-a Mav-x - MAV
-		Probe-a - Probe
+		Probe-a Probe-x - Probe
 		lander-a lander-x - Lander
 		
 		; physical objects and scan data
@@ -76,6 +76,7 @@
 		(Rads b)
 		(Starport-location Island-2 b)
 		(Starport-vehicles lander-x Island-2)
+		(Starport-vehicles Probe-x Island-2)
 		(Starport-item Ant-x Island-2)
 		(Starport-item Ant-y Island-2)
 
@@ -101,10 +102,10 @@
 		(On-vehicle Ant-b lander-a)
 
 		;init objectives to satisfy the mission
-		(Objective-scan objective-1 EdenSurfaceScan)
-		(Objective-scan objective-2 bScan)
-		(Objective-deploy-vehicle objective-3 probe-a ceres)
-		(Objective-deploy-vehicle objective-4 mav-a Pleiades)
+		(Objective-visit-subregion objective-1 b)
+		(Objective-visit-subregion objective-2 Ceres)
+		(Objective-visit-subregion objective-3 Eden)
+		(Objective-visit-subregion objective-4 Pleiades)
 	)
 
 	(:goal
