@@ -627,6 +627,15 @@
 
   ; hand in mission
 
+
+  ; ----------------- Additional feature ----------------------------------;
+  ; Ship can dock at a starport and aquire new vehicles and crew members   ;
+  ; Starport with home flag will be used to hand in completed Missions     ;
+  ; Crew load into ship via new room: Airlock                              ;
+  ; vehicles load into ship via launchbay                                  ;
+  ;------------------------------------------------------------------------;
+
+  ; Dock the ship at the starport
   (:action dock-starport
     :parameters (?starport - Starport ?subregion - Subregion)
     :precondition 
@@ -642,6 +651,7 @@
       )
   )
 
+  ; Ship departs starport
   (:action leave-starport
     :parameters (?starport - Starport ?subregion - Subregion)
     :precondition 
@@ -657,6 +667,8 @@
       )
   )
   
+  ; Starports have an infinate supply of identical vehicles
+  ; only one starport vehicle can be loaded into each launchbay at a time
   (:action load-vehicle
     :parameters (?vehicle - Vehicle ?starport - Starport ?launchbay - LaunchBay)
     :precondition 
@@ -671,19 +683,7 @@
       )
   )
 
-  ; ---------------- Question 2 ideas -----------------------
-
-  ; weapons system to destroy asteroid
-  ; weapons system disabled in nebula
-  ; shield system to prevent ionicising radiation from nebula
-  ; weapons cannot deploy when shield is in use vice versa
-  ; mav/probes/lander cannot deploy when shield is up
-  ; 
-
-  ; ---------------------------------------------------------
-
-  ; equipment stored in spaceport
-  ; ship can fly back and restock probes, landers ect
+  ; crew members are unique, no cloning
   (:action load-crew
     :parameters (?person - Personnel ?starport - Starport ?room - Airlock)
     :precondition 
