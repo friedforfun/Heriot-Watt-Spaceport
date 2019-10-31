@@ -88,14 +88,15 @@
 		(and 
 			;(Vehicle-destroyed Probe-a)
 			;(Vehicle-disabled Mav-b)
-			;(lander-on-surface lander-a Eden)
 			;(On-ship plasma-ple Science-Lab)
 			;(Antenna-deployed Ant-a Eden)
 			;(On-vehicle EdenSurfaceScan lander-a)
 			;(On-ship EdenScan Computer)
-			;(On-ship EdenSurfaceScan Computer)
+			;(On-vehicle EdenScan lander-a)
+			;(lander-on-surface lander-a Eden)
+			(On-ship EdenSurfaceScan Computer)
 			
-			(On-ship plasmascan-ple Computer)
+			;(On-ship plasmascan-ple Computer)
 			(Ship-at-Subregion Earth)
 		)
 	)
