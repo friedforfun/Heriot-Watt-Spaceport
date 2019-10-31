@@ -20,7 +20,7 @@
     Plasma Antenna Scan - Object
     ProbeScan LanderScan PlasmaScan - Scan ; can upload scans
     Region
-    ;Objective - Mission
+    Objective - Mission
   )
 
   (:constants Computer - Computer)                      
@@ -71,14 +71,10 @@
     (Object-complete ?ob - Objective)
     (Mission-complete ?m - Mission)								             ; Mission has been completed
     
-    (Objective-scan-subregion ?m - Objective ?sr - Subregion)		 ; Mission has objective in location
+    (Objective-scan ?m - Objective ?scan - Scan)		 ; Mission has objective in location
     (Objective-visit-subregion ?m - Objective ?sr - Subregion)
-    (Objective-scan-planet ?m - Objective ?p - Planet)
-    (Objective-retrieve-plasma ?m - Objective ?n - Nebula)
-    (Objective-visit-region ?m - Objective ?r - Region)
-    (Objective-identify-touchdown ?m - Objective ?p - Planet)
-    (Objective-deploy-MAV ?m - Objective ?sr - Subregion)
-    (Objective-deploy-probe ?m - Objective ?sr - Subregion)
+    (Objective-retrieve-plasmadata ?m - Objective ?p - Plasma)
+    (Objective-deploy-vehcle ?m - Objective ?v - Vehicle ?sr - Subregion)
   )
 
   ; ------------- Moving around ship actions ----------------
@@ -553,6 +549,65 @@
   ; complete lander mission
   ; complete scan mission
   ; complete plasma mission
+
+  (:action complete-objective-scan
+    :parameters (?objective - Objective ?scan - Scan)
+    :precondition 
+      (and 
+        (Objective-scan ?objective ?scan)
+        (not (Object-complete ?objective))
+        (On-ship ?scan Computer)
+      )
+    :effect 
+      (and 
+        (Object-complete ?objective)
+      )
+  )
+
+  (:action complete-objective-visit-subregion
+    :parameters (?objective - Objective ?subregion - Subregion)
+    :precondition 
+      (and 
+        (Objective-visit-subregion ?objective ?subregion)
+        (not (Object-complete ?objective))
+        (Ship-Location ?subregion)
+      )
+    :effect 
+      (and 
+        (Object-complete ?objective)
+      )
+  )
+
+  (:action complete-objective-retrieve-plasmadata
+    :parameters (?objective - Objective ?plasma - Plasma)
+    :precondition 
+      (and 
+        (Objective-retrieve-plasmadata ?objective ?plasma)
+        (not (Object-complete ?objective))
+        (exists (?x - PlasmaScan) (and (Plasma-data ?x ?plasma) (On-ship ?x Computer)))
+      )
+    :effect 
+      (and 
+        (Object-complete ?objective)
+      )
+  )
+
+  (:action complete-objective-deploy-vehicle
+    :parameters (?objective - Objective ?subregion - Subregion ?vehicle - Vehicle)
+    :precondition 
+      (and 
+        (Objective-deploy-MAV ?objective ?subregion)
+        (not (Objective-complete ?objective))
+        (Vehicle-deployed ?vehicle ?subregion)
+      )
+    :effect 
+      (and 
+        (Objective-complete ?objective)
+      )
+  )
+
+
+
 
   ;(:action complete-mission
   ; :parameters (?mission - Mission)
