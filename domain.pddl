@@ -68,7 +68,7 @@
 
     ; ------------- Mission predicates ---------------------
     (Mission-objective ?ob - Objective ?mi - Mission)
-    (Object-complete ?ob - Objective)
+    (Objective-complete ?ob - Objective)
     (Mission-complete ?m - Mission)								             ; Mission has been completed
     
     (Objective-scan ?m - Objective ?scan - Scan)		 ; Mission has objective in location
@@ -560,7 +560,7 @@
       )
     :effect 
       (and 
-        (Object-complete ?objective)
+        (Objective-complete ?objective)
       )
   )
 
@@ -574,7 +574,7 @@
       )
     :effect 
       (and 
-        (Object-complete ?objective)
+        (Objective-complete ?objective)
       )
   )
 
@@ -588,7 +588,7 @@
       )
     :effect 
       (and 
-        (Object-complete ?objective)
+        (Objective-complete ?objective)
       )
   )
 
