@@ -16,18 +16,18 @@
 		Earth b Eden - Planet
 		Ceres - AstroidBelt
 		Pleiades - Nebula
-		Mav-a Mav-b - MAV
+		Mav-a Mav-x - MAV
 		Probe-a - Probe
-		lander-a - Lander
+		lander-a lander-x - Lander
 		EdenScan bScan - ProbeScan
 		EdenSurfaceScan bSurfaceScan - LanderScan
-		Ant-a Ant-b - Antenna
+		Ant-a Ant-b Ant-x Ant-y - Antenna
 		plasma-ple - Plasma
 		plasmascan-ple - PlasmaScan
 
 		objective-1 objective-2 objective-3 objective-4 objective-5 - Objective
 
-		Bernal-1 - Starport
+		Bernal-1 Island-2 - Starport
 	)
 
 	(:init
@@ -39,7 +39,6 @@
 		(On-board Hagarty Mav-a)
 		(Personnel-occupied Hagarty)
 		(Personnel-Loc Zayicek Launch-Bay)
-		(Starport-crew Penley)
 
 		; init ship interior rooms
 		(door-connects Door-Bridge Hallway-B Bridge)
@@ -56,6 +55,9 @@
 
 		(In-region Sol Earth)
 		(Starport-location Bernal-1 Earth)
+		(Starport-crew Penley Bernal-1)
+		(Starport-vehicles mav-x Bernal-1)
+		
 
 		(In-region Sol Ceres)
 
@@ -63,7 +65,10 @@
 		(Obj-subregion bScan b)
 		(Obj-subregion bSurfaceScan b)
 		(Rads b)
-
+		(Starport-location Island-2 b)
+		(Starport-vehicles lander-x Island-2)
+		(Starport-item Ant-x Island-2)
+		(Starport-item Ant-y Island-2)
 
 		(In-region Alpha-Centauri Eden)
 
@@ -81,7 +86,6 @@
 
 		;init ship vehicles
 		(Vehicle-docked mav-a Launch-Bay)
-		(Vehicle-docked mav-b Launch-Bay)
 		(Vehicle-docked Probe-a Launch-Bay)
 		(Vehicle-docked lander-a Launch-Bay)
 		(On-vehicle Ant-a lander-a)
@@ -91,7 +95,7 @@
 		(Objective-scan objective-1 EdenSurfaceScan)
 		(Objective-retrieve-plasmadata objective-2 plasmascan-ple)
 		(Objective-visit-subregion objective-3 b)
-		(Objective-deploy-vehicle objective-4 mav-b Pleiades)
+		(Objective-deploy-vehicle objective-4 mav-x Pleiades)
 		(Objective-scan objective-5 bSurfaceScan)
 	)
 
