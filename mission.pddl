@@ -58,7 +58,7 @@
 		(In-region Sol Ceres)
 
 		(In-region Proxima-Centauri b)
-		;(Obj-subregion bScan b)
+		(Obj-subregion bScan b)
 
 		(In-region Alpha-Centauri Eden)
 
@@ -94,9 +94,10 @@
 			;(On-ship EdenScan Computer)
 			;(On-vehicle EdenScan lander-a)
 			;(lander-on-surface lander-a Eden)
+
 			(On-ship EdenSurfaceScan Computer)
-			
-			;(On-ship plasmascan-ple Computer)
+			(On-ship plasmascan-ple Computer)
+			;(Vehicle-destroyed lander-a)
 			(Ship-at-Subregion Earth)
 		)
 	)
